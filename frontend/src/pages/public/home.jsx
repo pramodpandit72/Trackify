@@ -116,7 +116,7 @@ function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="bg-gradient-to-br from-blue-50 to-white border border-blue-100 rounded-2xl p-8">
+            <div className="bg-linear-to-br from-blue-50 to-white border border-blue-100 rounded-2xl p-8">
               <div className="text-5xl mb-4">🎯</div>
               <h3 className="text-2xl font-bold text-[#1a1a1a] mb-3">The Perfect Trainer Match</h3>
               <p className="text-gray-600 leading-relaxed">
@@ -124,16 +124,16 @@ function Home() {
               </p>
             </div>
 
-            <div className="bg-gradient-to-br from-purple-50 to-white border border-purple-100 rounded-2xl p-8">
-              <div className="text-5xl mb-4">📋</div>
+            <div className="bg-linear-to-br from-purple-50 to-white border border-purple-100 rounded-2xl p-8">
+              <div className="text-5xl mb-4">💯</div>
               <h3 className="text-2xl font-bold text-[#1a1a1a] mb-3">Real Accountability</h3>
               <p className="text-gray-600 leading-relaxed">
                 You'll commit to your trainer and work together to show up even when life gets crazy. Your trainer is your accountability partner.
               </p>
             </div>
 
-            <div className="bg-gradient-to-br from-green-50 to-white border border-green-100 rounded-2xl p-8">
-              <div className="text-5xl mb-4">💪</div>
+            <div className="bg-linear-to-br from-green-50 to-white border border-green-100 rounded-2xl p-8">
+              <div className="text-5xl mb-4">✅</div>
               <h3 className="text-2xl font-bold text-[#1a1a1a] mb-3">Personalized Plans</h3>
               <p className="text-gray-600 leading-relaxed">
                 Step by step guidance. Our app shows you how to do each exercise and gives you live feedback on your pacing and form.
@@ -174,7 +174,7 @@ function Home() {
       />
 
       {/* Welcome to Your New Gym Section */}
-      <section className="py-24 px-4 bg-gradient-to-br from-gray-50 to-white">
+      <section className="py-24 px-4 bg-linear-to-br from-gray-50 to-white">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="order-2 lg:order-1">
@@ -238,7 +238,7 @@ function Home() {
               </p>
             </div>
 
-            <div className="bg-gradient-to-br from-orange-50 to-white border border-orange-100 rounded-2xl p-8">
+            <div className="bg-linear-to-br from-orange-50 to-white border border-orange-100 rounded-2xl p-8">
               <div className="text-4xl mb-4">🩺</div>
               <h3 className="text-2xl font-bold text-[#1a1a1a] mb-3">Physical Considerations</h3>
               <p className="text-gray-600 leading-relaxed">
@@ -269,7 +269,7 @@ function Home() {
       </section>
 
       {/* Trainer Quality Section */}
-      <section className="py-24 px-4 bg-gradient-to-br from-gray-50 to-white">
+      <section className="py-24 px-4 bg-linear-to-br from-gray-50 to-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl lg:text-5xl font-bold text-[#1a1a1a] mb-4">

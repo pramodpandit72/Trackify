@@ -10,8 +10,8 @@ export default function Jobs() {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const res = await axios.get("/api/jobs/list");
-        setJobs(res.data.jobs || []);
+        const res = await axios.get("/api/jobs");
+        setJobs(res.data.items || []);
       } catch (err) {
         console.log('Error fetching jobs:', err);
         // Dummy trainer job listings
@@ -264,7 +264,7 @@ export default function Jobs() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 px-4 bg-gradient-to-br from-gray-50 to-white">
+      <section className="py-24 px-4 bg-linear-to-br from-gray-50 to-white">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl lg:text-5xl font-bold text-[#1a1a1a] mb-6">
             Ready to Join Our Team?
