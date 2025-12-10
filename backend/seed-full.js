@@ -29,23 +29,31 @@ const seedDatabase = async () => {
     // Extract the exercisesLibrary array using regex
     const match = exercisesFileContent.match(/export const exercisesLibrary = \[([\s\S]*?)\];/);
     if (match) {
+      // Define the helper function and BASE_EXERCISE that the library uses
+      const BASE_EXERCISE = {
+        image: null,
+        videoUrl: null,
+        variants: []
+      };
+      const ex = (data) => ({ ...BASE_EXERCISE, ...data });
+      
       // Create a temporary module to evaluate the array
-      const exercisesCode = `const exercisesLibrary = [${match[1]}]; exercisesLibrary;`;
+      const exercisesCode = `[${match[1]}]`;
       const exercises = eval(exercisesCode);
       
       // Transform exercises to match the database schema
-      const transformedExercises = exercises.map(ex => ({
-        name: ex.name,
-        category: ex.category,
-        muscleGroups: ex.muscleGroups || [],
-        difficulty: ex.difficulty || 'Beginner',
-        equipment: ex.equipment || 'None',
-        description: ex.description || '',
-        instructions: ex.instructions || '',
-        targetArea: ex.targetArea || ex.category,
-        variants: ex.variants || [],
-        image: ex.image || null,
-        videoUrl: ex.videoUrl || null
+      const transformedExercises = exercises.map(exercise => ({
+        name: exercise.name,
+        category: exercise.category,
+        muscleGroups: exercise.muscleGroups || [],
+        difficulty: exercise.difficulty || 'Beginner',
+        equipment: exercise.equipment || 'None',
+        description: exercise.description || '',
+        instructions: exercise.instructions || '',
+        targetArea: exercise.targetArea || exercise.category,
+        variants: exercise.variants || [],
+        image: exercise.image || null,
+        videoUrl: exercise.videoUrl || null
       }));
 
       // Insert exercises

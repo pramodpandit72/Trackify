@@ -13,28 +13,25 @@ function Exercise() {
   const [categories, setCategories] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [totalExercises, setTotalExercises] = useState(0);
   const [usingLocalData, setUsingLocalData] = useState(false);
 
   const ITEMS_PER_PAGE = 12;
 
-  // Fetch exercises
+  // Fetch exercises - Initial load only
   useEffect(() => {
     const fetchExercises = async () => {
-      const params = {
-        page,
-        limit: ITEMS_PER_PAGE,
-        ...(search && { search }),
-        ...(selectedCategory && { category: selectedCategory }),
-        ...(selectedDifficulty && { difficulty: selectedDifficulty })
-      };
-
+      setLoading(true);
+      console.log('[Exercise] Component mounted, loading exercises...');
+      
       try {
-        const response = await axios.get('/api/exercises', { params });
+        // Try API first
+        console.log('[Exercise] Attempting to fetch from API...');
+        const response = await axios.get('/api/exercises', { params: { limit: 1000 } });
         const data = response.data;
+        console.log('[Exercise] API returned:', data.items?.length || 0, 'exercises');
 
         setExercises(data.items || []);
-        setFilteredExercises(data.items || []);
-        setTotalPages(data.totalPages || 1);
         setUsingLocalData(false);
 
         // Extract unique categories
@@ -45,18 +42,21 @@ function Exercise() {
         setCategories(Array.from(allCategories).sort());
         setLoading(false);
       } catch (error) {
-        console.error('Error fetching exercises:', error);
+        console.log('[Exercise] API failed, using local data:', error.message);
         setUsingLocalData(true);
         
         // Use local exercise library as fallback
+        console.log('[Exercise] exercisesLibrary length:', exercisesLibrary.length);
         const exercisesWithIds = exercisesLibrary.map((ex, idx) => ({
           ...ex,
           _id: ex.id || `exercise-${idx}`
         }));
         
+        console.log('[Exercise] Processed local exercises:', exercisesWithIds.length);
         setExercises(exercisesWithIds);
         
         // Extract unique categories from exercise library
+        console.log('[Exercise] exerciseCategories:', exerciseCategories);
         const allCategories = new Set(exerciseCategories);
         setCategories(Array.from(allCategories).sort());
         setLoading(false);
@@ -64,12 +64,18 @@ function Exercise() {
     };
 
     fetchExercises();
-  }, [page, search, selectedCategory, selectedDifficulty]);
+  }, []);
 
-  // Client-side filtering for local data
+  // Client-side filtering and pagination for local data
   useEffect(() => {
-    if (!usingLocalData) {
-      return; // API handles filtering
+    console.log('[Exercise-Filter] Running filter effect with exercises:', exercises.length);
+    
+    if (exercises.length === 0) {
+      console.log('[Exercise-Filter] No exercises, setting empty filtered list');
+      setFilteredExercises([]);
+      setTotalExercises(0);
+      setTotalPages(1);
+      return;
     }
 
     let filtered = [...exercises];
@@ -94,9 +100,27 @@ function Exercise() {
       filtered = filtered.filter(exercise => exercise.difficulty === selectedDifficulty);
     }
 
-    setFilteredExercises(filtered);
-    setTotalPages(Math.ceil(filtered.length / ITEMS_PER_PAGE));
-  }, [search, selectedCategory, selectedDifficulty, exercises, usingLocalData]);
+    // Set total count before pagination
+    setTotalExercises(filtered.length);
+
+    // For local data, apply pagination
+    if (usingLocalData) {
+      const totalPagesCount = Math.ceil(filtered.length / ITEMS_PER_PAGE) || 1;
+      const startIdx = (page - 1) * ITEMS_PER_PAGE;
+      const endIdx = startIdx + ITEMS_PER_PAGE;
+      const paginatedExercises = filtered.slice(startIdx, endIdx);
+      
+      console.log('[Exercise-Filter] Setting paginated exercises:', paginatedExercises.length, 'of', filtered.length);
+      
+      setFilteredExercises(paginatedExercises);
+      setTotalPages(totalPagesCount);
+    } else {
+      // For API data, use all results
+      console.log('[Exercise-Filter] Using API data, showing all filtered');
+      setFilteredExercises(filtered);
+      setTotalPages(1);
+    }
+  }, [search, selectedCategory, selectedDifficulty, exercises, page, usingLocalData, ITEMS_PER_PAGE]);
 
   return (
     <div className="pt-25 min-h-screen bg-gray-50">
@@ -125,7 +149,7 @@ function Exercise() {
                 value={search}
                 onChange={(e) => {
                   setSearch(e.target.value);
-                  setPage(1);
+                  setPage(1); // Reset to first page on search
                 }}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#775fab]"
               />
@@ -185,7 +209,10 @@ function Exercise() {
             <>
               <div className="mb-6">
                 <p className="text-gray-600">
-                  Found <strong>{filteredExercises.length}</strong> exercise(s)
+                  Found <strong>{totalExercises}</strong> exercise(s)
+                  {usingLocalData && totalPages > 1 && (
+                    <span className="ml-2 text-sm">(Page {page} of {totalPages})</span>
+                  )}
                 </p>
               </div>
 

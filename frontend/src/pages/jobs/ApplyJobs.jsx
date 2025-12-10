@@ -46,10 +46,7 @@ export default function ApplyJobs() {
 
     setLoading(true);
     try {
-      await axios.post("/api/jobs/apply", {
-        jobId,
-        ...form
-      });
+      await axios.post(`/api/jobs/${jobId}/apply`, form);
 
       setSubmitted(true);
       setTimeout(() => {

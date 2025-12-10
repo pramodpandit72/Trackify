@@ -8,9 +8,21 @@ function Trainers() {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [selectedSpecialty, setSelectedSpecialty] = useState('');
-  const [specialties, setSpecialties] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+
+  // Exercise-related specialties matching the exercise library
+  const specialties = [
+    'Strength Training',
+    'Cardio',
+    'Flexibility',
+    'Functional Training',
+    'Core Training',
+    'Upper Body',
+    'Lower Body',
+    'Weight Loss',
+    'Muscle Building'
+  ];
 
   const ITEMS_PER_PAGE = 12;
 
@@ -32,13 +44,6 @@ function Trainers() {
         setTrainers(data.items || []);
         setFilteredTrainers(data.items || []);
         setTotalPages(data.totalPages || 1);
-
-        // Extract unique specialties
-        const allSpecialties = new Set();
-        (data.items || []).forEach(trainer => {
-          trainer.specialties?.forEach(s => allSpecialties.add(s));
-        });
-        setSpecialties(Array.from(allSpecialties).sort());
       } catch (error) {
         console.error('Error fetching trainers:', error);
         // Dummy data
@@ -48,7 +53,7 @@ function Trainers() {
             name: 'Nate F.',
             title: 'Certified Personal Trainer',
             bio: 'MS in Exercise Science',
-            specialties: ['Mobility', 'Strength', 'Weight Loss'],
+            specialties: ['Flexibility', 'Strength Training', 'Weight Loss'],
             rating: 4.9,
             reviewsCount: 715,
             experienceYears: 4,
@@ -60,7 +65,7 @@ function Trainers() {
             name: 'Melissa',
             title: 'Certified Personal Trainer & Nutrition Specialist',
             bio: 'Athlete & Mom',
-            specialties: ['Women\'s Fitness', 'Autoimmune Health'],
+            specialties: ['Core Training', 'Cardio', 'Weight Loss'],
             rating: 4.9,
             reviewsCount: 547,
             experienceYears: 13,
@@ -72,7 +77,7 @@ function Trainers() {
             name: 'Jay S.',
             title: 'Strength Coach',
             bio: 'Athlete turned pain-free performance coach',
-            specialties: ['Prenatal/Postpartum', 'HIIT', 'Functional Strength'],
+            specialties: ['Functional Training', 'Cardio', 'Muscle Building'],
             rating: 5.0,
             reviewsCount: 198,
             experienceYears: 8,
@@ -82,7 +87,6 @@ function Trainers() {
         ];
         setTrainers(dummyTrainers);
         setFilteredTrainers(dummyTrainers);
-        setSpecialties(['Mobility', 'Strength', 'Weight Loss', 'Women\'s Fitness', 'HIIT']);
       } finally {
         setLoading(false);
       }

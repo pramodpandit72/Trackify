@@ -20,7 +20,7 @@ router.get("/applications/all", protect, restrictTo("admin"), getAllApplications
 router.delete("/applications/:appId", protect, restrictTo("admin"), deleteApplication); // Admin only
 router.get("/applications/:appId", protect, getApplicationById);       // GET /api/jobs/applications/:appId
 router.get("/:jobId/applications", protect, restrictTo("admin"), getJobApplications); // Admin only
-router.post("/:jobId/apply", protect, applyJob);                       // POST /api/jobs/:jobId/apply (authenticated users)
+router.post("/:jobId/apply", applyJob);                                // POST /api/jobs/:jobId/apply (public - anyone can apply)
 
 // Standard CRUD routes (after special routes)
 router.get("/", listJobs);                                             // GET /api/jobs (public)

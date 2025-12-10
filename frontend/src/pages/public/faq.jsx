@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export default function FAQ() {
+export default function Faq() {
   const [expanded, setExpanded] = useState(null);
 
   const faqs = [

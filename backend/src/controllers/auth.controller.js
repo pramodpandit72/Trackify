@@ -315,6 +315,83 @@ export const changePassword = async (req, res, next) => {
 };
 
 /**
+ * POST /api/auth/create-admin
+ * Create a new admin user (requires existing admin authentication)
+ * SECURITY: This endpoint requires valid admin token
+ */
+export const createAdmin = async (req, res, next) => {
+  try {
+    // Check if user is authenticated and is admin
+    if (!req.user || req.user.role !== "admin") {
+      return res.status(403).json({
+        error: "Forbidden",
+        message: "Only existing admins can create new admin accounts"
+      });
+    }
+
+    const { firstName, lastName, email, password, phone } = req.body;
+
+    // Validation
+    if (!firstName || !lastName || !email || !password) {
+      return res.status(400).json({
+        error: "Validation failed",
+        errors: [
+          { field: "required", message: "First name, last name, email, and password are required" }
+        ]
+      });
+    }
+
+    if (password.length < 6) {
+      return res.status(400).json({
+        error: "Validation failed",
+        errors: [
+          { field: "password", message: "Password must be at least 6 characters" }
+        ]
+      });
+    }
+
+    // Check if user already exists
+    const existingUser = await User.findOne({ email: email.toLowerCase() });
+    if (existingUser) {
+      return res.status(400).json({
+        error: "Validation failed",
+        errors: [
+          { field: "email", message: "Email already registered" }
+        ]
+      });
+    }
+
+    // Create admin user
+    const admin = await User.create({
+      firstName,
+      lastName,
+      email: email.toLowerCase(),
+      password,
+      phone,
+      role: "admin",
+      isActive: true
+    });
+
+    // Update last login
+    admin.lastLogin = new Date();
+    await admin.save();
+
+    res.status(201).json({
+      message: "Admin account created successfully",
+      admin: {
+        id: admin._id,
+        firstName: admin.firstName,
+        lastName: admin.lastName,
+        email: admin.email,
+        role: admin.role
+      }
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+/**
  * POST /api/auth/logout
  * Logout user (client-side should remove token)
  */

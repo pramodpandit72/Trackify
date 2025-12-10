@@ -9,7 +9,7 @@ const ExerciseSchema = new mongoose.Schema({
   },
   category: { 
     type: String, 
-    enum: ["Chest", "Legs", "Back", "Shoulders", "Arms", "Core"],
+    enum: ["Strength", "Cardio", "Flexibility", "Functional", "Core", "Chest", "Legs", "Back", "Shoulders", "Arms"],
     required: [true, "Category is required"]
   },
   muscleGroups: {
@@ -28,12 +28,18 @@ const ExerciseSchema = new mongoose.Schema({
     },
     default: "Beginner" 
   },
-  equipment: String,
+  equipment: {
+    type: [String],
+    default: []
+  },
   description: {
     type: String,
     minlength: [10, "Description must be at least 10 characters"]
   },
-  instructions: String,
+  instructions: {
+    type: [String],
+    default: []
+  },
   targetArea: String,
   variants: [String],
   image: String,

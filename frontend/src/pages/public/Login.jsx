@@ -4,6 +4,7 @@ import axios from 'axios';
 
 function Login() {
   const navigate = useNavigate();
+  const [isAdminLogin, setIsAdminLogin] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -57,19 +58,65 @@ function Login() {
 		<>
 			<section className="grid grid-cols-2 w-full h-fit bg-white">
 				<div className="w-full h-full bg-white p-10 relative">
+					{/* Login Type Tabs */}
+					<div className="mb-8 flex gap-4 border-b border-gray-300">
+						<button
+							onClick={() => {
+								setIsAdminLogin(false);
+								setError('');
+								setFormData({ email: '', password: '' });
+							}}
+							className={`pb-3 px-4 font-semibold text-lg transition-all ${
+								!isAdminLogin
+									? 'border-b-2 border-[#775fab] text-[#775fab]'
+									: 'text-gray-500 hover:text-gray-700'
+							}`}
+						>
+							<i className="fa-solid fa-user mr-2"></i>
+							User Login
+						</button>
+						<button
+							onClick={() => {
+								setIsAdminLogin(true);
+								setError('');
+								setFormData({ email: '', password: '' });
+							}}
+							className={`pb-3 px-4 font-semibold text-lg transition-all flex items-center ${
+								isAdminLogin
+									? 'border-b-2 border-[#775fab] text-[#775fab]'
+									: 'text-gray-500 hover:text-gray-700'
+							}`}
+						>
+							<i className="fa-solid fa-lock mr-2"></i>
+							Admin Login
+						</button>
+					</div>
+
 					<div className="mb-10">
 						<h1 className="text-6xl text-center pb-4">
-							Welcome Back
+							{isAdminLogin ? 'Admin Access' : 'Welcome Back'}
 						</h1>
 						<p className="text-[1rem] font-light pb-3 text-center">
-							Enter your email and password to access
-							your account
+							{isAdminLogin
+								? 'Enter your admin credentials to access the admin dashboard'
+								: 'Enter your email and password to access your account'
+							}
 						</p>
 					</div>
 
+					{/* Error Message */}
 					{error && (
-						<div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+						<div className="mb-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg flex items-center gap-2">
+							<i className="fa-solid fa-circle-exclamation"></i>
 							{error}
+						</div>
+					)}
+
+					{/* Admin Notice */}
+					{isAdminLogin && (
+						<div className="mb-4 p-4 bg-blue-100 border border-blue-400 text-blue-700 rounded-lg flex items-center gap-2">
+							<i className="fa-solid fa-shield"></i>
+							<span>Restricted access. Only authorized administrators can login here.</span>
 						</div>
 					)}
 

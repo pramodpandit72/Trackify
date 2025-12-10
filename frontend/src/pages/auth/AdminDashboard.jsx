@@ -206,13 +206,21 @@ function AdminDashboard() {
             <i className="fa-solid fa-bolt mr-2 text-[#775fab]"></i>
             Quick Actions
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
             <button
               onClick={() => navigate('/jobs')}
               className="p-4 border-2 border-gray-200 rounded-lg hover:border-[#775fab] hover:bg-purple-50 transition text-center"
             >
               <i className="fa-solid fa-plus-circle text-3xl text-[#775fab] mb-2"></i>
               <p className="font-semibold text-gray-900">Create Job</p>
+            </button>
+
+            <button
+              onClick={() => navigate('/admin/applications')}
+              className="p-4 border-2 border-blue-200 rounded-lg hover:border-[#775fab] hover:bg-blue-50 transition text-center bg-blue-50"
+            >
+              <i className="fa-solid fa-file-alt text-3xl text-blue-600 mb-2"></i>
+              <p className="font-semibold text-gray-900">All Applications</p>
             </button>
 
             <button

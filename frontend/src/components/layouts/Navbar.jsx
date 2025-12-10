@@ -72,11 +72,11 @@ function NavBar() {
 								<NavLink
 									to="/"
 									className={({ isActive }) =>
-										`${isActive ? "" : ""} ${
-											location.pathname === "/"
-												? "hover:text-[#dedaee]"
-												: "hover:text-[#775fab] text-[#443361]"
-										}`
+										isActive
+											? "text-[#775fab]"
+											: location.pathname === "/"
+											? "hover:text-[#dedaee]"
+											: "hover:text-[#775fab] text-[#443361]"
 									}
 								>
 									Home
@@ -118,77 +118,61 @@ function NavBar() {
 											: "text-[#443361]"
 									}`}
 								>
-									<li className="mb-1">
-										<NavLink
-											to="/about"
-											className={({ isActive }) =>
-												`block w-full py-1 ${
+										<li className="mb-1">
+											<NavLink
+												to="/about"
+												className={({ isActive }) =>
 													isActive
-														? "text-[#775fab]"
-														: "text-[#443361]"
-												} ${
-													location.pathname === "/"
-														? "text-white hover:text-[#dedaee]"
-														: "hover:text-[#775fab]"
-												}`
-											}
-										>
-											About
-										</NavLink>
-									</li>
+														? "block w-full py-1 text-[#775fab] font-semibold"
+														: location.pathname === "/"
+														? "block w-full py-1 text-white hover:text-[#dedaee]"
+														: "block w-full py-1 text-[#443361] hover:text-[#775fab]"
+												}
+											>
+												About
+											</NavLink>
+										</li>
 									<hr className="border-[#150d26]" />
-									<li className={`mb-1`}>
-										<NavLink
-											to="/contact"
-											className={({ isActive }) =>
-												`block w-full py-1 ${
+										<li className={`mb-1`}>
+											<NavLink
+												to="/contact"
+												className={({ isActive }) =>
 													isActive
-														? "text-[#775fab]"
-														: "text-[#443361]"
-												} ${
-													location.pathname === "/"
-														? "text-white hover:text-[#dedaee]"
-														: "hover:text-[#775fab]"
-												}`
-											}
-										>
-											Contact
-										</NavLink>
-									</li>
+														? "block w-full py-1 text-[#775fab] font-semibold"
+														: location.pathname === "/"
+														? "block w-full py-1 text-white hover:text-[#dedaee]"
+														: "block w-full py-1 text-[#443361] hover:text-[#775fab]"
+												}
+											>
+												Contact
+											</NavLink>
+										</li>
 									<hr className="border-[#150d26]" />
-									<li>
-										<NavLink
-											to="/faq"
-											className={({ isActive }) =>
-												`block w-full py-1 ${
+										<li>
+											<NavLink
+												to="/faq"
+												className={({ isActive }) =>
 													isActive
-														? "text-[#775fab]"
-														: "text-[#443361]"
-												} ${
-													location.pathname === "/"
-														? "text-white hover:text-[#dedaee]"
-														: "hover:text-[#775fab]"
-												}`
-											}
-										>
-											FAQ (optional)
-										</NavLink>
-									</li>
+														? "block w-full py-1 text-[#775fab] font-semibold"
+														: location.pathname === "/"
+														? "block w-full py-1 text-white hover:text-[#dedaee]"
+														: "block w-full py-1 text-[#443361] hover:text-[#775fab]"
+												}
+											>
+												FAQ (optional)
+											</NavLink>
+										</li>
 								</ul>
 							</li>
 							<li>
 								<NavLink
 									to="/trainers"
 									className={({ isActive }) =>
-										`${
-											isActive
-												? "text-[#775fab]"
-												: "text-[#443361]"
-										} ${
-											location.pathname === "/"
-												? "text-white hover:text-[#dedaee]"
-												: "hover:text-[#775fab]"
-										}`
+										isActive
+											? "text-[#775fab] font-semibold"
+											: location.pathname === "/"
+											? "text-white hover:text-[#dedaee]"
+											: "text-[#443361] hover:text-[#775fab]"
 									}
 								>
 									Trainers
@@ -198,15 +182,11 @@ function NavBar() {
 								<NavLink
 									to="/exercise"
 									className={({ isActive }) =>
-										`${
-											isActive
-												? "text-[#775fab]"
-												: "text-[#443361]"
-										} ${
-											location.pathname === "/"
-												? "text-white hover:text-[#dedaee]"
-												: "hover:text-[#775fab]"
-										}`
+										isActive
+											? "text-[#775fab] font-semibold"
+											: location.pathname === "/"
+											? "text-white hover:text-[#dedaee]"
+											: "text-[#443361] hover:text-[#775fab]"
 									}
 								>
 									Exercise Library
@@ -216,15 +196,11 @@ function NavBar() {
 								<NavLink
 									to="/reviews"
 									className={({ isActive }) =>
-										`${
-											isActive
-												? "text-[#775fab]"
-												: "text-[#443361]"
-										} ${
-											location.pathname === "/"
-												? "text-white hover:text-[#dedaee]"
-												: "hover:text-[#775fab]"
-										}`
+										isActive
+											? "text-[#775fab] font-semibold"
+											: location.pathname === "/"
+											? "text-white hover:text-[#dedaee]"
+											: "text-[#443361] hover:text-[#775fab]"
 									}
 								>
 									Reviews
@@ -234,15 +210,11 @@ function NavBar() {
 								<NavLink
 									to="/jobs"
 									className={({ isActive }) =>
-										`${
-											isActive
-												? "text-[#775fab]"
-												: "text-[#443361]"
-										} ${
-											location.pathname === "/"
-												? "text-white hover:text-[#dedaee]"
-												: "hover:text-[#775fab]"
-										}`
+										isActive
+											? "text-[#775fab] font-semibold"
+											: location.pathname === "/"
+											? "text-white hover:text-[#dedaee]"
+											: "text-[#443361] hover:text-[#775fab]"
 									}
 								>
 									Jobs
@@ -280,15 +252,25 @@ function NavBar() {
 							)}
 						</div>
 					) : (
-						<Button
-							className={`bg-[#c3d7ff] text-[1rem] text-center py-2 px-4 text-[#32284a] transition-all duration-300 hover:scale-115 ease-in-out cursor-pointer rounded-[25px]`}
-						>
-							<Link to="/login">
-								{location.pathname === "/"
-									? "Get Started"
-									: "Get My Plan"}
-							</Link>
-						</Button>
+						<div className="flex items-center gap-3">
+							<Button
+								className={`bg-[#775fab] text-[1rem] text-center py-2 px-4 text-white transition-all duration-300 hover:scale-105 ease-in-out cursor-pointer rounded-[25px]`}
+							>
+								<Link to="/login?admin=true" className="flex items-center gap-2">
+									<i className="fa-solid fa-lock"></i>
+									Admin
+								</Link>
+							</Button>
+							<Button
+								className={`bg-[#c3d7ff] text-[1rem] text-center py-2 px-4 text-[#32284a] transition-all duration-300 hover:scale-105 ease-in-out cursor-pointer rounded-[25px]`}
+							>
+								<Link to="/login">
+									{location.pathname === "/"
+										? "Get Started"
+										: "Get My Plan"}
+								</Link>
+							</Button>
+						</div>
 					)}
 				</div>
 			</section>

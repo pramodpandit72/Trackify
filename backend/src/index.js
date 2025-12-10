@@ -10,6 +10,7 @@ import reviewRoutes from "./routes/review.routes.js";
 import jobRoutes from "./routes/job.routes.js";
 import exerciseRoutes from "./routes/exercise.routes.js";
 import authRoutes from "./routes/auth.routes.js";
+import contactRoutes from "./routes/contact.routes.js";
 import errorHandler from "./middleware/error.middleware.js";
 
 dotenv.config({ path: "./.env" });
@@ -48,6 +49,7 @@ app.use("/api/trainers", trainerRoutes);
 app.use("/api/reviews", reviewRoutes);
 app.use("/api/jobs", jobRoutes);
 app.use("/api/exercises", exerciseRoutes);
+app.use("/api/contact", contactRoutes);
 
 // error handler (should be last)
 app.use(errorHandler);

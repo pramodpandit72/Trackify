@@ -1,15 +1,33 @@
-import React from 'react';
+import React, { memo } from 'react';
+
+const difficultyStyles = {
+  Beginner: 'bg-green-100 text-green-700',
+  Intermediate: 'bg-yellow-100 text-yellow-700',
+  Advanced: 'bg-red-100 text-red-700'
+};
 
 function ExerciseCard({ exercise }) {
+  if (!exercise) return null;
+
+  const {
+    name,
+    image,
+    category,
+    description,
+    muscleGroups = [],
+    difficulty
+  } = exercise;
+
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow h-full flex flex-col">
       {/* Image */}
       <div className="h-40 bg-linear-to-br from-[#775fab] to-[#32284a] flex items-center justify-center overflow-hidden">
-        {exercise.image ? (
-          <img 
-            src={exercise.image} 
-            alt={exercise.name}
+        {image ? (
+          <img
+            src={image}
+            alt={name}
             className="w-full h-full object-cover"
+            loading="lazy"
           />
         ) : (
           <div className="text-5xl">💪</div>
@@ -18,27 +36,36 @@ function ExerciseCard({ exercise }) {
 
       {/* Content */}
       <div className="p-4 flex-1 flex flex-col">
-        <h3 className="text-lg font-bold text-[#443049] mb-2">{exercise.name}</h3>
-        
+        <h3 className="text-lg font-bold text-[#443049] mb-2">
+          {name}
+        </h3>
+
         {/* Category */}
-        {exercise.category && (
+        {category && (
           <p className="text-xs font-medium text-purple-600 bg-purple-50 px-2 py-1 rounded w-fit mb-2">
-            {exercise.category}
+            {category}
           </p>
         )}
 
         {/* Description */}
-        <p className="text-sm text-gray-600 mb-3 flex-1">
-          {exercise.description}
-        </p>
+        {description && (
+          <p className="text-sm text-gray-600 mb-3 flex-1">
+            {description}
+          </p>
+        )}
 
         {/* Muscle Groups */}
-        {exercise.muscleGroups && exercise.muscleGroups.length > 0 && (
+        {muscleGroups.length > 0 && (
           <div className="mb-3">
-            <p className="text-xs font-semibold text-gray-700 mb-1">Targets:</p>
+            <p className="text-xs font-semibold text-gray-700 mb-1">
+              Targets:
+            </p>
             <div className="flex flex-wrap gap-1">
-              {exercise.muscleGroups.map((muscle, i) => (
-                <span key={i} className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded">
+              {muscleGroups.map((muscle) => (
+                <span
+                  key={muscle}
+                  className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded"
+                >
                   {muscle}
                 </span>
               ))}
@@ -47,14 +74,14 @@ function ExerciseCard({ exercise }) {
         )}
 
         {/* Difficulty */}
-        {exercise.difficulty && (
+        {difficulty && (
           <div className="pt-3 border-t border-gray-200">
-            <span className={`text-xs font-semibold px-2 py-1 rounded ${
-              exercise.difficulty === 'Beginner' ? 'bg-green-100 text-green-700' :
-              exercise.difficulty === 'Intermediate' ? 'bg-yellow-100 text-yellow-700' :
-              'bg-red-100 text-red-700'
-            }`}>
-              {exercise.difficulty}
+            <span
+              className={`text-xs font-semibold px-2 py-1 rounded ${
+                difficultyStyles[difficulty] ?? 'bg-gray-100 text-gray-700'
+              }`}
+            >
+              {difficulty}
             </span>
           </div>
         )}
@@ -63,4 +90,4 @@ function ExerciseCard({ exercise }) {
   );
 }
 
-export default ExerciseCard;
+export default memo(ExerciseCard);
