@@ -254,14 +254,6 @@ function NavBar() {
 					) : (
 						<div className="flex items-center gap-3">
 							<Button
-								className={`bg-[#775fab] text-[1rem] text-center py-2 px-4 text-white transition-all duration-300 hover:scale-105 ease-in-out cursor-pointer rounded-[25px]`}
-							>
-								<Link to="/login?admin=true" className="flex items-center gap-2">
-									<i className="fa-solid fa-lock"></i>
-									Admin
-								</Link>
-							</Button>
-							<Button
 								className={`bg-[#c3d7ff] text-[1rem] text-center py-2 px-4 text-[#32284a] transition-all duration-300 hover:scale-105 ease-in-out cursor-pointer rounded-[25px]`}
 							>
 								<Link to="/login">

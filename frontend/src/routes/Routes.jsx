@@ -24,6 +24,7 @@ import KnowUs from "../components/public/KnowUs";
 import UserDashboard from "../pages/auth/UserDashboard";
 import AdminDashboard from "../pages/auth/AdminDashboard";
 import AdminApplications from "../pages/auth/AdminApplications";
+import AdminLogin from "../pages/auth/AdminLogin";
 import UpdateProfile from "../pages/auth/UpdateProfile";
 import Home from "../pages/public/home";
 import Exercise from "../pages/public/exercise";
@@ -55,6 +56,7 @@ function RoutesClient() {
 
         {/* auth pages - protected routes */}
         <Route path="/dashboard" element={<UserDashboard />} />
+        <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
         <Route path="/admin/applications" element={<AdminApplications />} />
         <Route path="/profile/edit" element={<UpdateProfile />} />

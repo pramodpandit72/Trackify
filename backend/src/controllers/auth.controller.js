@@ -2,10 +2,11 @@ import jwt from "jsonwebtoken";
 import crypto from "crypto";
 import nodemailer from "nodemailer";
 import User from "../models/user.model.js";
+import Admin from "../models/admin.model.js";
 
 // Generate JWT token
-const generateToken = (userId) => {
-  return jwt.sign({ id: userId }, process.env.JWT_SECRET || "trackify_secret_key_2025", {
+const generateToken = (userId, role = 'user') => {
+  return jwt.sign({ id: userId, role }, process.env.JWT_SECRET || "trackify_secret_key_2025", {
     expiresIn: process.env.JWT_EXPIRES_IN || "7d"
   });
 };
@@ -97,12 +98,12 @@ export const signup = async (req, res, next) => {
 
 /**
  * POST /api/auth/login
- * Login user
+ * Login user or admin
  */
 export const login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
-    console.log('Login attempt:', { email }); // Log login attempt
+    console.log('Login attempt:', { email });
 
     // Validation
     if (!email || !password) {
@@ -114,9 +115,50 @@ export const login = async (req, res, next) => {
       });
     }
 
-    // Find user and include password
+    // First, check if it's an admin
+    let admin = await Admin.findOne({ email: email.toLowerCase() }).select("+password");
+    
+    if (admin) {
+      // Admin login
+      if (!admin.isActive) {
+        return res.status(401).json({
+          error: "Authentication failed",
+          message: "Account is deactivated. Please contact support."
+        });
+      }
+
+      const isPasswordValid = await admin.comparePassword(password);
+      if (!isPasswordValid) {
+        return res.status(401).json({
+          error: "Authentication failed",
+          message: "Invalid email or password"
+        });
+      }
+
+      const token = generateToken(admin._id, 'admin');
+      admin.lastLogin = new Date();
+      await admin.save();
+
+      return res.json({
+        message: "Login successful",
+        token,
+        user: {
+          id: admin._id,
+          firstName: admin.firstName,
+          lastName: admin.lastName,
+          email: admin.email,
+          role: 'admin',
+          phone: admin.phone,
+          profilePicture: admin.profilePicture,
+          permissions: admin.permissions,
+          isSuperAdmin: admin.isSuperAdmin
+        }
+      });
+    }
+
+    // If not admin, check regular user
     const user = await User.findOne({ email: email.toLowerCase() }).select("+password");
-    console.log('User found:', !!user); // Log if user exists
+    console.log('User found:', !!user);
 
     if (!user) {
       return res.status(401).json({
@@ -135,7 +177,7 @@ export const login = async (req, res, next) => {
 
     // Compare password
     const isPasswordValid = await user.comparePassword(password);
-    console.log('Password valid:', isPasswordValid); // Log password validation
+    console.log('Password valid:', isPasswordValid);
 
     if (!isPasswordValid) {
       return res.status(401).json({
@@ -145,7 +187,7 @@ export const login = async (req, res, next) => {
     }
 
     // Generate token
-    const token = generateToken(user._id);
+    const token = generateToken(user._id, 'user');
 
     // Update last login
     user.lastLogin = new Date();
@@ -318,7 +360,7 @@ export const changePassword = async (req, res, next) => {
 
 /**
  * POST /api/auth/create-admin
- * Create a new admin user (requires existing admin authentication)
+ * Create a new admin (requires existing admin authentication)
  * SECURITY: This endpoint requires valid admin token
  */
 export const createAdmin = async (req, res, next) => {
@@ -331,7 +373,7 @@ export const createAdmin = async (req, res, next) => {
       });
     }
 
-    const { firstName, lastName, email, password, phone } = req.body;
+    const { firstName, lastName, email, password, phone, permissions } = req.body;
 
     // Validation
     if (!firstName || !lastName || !email || !password) {
@@ -352,7 +394,18 @@ export const createAdmin = async (req, res, next) => {
       });
     }
 
-    // Check if user already exists
+    // Check if admin already exists in Admin collection
+    const existingAdmin = await Admin.findOne({ email: email.toLowerCase() });
+    if (existingAdmin) {
+      return res.status(400).json({
+        error: "Validation failed",
+        errors: [
+          { field: "email", message: "Email already registered as admin" }
+        ]
+      });
+    }
+
+    // Also check User collection to prevent duplicate emails
     const existingUser = await User.findOne({ email: email.toLowerCase() });
     if (existingUser) {
       return res.status(400).json({
@@ -363,14 +416,14 @@ export const createAdmin = async (req, res, next) => {
       });
     }
 
-    // Create admin user
-    const admin = await User.create({
+    // Create admin in Admin collection
+    const admin = await Admin.create({
       firstName,
       lastName,
       email: email.toLowerCase(),
       password,
       phone,
-      role: "admin",
+      permissions: permissions || {},
       isActive: true
     });
 
@@ -385,7 +438,8 @@ export const createAdmin = async (req, res, next) => {
         firstName: admin.firstName,
         lastName: admin.lastName,
         email: admin.email,
-        role: admin.role
+        role: 'admin',
+        permissions: admin.permissions
       }
     });
   } catch (error) {
@@ -421,10 +475,15 @@ export const forgotPassword = async (req, res, next) => {
       });
     }
 
-    // Find user by email
-    const user = await User.findOne({ email: email.toLowerCase() });
+    // First check Admin collection, then User collection
+    let account = await Admin.findOne({ email: email.toLowerCase() });
+    let isAdmin = !!account;
     
-    if (!user) {
+    if (!account) {
+      account = await User.findOne({ email: email.toLowerCase() });
+    }
+    
+    if (!account) {
       // Don't reveal if user exists or not for security
       return res.status(200).json({
         success: true,
@@ -438,7 +497,8 @@ export const forgotPassword = async (req, res, next) => {
 
     // Store token (in production, store in database)
     resetTokens.set(resetToken, {
-      userId: user._id,
+      userId: account._id,
+      isAdmin: isAdmin,
       expiry: resetTokenExpiry
     });
 
@@ -459,7 +519,7 @@ export const forgotPassword = async (req, res, next) => {
 
         await transporter.sendMail({
           from: process.env.EMAIL_USER,
-          to: user.email,
+          to: account.email,
           subject: "Password Reset Request - Trackify",
           html: `
             <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -467,7 +527,7 @@ export const forgotPassword = async (req, res, next) => {
                 <h1 style="color: white; margin: 0;">Password Reset</h1>
               </div>
               <div style="background: #f8f9fa; padding: 30px;">
-                <p style="font-size: 16px; color: #333;">Hi ${user.firstName},</p>
+                <p style="font-size: 16px; color: #333;">Hi ${account.firstName},</p>
                 <p style="font-size: 16px; color: #333;">
                   You requested to reset your password. Click the button below to set a new password:
                 </p>
@@ -493,7 +553,7 @@ export const forgotPassword = async (req, res, next) => {
           `
         });
         emailSent = true;
-        console.log(`✉️ Password reset email sent to ${user.email}`);
+        console.log(`✉️ Password reset email sent to ${account.email}`);
       } catch (emailErr) {
         console.error("Failed to send reset email:", emailErr.message);
       }
@@ -559,24 +619,29 @@ export const resetPassword = async (req, res, next) => {
       });
     }
 
-    // Find user and update password
-    const user = await User.findById(tokenData.userId).select('+password');
+    // Find account (Admin or User) and update password
+    let account;
+    if (tokenData.isAdmin) {
+      account = await Admin.findById(tokenData.userId).select('+password');
+    } else {
+      account = await User.findById(tokenData.userId).select('+password');
+    }
 
-    if (!user) {
+    if (!account) {
       return res.status(400).json({
         success: false,
-        message: "User not found"
+        message: "Account not found"
       });
     }
 
     // Update password
-    user.password = password;
-    await user.save();
+    account.password = password;
+    await account.save();
 
     // Delete used token
     resetTokens.delete(token);
 
-    console.log(`✅ Password reset successful for ${user.email}`);
+    console.log(`✅ Password reset successful for ${account.email}`);
 
     res.status(200).json({
       success: true,
