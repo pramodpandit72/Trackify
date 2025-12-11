@@ -16,6 +16,8 @@ import Contact from "../pages/public/Contact";
 import FAQ from "../pages/public/Faq";
 import Login from "../pages/public/Login";
 import SignUp from "../pages/public/Signup";
+import ForgotPassword from "../pages/public/ForgotPassword";
+import ResetPassword from "../pages/public/ResetPassword";
 import KnowUs from "../components/public/KnowUs";
 
 // Auth pages
@@ -47,6 +49,8 @@ function RoutesClient() {
         <Route path="/faq" element={<FAQ />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password/:token" element={<ResetPassword />} />
         <Route path="/knowus" element={<KnowUs />} />
 
         {/* auth pages - protected routes */}

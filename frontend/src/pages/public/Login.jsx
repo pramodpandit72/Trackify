@@ -165,7 +165,7 @@ function Login() {
 							</div>
 							<p className="text-m">
 								<Link
-									to="/forgetpassword"
+									to="/forgot-password"
 									className="hover:text-[#dd00ff] underline"
 								>
 									Forgot Password?
@@ -176,21 +176,9 @@ function Login() {
 						<button
 							type="submit"
 							disabled={loading}
-							className="w-full text-white bg-black p-2 cursor-pointer text-m rounded-[17px_4px] mb-0.5 transform hover:scale-104 transition-all duration-300 ease-in-out border border-white disabled:opacity-50 disabled:cursor-not-allowed"
+							className="w-full text-white bg-black p-2 cursor-pointer text-m rounded-[17px_4px] mb-25 transform hover:scale-104 transition-all duration-300 ease-in-out border border-white disabled:opacity-50 disabled:cursor-not-allowed"
 						>
 							{loading ? 'Logging in...' : 'Login'}
-						</button>
-						<button
-							type="button"
-							className="flex justify-center items-center gap-3 my-2 transform text-m rounded-[4px_17px] hover:scale-104 transition-all duration-300 ease-in-out border p-2 mb-25"
-						>
-							<img
-								src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/2048px-Google_%22G%22_logo.svg.png"
-								alt="google"
-								width={20}
-								height={20}
-							/>{" "}
-							Login with Google
 						</button>
 					</form>
 

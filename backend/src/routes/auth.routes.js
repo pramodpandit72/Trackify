@@ -6,7 +6,10 @@ import {
   getMe,
   updateProfile,
   changePassword,
-  createAdmin
+  createAdmin,
+  forgotPassword,
+  resetPassword,
+  verifyResetToken
 } from "../controllers/auth.controller.js";
 import { protect } from "../middleware/auth.middleware.js";
 
@@ -16,6 +19,9 @@ const router = express.Router();
 router.post("/signup", signup);
 router.post("/login", login);
 router.post("/logout", logout);
+router.post("/forgot-password", forgotPassword);
+router.post("/reset-password/:token", resetPassword);
+router.get("/verify-reset-token/:token", verifyResetToken);
 
 // Protected routes (require authentication)
 router.get("/me", protect, getMe);
