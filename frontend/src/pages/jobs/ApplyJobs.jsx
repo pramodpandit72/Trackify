@@ -61,15 +61,15 @@ export default function ApplyJobs() {
 
   if (submitted) {
     return (
-      <div className="min-h-screen bg-linear-to-br from-gray-50 to-white flex items-center justify-center px-4">
+      <div className="min-h-screen bg-linear-to-br from-gray-50 to-white dark:from-black dark:to-gray-900 flex items-center justify-center px-4">
         <div className="max-w-md w-full text-center">
-          <div className="bg-white rounded-2xl shadow-lg p-12 border border-gray-100">
+          <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-lg p-12 border border-gray-100 dark:border-gray-700">
             <div className="text-6xl mb-6">✅</div>
-            <h1 className="text-3xl font-bold text-[#1a1a1a] mb-4">Application Submitted!</h1>
-            <p className="text-gray-600 mb-8 leading-relaxed">
+            <h1 className="text-3xl font-bold text-[#1a1a1a] dark:text-white mb-4">Application Submitted!</h1>
+            <p className="text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
               Thank you for applying! We've received your application and will review it shortly. You'll receive an email confirmation at <span className="font-semibold">{form.email}</span>.
             </p>
-            <p className="text-sm text-gray-500">Redirecting to jobs page in a few seconds...</p>
+            <p className="text-sm text-gray-500 dark:text-gray-500">Redirecting to jobs page in a few seconds...</p>
           </div>
         </div>
       </div>
@@ -77,25 +77,25 @@ export default function ApplyJobs() {
   }
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-gray-50 to-white py-16 px-4">
+    <div className="min-h-screen bg-linear-to-br from-gray-50 to-white dark:from-black dark:to-gray-900 py-16 px-4">
       <div className="max-w-3xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl lg:text-5xl font-bold text-[#1a1a1a] mb-4">
+          <h1 className="text-4xl lg:text-5xl font-bold text-[#1a1a1a] dark:text-white mb-4">
             Apply to Join Trackify
           </h1>
-          <p className="text-xl text-gray-600">
+          <p className="text-xl text-gray-600 dark:text-gray-400">
             Share your information and let's see if you're a great fit for our team
           </p>
         </div>
 
         {/* Form Container */}
-        <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+        <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700 overflow-hidden">
           <form onSubmit={submitForm} className="p-8 lg:p-12">
             {/* Submit Error */}
             {errors.submit && (
-              <div className="mb-8 p-4 bg-red-50 border border-red-200 rounded-xl">
-                <p className="text-red-700 font-medium flex items-center gap-2">
+              <div className="mb-8 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl">
+                <p className="text-red-700 dark:text-red-400 font-medium flex items-center gap-2">
                   <span>⚠️</span> {errors.submit}
                 </p>
               </div>
@@ -103,13 +103,13 @@ export default function ApplyJobs() {
 
             {/* Personal Information Section */}
             <div className="mb-10">
-              <h2 className="text-2xl font-bold text-[#1a1a1a] mb-2">Personal Information</h2>
-              <p className="text-gray-600 mb-6">Help us get to know you</p>
+              <h2 className="text-2xl font-bold text-[#1a1a1a] dark:text-white mb-2">Personal Information</h2>
+              <p className="text-gray-600 dark:text-gray-400 mb-6">Help us get to know you</p>
 
               <div className="space-y-6">
                 {/* Name */}
                 <div>
-                  <label className="block text-sm font-semibold text-[#1a1a1a] mb-2">
+                  <label className="block text-sm font-semibold text-[#1a1a1a] dark:text-white mb-2">
                     Full Name *
                   </label>
                   <input
@@ -118,18 +118,18 @@ export default function ApplyJobs() {
                     value={form.name}
                     onChange={handleChange}
                     placeholder="John Doe"
-                    className={`w-full px-4 py-3 border-2 rounded-xl transition-all focus:outline-none ${
+                    className={`w-full px-4 py-3 border-2 rounded-xl transition-all focus:outline-none dark:bg-gray-800 dark:text-white dark:placeholder-gray-500 ${
                       errors.name
-                        ? "border-red-300 bg-red-50"
-                        : "border-gray-200 focus:border-[#775fab] focus:bg-white"
+                        ? "border-red-300 bg-red-50 dark:border-red-700 dark:bg-red-900/20"
+                        : "border-gray-200 dark:border-gray-600 focus:border-[#775fab] focus:bg-white dark:focus:bg-gray-800"
                     }`}
                   />
-                  {errors.name && <p className="text-red-600 text-sm mt-1">{errors.name}</p>}
+                  {errors.name && <p className="text-red-600 dark:text-red-400 text-sm mt-1">{errors.name}</p>}
                 </div>
 
                 {/* Email */}
                 <div>
-                  <label className="block text-sm font-semibold text-[#1a1a1a] mb-2">
+                  <label className="block text-sm font-semibold text-[#1a1a1a] dark:text-white mb-2">
                     Email Address *
                   </label>
                   <input
@@ -138,18 +138,18 @@ export default function ApplyJobs() {
                     value={form.email}
                     onChange={handleChange}
                     placeholder="john@example.com"
-                    className={`w-full px-4 py-3 border-2 rounded-xl transition-all focus:outline-none ${
+                    className={`w-full px-4 py-3 border-2 rounded-xl transition-all focus:outline-none dark:bg-gray-800 dark:text-white dark:placeholder-gray-500 ${
                       errors.email
-                        ? "border-red-300 bg-red-50"
-                        : "border-gray-200 focus:border-[#775fab] focus:bg-white"
+                        ? "border-red-300 bg-red-50 dark:border-red-700 dark:bg-red-900/20"
+                        : "border-gray-200 dark:border-gray-600 focus:border-[#775fab] focus:bg-white dark:focus:bg-gray-800"
                     }`}
                   />
-                  {errors.email && <p className="text-red-600 text-sm mt-1">{errors.email}</p>}
+                  {errors.email && <p className="text-red-600 dark:text-red-400 text-sm mt-1">{errors.email}</p>}
                 </div>
 
                 {/* Phone */}
                 <div>
-                  <label className="block text-sm font-semibold text-[#1a1a1a] mb-2">
+                  <label className="block text-sm font-semibold text-[#1a1a1a] dark:text-white mb-2">
                     Phone Number *
                   </label>
                   <input
@@ -158,26 +158,26 @@ export default function ApplyJobs() {
                     value={form.phone}
                     onChange={handleChange}
                     placeholder="+1 (555) 123-4567"
-                    className={`w-full px-4 py-3 border-2 rounded-xl transition-all focus:outline-none ${
+                    className={`w-full px-4 py-3 border-2 rounded-xl transition-all focus:outline-none dark:bg-gray-800 dark:text-white dark:placeholder-gray-500 ${
                       errors.phone
-                        ? "border-red-300 bg-red-50"
-                        : "border-gray-200 focus:border-[#775fab] focus:bg-white"
+                        ? "border-red-300 bg-red-50 dark:border-red-700 dark:bg-red-900/20"
+                        : "border-gray-200 dark:border-gray-600 focus:border-[#775fab] focus:bg-white dark:focus:bg-gray-800"
                     }`}
                   />
-                  {errors.phone && <p className="text-red-600 text-sm mt-1">{errors.phone}</p>}
+                  {errors.phone && <p className="text-red-600 dark:text-red-400 text-sm mt-1">{errors.phone}</p>}
                 </div>
               </div>
             </div>
 
             {/* Professional Information Section */}
-            <div className="mb-10 pb-10 border-t border-gray-100 pt-10">
-              <h2 className="text-2xl font-bold text-[#1a1a1a] mb-2">Professional Information</h2>
-              <p className="text-gray-600 mb-6">Tell us about your qualifications</p>
+            <div className="mb-10 pb-10 border-t border-gray-100 dark:border-gray-700 pt-10">
+              <h2 className="text-2xl font-bold text-[#1a1a1a] dark:text-white mb-2">Professional Information</h2>
+              <p className="text-gray-600 dark:text-gray-400 mb-6">Tell us about your qualifications</p>
 
               <div className="space-y-6">
                 {/* Certifications */}
                 <div>
-                  <label className="block text-sm font-semibold text-[#1a1a1a] mb-2">
+                  <label className="block text-sm font-semibold text-[#1a1a1a] dark:text-white mb-2">
                     Certifications & Credentials
                   </label>
                   <textarea
@@ -185,7 +185,7 @@ export default function ApplyJobs() {
                     value={form.certifications}
                     onChange={handleChange}
                     placeholder="e.g., NASM CPT, ACE Certification, CSCS, etc."
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-[#775fab] focus:bg-white transition-all resize-none"
+                    className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:placeholder-gray-500 rounded-xl focus:outline-none focus:border-[#775fab] focus:bg-white dark:focus:bg-gray-800 transition-all resize-none"
                     rows="3"
                   ></textarea>
                   <p className="text-xs text-gray-500 mt-1">List all relevant fitness certifications and credentials</p>
@@ -193,7 +193,7 @@ export default function ApplyJobs() {
 
                 {/* Experience */}
                 <div>
-                  <label className="block text-sm font-semibold text-[#1a1a1a] mb-2">
+                  <label className="block text-sm font-semibold text-[#1a1a1a] dark:text-white mb-2">
                     Years of Training Experience
                   </label>
                   <input
@@ -202,13 +202,13 @@ export default function ApplyJobs() {
                     value={form.experience}
                     onChange={handleChange}
                     placeholder="e.g., 5 years"
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-[#775fab] focus:bg-white transition-all"
+                    className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:placeholder-gray-500 rounded-xl focus:outline-none focus:border-[#775fab] focus:bg-white dark:focus:bg-gray-800 transition-all"
                   />
                 </div>
 
                 {/* Resume Link */}
                 <div>
-                  <label className="block text-sm font-semibold text-[#1a1a1a] mb-2">
+                  <label className="block text-sm font-semibold text-[#1a1a1a] dark:text-white mb-2">
                     Resume/CV Link
                   </label>
                   <input
@@ -217,7 +217,7 @@ export default function ApplyJobs() {
                     value={form.resumeLink}
                     onChange={handleChange}
                     placeholder="https://link-to-your-resume.com"
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-[#775fab] focus:bg-white transition-all"
+                    className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:placeholder-gray-500 rounded-xl focus:outline-none focus:border-[#775fab] focus:bg-white dark:focus:bg-gray-800 transition-all"
                   />
                   <p className="text-xs text-gray-500 mt-1">You can use Google Drive, Dropbox, or any cloud storage link</p>
                 </div>
@@ -225,9 +225,9 @@ export default function ApplyJobs() {
             </div>
 
             {/* Message Section */}
-            <div className="mb-10 pb-10 border-t border-gray-100 pt-10">
-              <h2 className="text-2xl font-bold text-[#1a1a1a] mb-2">Tell Us More</h2>
-              <p className="text-gray-600 mb-6">Why do you want to join Trackify?</p>
+            <div className="mb-10 pb-10 border-t border-gray-100 dark:border-gray-700 pt-10">
+              <h2 className="text-2xl font-bold text-[#1a1a1a] dark:text-white mb-2">Tell Us More</h2>
+              <p className="text-gray-600 dark:text-gray-400 mb-6">Why do you want to join Trackify?</p>
 
               <div>
                 <textarea
@@ -235,7 +235,7 @@ export default function ApplyJobs() {
                   value={form.message}
                   onChange={handleChange}
                   placeholder="Share your passion for fitness training and why you'd be a great fit for our team..."
-                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-[#775fab] focus:bg-white transition-all resize-none"
+                  className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:placeholder-gray-500 rounded-xl focus:outline-none focus:border-[#775fab] focus:bg-white dark:focus:bg-gray-800 transition-all resize-none"
                   rows="5"
                 ></textarea>
                 <p className="text-xs text-gray-500 mt-1">This helps us understand your motivation and personality</p>
@@ -256,7 +256,7 @@ export default function ApplyJobs() {
               <button
                 type="button"
                 onClick={() => navigate("/jobs")}
-                className="px-8 py-4 border-2 border-gray-300 text-gray-700 rounded-xl font-semibold hover:bg-gray-50 transition-all"
+                className="px-8 py-4 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-xl font-semibold hover:bg-gray-50 dark:hover:bg-gray-800 transition-all"
               >
                 Cancel
               </button>
@@ -266,20 +266,20 @@ export default function ApplyJobs() {
 
         {/* Info Banner */}
         <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-white rounded-xl p-6 border border-gray-100 text-center">
+          <div className="bg-white dark:bg-gray-900 rounded-xl p-6 border border-gray-100 dark:border-gray-700 text-center">
             <div className="text-4xl mb-3">⚡</div>
-            <h3 className="font-semibold text-[#1a1a1a] mb-2">Quick Review</h3>
-            <p className="text-sm text-gray-600">We review all applications within 2-3 business days</p>
+            <h3 className="font-semibold text-[#1a1a1a] dark:text-white mb-2">Quick Review</h3>
+            <p className="text-sm text-gray-600 dark:text-gray-400">We review all applications within 2-3 business days</p>
           </div>
-          <div className="bg-white rounded-xl p-6 border border-gray-100 text-center">
+          <div className="bg-white dark:bg-gray-900 rounded-xl p-6 border border-gray-100 dark:border-gray-700 text-center">
             <div className="text-4xl mb-3">💬</div>
-            <h3 className="font-semibold text-[#1a1a1a] mb-2">Follow-up</h3>
-            <p className="text-sm text-gray-600">We'll contact you by phone or email to discuss next steps</p>
+            <h3 className="font-semibold text-[#1a1a1a] dark:text-white mb-2">Follow-up</h3>
+            <p className="text-sm text-gray-600 dark:text-gray-400">We'll contact you by phone or email to discuss next steps</p>
           </div>
-          <div className="bg-white rounded-xl p-6 border border-gray-100 text-center">
+          <div className="bg-white dark:bg-gray-900 rounded-xl p-6 border border-gray-100 dark:border-gray-700 text-center">
             <div className="text-4xl mb-3">🎯</div>
-            <h3 className="font-semibold text-[#1a1a1a] mb-2">Your Success</h3>
-            <p className="text-sm text-gray-600">Join a community dedicated to transforming lives</p>
+            <h3 className="font-semibold text-[#1a1a1a] dark:text-white mb-2">Your Success</h3>
+            <p className="text-sm text-gray-600 dark:text-gray-400">Join a community dedicated to transforming lives</p>
           </div>
         </div>
       </div>

@@ -55,10 +55,10 @@ function UserDashboard() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-black">
         <div className="text-center">
           <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-[#775fab] mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loading your dashboard...</p>
+          <p className="mt-4 text-gray-600 dark:text-gray-400">Loading your dashboard...</p>
         </div>
       </div>
     );
@@ -69,16 +69,16 @@ function UserDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-black">
       {/* Header */}
-      <div className="bg-white shadow">
+      <div className="bg-white dark:bg-gray-900 shadow dark:shadow-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex justify-between items-center">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
                 Welcome back, {user.firstName}!
               </h1>
-              <p className="text-gray-600 mt-1">Track your fitness journey</p>
+              <p className="text-gray-600 dark:text-gray-400 mt-1">Track your fitness journey</p>
             </div>
             <button
               onClick={handleLogout}
@@ -94,38 +94,38 @@ function UserDashboard() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <div className="bg-white p-6 rounded-xl shadow-md border border-gray-200">
+          <div className="bg-white dark:bg-gray-900 p-6 rounded-xl shadow-md border border-gray-200 dark:border-gray-700">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-gray-600 text-sm font-medium">Applied Jobs</p>
-                <p className="text-3xl font-bold text-gray-900 mt-2">{stats.appliedJobs}</p>
+                <p className="text-gray-600 dark:text-gray-400 text-sm font-medium">Applied Jobs</p>
+                <p className="text-3xl font-bold text-gray-900 dark:text-white mt-2">{stats.appliedJobs}</p>
               </div>
-              <div className="bg-blue-100 p-4 rounded-full">
-                <i className="fa-solid fa-briefcase text-2xl text-blue-600"></i>
+              <div className="bg-blue-100 dark:bg-blue-900/30 p-4 rounded-full">
+                <i className="fa-solid fa-briefcase text-2xl text-blue-600 dark:text-blue-400"></i>
               </div>
             </div>
           </div>
 
-          <div className="bg-white p-6 rounded-xl shadow-md border border-gray-200">
+          <div className="bg-white dark:bg-gray-900 p-6 rounded-xl shadow-md border border-gray-200 dark:border-gray-700">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-gray-600 text-sm font-medium">Saved Exercises</p>
-                <p className="text-3xl font-bold text-gray-900 mt-2">{stats.savedExercises}</p>
+                <p className="text-gray-600 dark:text-gray-400 text-sm font-medium">Saved Exercises</p>
+                <p className="text-3xl font-bold text-gray-900 dark:text-white mt-2">{stats.savedExercises}</p>
               </div>
-              <div className="bg-green-100 p-4 rounded-full">
-                <i className="fa-solid fa-dumbbell text-2xl text-green-600"></i>
+              <div className="bg-green-100 dark:bg-green-900/30 p-4 rounded-full">
+                <i className="fa-solid fa-dumbbell text-2xl text-green-600 dark:text-green-400"></i>
               </div>
             </div>
           </div>
 
-          <div className="bg-white p-6 rounded-xl shadow-md border border-gray-200">
+          <div className="bg-white dark:bg-gray-900 p-6 rounded-xl shadow-md border border-gray-200 dark:border-gray-700">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-gray-600 text-sm font-medium">Reviews Posted</p>
-                <p className="text-3xl font-bold text-gray-900 mt-2">{stats.reviewsPosted}</p>
+                <p className="text-gray-600 dark:text-gray-400 text-sm font-medium">Reviews Posted</p>
+                <p className="text-3xl font-bold text-gray-900 dark:text-white mt-2">{stats.reviewsPosted}</p>
               </div>
-              <div className="bg-purple-100 p-4 rounded-full">
-                <i className="fa-solid fa-star text-2xl text-purple-600"></i>
+              <div className="bg-purple-100 dark:bg-purple-900/30 p-4 rounded-full">
+                <i className="fa-solid fa-star text-2xl text-purple-600 dark:text-purple-400"></i>
               </div>
             </div>
           </div>
@@ -134,33 +134,33 @@ function UserDashboard() {
         {/* Profile Information */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Personal Info */}
-          <div className="bg-white p-6 rounded-xl shadow-md border border-gray-200">
-            <h2 className="text-xl font-bold text-gray-900 mb-4">
+          <div className="bg-white dark:bg-gray-900 p-6 rounded-xl shadow-md border border-gray-200 dark:border-gray-700">
+            <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
               <i className="fa-solid fa-user mr-2 text-[#775fab]"></i>
               Personal Information
             </h2>
             <div className="space-y-3">
-              <div className="flex justify-between border-b pb-2">
-                <span className="text-gray-600">Name:</span>
-                <span className="font-medium">{user.firstName} {user.lastName}</span>
+              <div className="flex justify-between border-b border-gray-200 dark:border-gray-700 pb-2">
+                <span className="text-gray-600 dark:text-gray-400">Name:</span>
+                <span className="font-medium dark:text-white">{user.firstName} {user.lastName}</span>
               </div>
-              <div className="flex justify-between border-b pb-2">
-                <span className="text-gray-600">Email:</span>
-                <span className="font-medium">{user.email}</span>
+              <div className="flex justify-between border-b border-gray-200 dark:border-gray-700 pb-2">
+                <span className="text-gray-600 dark:text-gray-400">Email:</span>
+                <span className="font-medium dark:text-white">{user.email}</span>
               </div>
-              <div className="flex justify-between border-b pb-2">
-                <span className="text-gray-600">Phone:</span>
-                <span className="font-medium">{user.phone || 'Not provided'}</span>
+              <div className="flex justify-between border-b border-gray-200 dark:border-gray-700 pb-2">
+                <span className="text-gray-600 dark:text-gray-400">Phone:</span>
+                <span className="font-medium dark:text-white">{user.phone || 'Not provided'}</span>
               </div>
-              <div className="flex justify-between border-b pb-2">
-                <span className="text-gray-600">Role:</span>
-                <span className="font-medium capitalize px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">
+              <div className="flex justify-between border-b border-gray-200 dark:border-gray-700 pb-2">
+                <span className="text-gray-600 dark:text-gray-400">Role:</span>
+                <span className="font-medium capitalize px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-400 rounded-full text-sm">
                   {user.role}
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-600">Member Since:</span>
-                <span className="font-medium">
+                <span className="text-gray-600 dark:text-gray-400">Member Since:</span>
+                <span className="font-medium dark:text-white">
                   {new Date(user.createdAt).toLocaleDateString('en-US', {
                     year: 'numeric',
                     month: 'long',
@@ -172,31 +172,31 @@ function UserDashboard() {
           </div>
 
           {/* Fitness Profile */}
-          <div className="bg-white p-6 rounded-xl shadow-md border border-gray-200">
-            <h2 className="text-xl font-bold text-gray-900 mb-4">
+          <div className="bg-white dark:bg-gray-900 p-6 rounded-xl shadow-md border border-gray-200 dark:border-gray-700">
+            <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
               <i className="fa-solid fa-heart-pulse mr-2 text-[#775fab]"></i>
               Fitness Profile
             </h2>
             <div className="space-y-3">
-              <div className="flex justify-between border-b pb-2">
-                <span className="text-gray-600">Age:</span>
-                <span className="font-medium">{user.age || 'Not set'}</span>
+              <div className="flex justify-between border-b border-gray-200 dark:border-gray-700 pb-2">
+                <span className="text-gray-600 dark:text-gray-400">Age:</span>
+                <span className="font-medium dark:text-white">{user.age || 'Not set'}</span>
               </div>
-              <div className="flex justify-between border-b pb-2">
-                <span className="text-gray-600">Height:</span>
-                <span className="font-medium">{user.height ? `${user.height} cm` : 'Not set'}</span>
+              <div className="flex justify-between border-b border-gray-200 dark:border-gray-700 pb-2">
+                <span className="text-gray-600 dark:text-gray-400">Height:</span>
+                <span className="font-medium dark:text-white">{user.height ? `${user.height} cm` : 'Not set'}</span>
               </div>
-              <div className="flex justify-between border-b pb-2">
-                <span className="text-gray-600">Weight:</span>
-                <span className="font-medium">{user.weight ? `${user.weight} kg` : 'Not set'}</span>
+              <div className="flex justify-between border-b border-gray-200 dark:border-gray-700 pb-2">
+                <span className="text-gray-600 dark:text-gray-400">Weight:</span>
+                <span className="font-medium dark:text-white">{user.weight ? `${user.weight} kg` : 'Not set'}</span>
               </div>
-              <div className="flex justify-between border-b pb-2">
-                <span className="text-gray-600">Fitness Level:</span>
-                <span className="font-medium capitalize">{user.fitnessLevel || 'Not set'}</span>
+              <div className="flex justify-between border-b border-gray-200 dark:border-gray-700 pb-2">
+                <span className="text-gray-600 dark:text-gray-400">Fitness Level:</span>
+                <span className="font-medium capitalize dark:text-white">{user.fitnessLevel || 'Not set'}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-600">Main Goal:</span>
-                <span className="font-medium">{user.mainGoal || 'Not set'}</span>
+                <span className="text-gray-600 dark:text-gray-400">Main Goal:</span>
+                <span className="font-medium dark:text-white">{user.mainGoal || 'Not set'}</span>
               </div>
             </div>
           </div>
@@ -204,8 +204,8 @@ function UserDashboard() {
 
         {/* Goals */}
         {user.goals && user.goals.length > 0 && (
-          <div className="bg-white p-6 rounded-xl shadow-md border border-gray-200 mt-6">
-            <h2 className="text-xl font-bold text-gray-900 mb-4">
+          <div className="bg-white dark:bg-gray-900 p-6 rounded-xl shadow-md border border-gray-200 dark:border-gray-700 mt-6">
+            <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
               <i className="fa-solid fa-bullseye mr-2 text-[#775fab]"></i>
               Your Fitness Goals
             </h2>
@@ -213,7 +213,7 @@ function UserDashboard() {
               {user.goals.map((goal, index) => (
                 <span
                   key={index}
-                  className="px-4 py-2 bg-purple-100 text-purple-800 rounded-full text-sm font-medium"
+                  className="px-4 py-2 bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-400 rounded-full text-sm font-medium"
                 >
                   {goal}
                 </span>
@@ -223,37 +223,37 @@ function UserDashboard() {
         )}
 
         {/* Quick Actions */}
-        <div className="bg-white p-6 rounded-xl shadow-md border border-gray-200 mt-6">
-          <h2 className="text-xl font-bold text-gray-900 mb-4">
+        <div className="bg-white dark:bg-gray-900 p-6 rounded-xl shadow-md border border-gray-200 dark:border-gray-700 mt-6">
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
             <i className="fa-solid fa-bolt mr-2 text-[#775fab]"></i>
             Quick Actions
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <button
               onClick={() => navigate('/exercise')}
-              className="p-4 border-2 border-gray-200 rounded-lg hover:border-[#775fab] hover:bg-purple-50 transition text-left"
+              className="p-4 border-2 border-gray-200 dark:border-gray-700 rounded-lg hover:border-[#775fab] hover:bg-purple-50 dark:hover:bg-[#775fab]/10 transition text-left"
             >
               <i className="fa-solid fa-dumbbell text-2xl text-[#775fab] mb-2"></i>
-              <p className="font-semibold text-gray-900">Browse Exercises</p>
-              <p className="text-sm text-gray-600">Explore workout library</p>
+              <p className="font-semibold text-gray-900 dark:text-white">Browse Exercises</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Explore workout library</p>
             </button>
 
             <button
               onClick={() => navigate('/trainers')}
-              className="p-4 border-2 border-gray-200 rounded-lg hover:border-[#775fab] hover:bg-purple-50 transition text-left"
+              className="p-4 border-2 border-gray-200 dark:border-gray-700 rounded-lg hover:border-[#775fab] hover:bg-purple-50 dark:hover:bg-[#775fab]/10 transition text-left"
             >
               <i className="fa-solid fa-user-tie text-2xl text-[#775fab] mb-2"></i>
-              <p className="font-semibold text-gray-900">Find a Trainer</p>
-              <p className="text-sm text-gray-600">Get expert guidance</p>
+              <p className="font-semibold text-gray-900 dark:text-white">Find a Trainer</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Get expert guidance</p>
             </button>
 
             <button
               onClick={() => navigate('/jobs')}
-              className="p-4 border-2 border-gray-200 rounded-lg hover:border-[#775fab] hover:bg-purple-50 transition text-left"
+              className="p-4 border-2 border-gray-200 dark:border-gray-700 rounded-lg hover:border-[#775fab] hover:bg-purple-50 dark:hover:bg-[#775fab]/10 transition text-left"
             >
               <i className="fa-solid fa-briefcase text-2xl text-[#775fab] mb-2"></i>
-              <p className="font-semibold text-gray-900">View Jobs</p>
-              <p className="text-sm text-gray-600">Explore opportunities</p>
+              <p className="font-semibold text-gray-900 dark:text-white">View Jobs</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Explore opportunities</p>
             </button>
           </div>
         </div>

@@ -77,7 +77,7 @@ function Reviews() {
   }, [page]);
 
   return (
-    <div className="pt-25 min-h-screen bg-gray-50">
+    <div className="pt-25 min-h-screen bg-gray-50 dark:bg-black">
       {/* Header */}
       <div className="bg-linear-to-r from-[#32284a] to-[#443049] text-white py-12 px-4">
         <div className="max-w-6xl mx-auto">
@@ -94,8 +94,8 @@ function Reviews() {
           {reviews.length > 0 ? (
             <>
               <div className="mb-6">
-                <p className="text-gray-600">
-                  <strong>{reviews.length}</strong> testimonials from our satisfied clients
+                <p className="text-gray-600 dark:text-gray-400">
+                  <strong className="dark:text-white">{reviews.length}</strong> testimonials from our satisfied clients
                 </p>
               </div>
 
@@ -111,7 +111,7 @@ function Reviews() {
                   <button
                     onClick={() => setPage(prev => Math.max(1, prev - 1))}
                     disabled={page === 1}
-                    className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-100 disabled:opacity-50"
+                    className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-100 dark:hover:bg-[#252542] dark:text-white disabled:opacity-50"
                   >
                     Previous
                   </button>
@@ -122,7 +122,7 @@ function Reviews() {
                       className={`px-4 py-2 rounded-lg ${
                         page === i + 1
                           ? 'bg-[#775fab] text-white'
-                          : 'border border-gray-300 hover:bg-gray-100'
+                          : 'border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-[#252542] dark:text-white'
                       }`}
                     >
                       {i + 1}
@@ -131,7 +131,7 @@ function Reviews() {
                   <button
                     onClick={() => setPage(prev => Math.min(totalPages, prev + 1))}
                     disabled={page === totalPages}
-                    className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-100 disabled:opacity-50"
+                    className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-100 dark:hover:bg-[#252542] dark:text-white disabled:opacity-50"
                   >
                     Next
                   </button>
@@ -140,7 +140,7 @@ function Reviews() {
             </>
           ) : (
             <div className="text-center py-12">
-              <p className="text-gray-600 text-lg">No testimonials found.</p>
+              <p className="text-gray-600 dark:text-gray-400 text-lg">No testimonials found.</p>
             </div>
           )}
         </div>

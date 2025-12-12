@@ -171,31 +171,31 @@ function AdminApplications() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-black">
         <div className="text-center">
           <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-[#775fab] mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loading applications...</p>
+          <p className="mt-4 text-gray-600 dark:text-gray-400">Loading applications...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-gray-50 dark:bg-black py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-8">
           <div className="flex justify-between items-center mb-6">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 flex items-center">
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-white flex items-center">
                 <i className="fa-solid fa-file-alt mr-3 text-[#775fab]"></i>
                 Job Applications
               </h1>
-              <p className="text-gray-600 mt-2">Manage and review all job applications</p>
+              <p className="text-gray-600 dark:text-gray-400 mt-2">Manage and review all job applications</p>
             </div>
             <button
               onClick={() => navigate('/admin/dashboard')}
-              className="px-6 py-2 bg-gray-200 hover:bg-gray-300 rounded-lg font-semibold text-gray-900 transition"
+              className="px-6 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 rounded-lg font-semibold text-gray-900 dark:text-white transition"
             >
               ← Back to Dashboard
             </button>
@@ -203,23 +203,23 @@ function AdminApplications() {
 
           {/* Stats */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <div className="bg-white p-4 rounded-lg shadow-sm border-l-4 border-blue-500">
-              <p className="text-gray-600 text-sm font-medium">Total Applications</p>
-              <p className="text-2xl font-bold text-gray-900">{applications.length}</p>
+            <div className="bg-white dark:bg-gray-900 p-4 rounded-lg shadow-sm border-l-4 border-blue-500">
+              <p className="text-gray-600 dark:text-gray-400 text-sm font-medium">Total Applications</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">{applications.length}</p>
             </div>
-            <div className="bg-white p-4 rounded-lg shadow-sm border-l-4 border-green-500">
-              <p className="text-gray-600 text-sm font-medium">Showing</p>
-              <p className="text-2xl font-bold text-gray-900">{currentItems.length}</p>
+            <div className="bg-white dark:bg-gray-900 p-4 rounded-lg shadow-sm border-l-4 border-green-500">
+              <p className="text-gray-600 dark:text-gray-400 text-sm font-medium">Showing</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">{currentItems.length}</p>
             </div>
-            <div className="bg-white p-4 rounded-lg shadow-sm border-l-4 border-purple-500">
-              <p className="text-gray-600 text-sm font-medium">With Resume</p>
-              <p className="text-2xl font-bold text-gray-900">
+            <div className="bg-white dark:bg-gray-900 p-4 rounded-lg shadow-sm border-l-4 border-purple-500">
+              <p className="text-gray-600 dark:text-gray-400 text-sm font-medium">With Resume</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">
                 {applications.filter(app => app.resumeLink).length}
               </p>
             </div>
-            <div className="bg-white p-4 rounded-lg shadow-sm border-l-4 border-orange-500">
-              <p className="text-gray-600 text-sm font-medium">Unique Jobs</p>
-              <p className="text-2xl font-bold text-gray-900">
+            <div className="bg-white dark:bg-gray-900 p-4 rounded-lg shadow-sm border-l-4 border-orange-500">
+              <p className="text-gray-600 dark:text-gray-400 text-sm font-medium">Unique Jobs</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">
                 {new Set(applications.map(app => app.jobId?._id)).size}
               </p>
             </div>
@@ -227,8 +227,8 @@ function AdminApplications() {
         </div>
 
         {/* Filters & Search */}
-        <div className="bg-white p-6 rounded-lg shadow-md mb-8">
-          <h2 className="text-lg font-bold text-gray-900 mb-4">
+        <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-md mb-8">
+          <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
             <i className="fa-solid fa-filter mr-2 text-[#775fab]"></i>
             Filters & Search
           </h2>
@@ -236,13 +236,13 @@ function AdminApplications() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
             {/* Search */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Search</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Search</label>
               <input
                 type="text"
                 placeholder="Name, email, or phone..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-[#775fab] focus:border-[#775fab] outline-none"
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:ring-[#775fab] focus:border-[#775fab] outline-none"
               />
             </div>
 

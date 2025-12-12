@@ -36,7 +36,7 @@ const FormDropdown = ({
   return (
     <div ref={dropdownRef}>
       {label && (
-        <label className="block text-sm font-semibold text-[#32284a] mb-2">
+        <label className="block text-sm font-semibold text-[#32284a] dark:text-gray-300 mb-2">
           {icon && <i className={`${icon} mr-2 text-[#775fab]`}></i>}
           {label}
         </label>
@@ -46,17 +46,17 @@ const FormDropdown = ({
         <button
           type="button"
           onClick={() => setIsOpen(!isOpen)}
-          className={`w-full pl-4 pr-14 py-3 bg-gray-50 border-2 rounded-xl text-left font-medium cursor-pointer transition-all duration-300 flex items-center gap-2
+          className={`w-full pl-4 pr-14 py-3 bg-gray-50 dark:bg-gray-800 border-2 rounded-xl text-left font-medium cursor-pointer transition-all duration-300 flex items-center gap-2
             ${isOpen 
-              ? 'border-[#775fab] bg-white shadow-lg shadow-[#775fab]/10' 
-              : 'border-gray-200 hover:border-[#775fab]/50 hover:shadow-md hover:bg-white'
+              ? 'border-[#775fab] bg-white dark:bg-gray-800 shadow-lg shadow-[#775fab]/10' 
+              : 'border-gray-200 dark:border-gray-600 hover:border-[#775fab]/50 hover:shadow-md hover:bg-white dark:hover:bg-[#252542]'
             }
             ${error ? 'border-red-400' : ''}`}
         >
           {selectedOption ? (
             <>
               <span className="text-lg">{selectedOption.icon}</span>
-              <span className="text-gray-800">{selectedOption.label}</span>
+              <span className="text-gray-800 dark:text-gray-200">{selectedOption.label}</span>
             </>
           ) : (
             <>
@@ -73,7 +73,7 @@ const FormDropdown = ({
         </div>
 
         {isOpen && (
-          <div className="absolute z-50 w-full mt-2 bg-white border-2 border-gray-100 rounded-2xl shadow-xl shadow-gray-200/50 overflow-hidden">
+          <div className="absolute z-50 w-full mt-2 bg-white dark:bg-gray-900 border-2 border-gray-100 dark:border-gray-700 rounded-2xl shadow-xl shadow-gray-200/50 dark:shadow-black/30 overflow-hidden">
             <div className="max-h-56 overflow-y-auto py-2">
               {options.map((option) => (
                 <button
@@ -86,12 +86,12 @@ const FormDropdown = ({
                   <span className={`w-10 h-10 rounded-xl flex items-center justify-center text-lg shadow-sm transition-all duration-200
                     ${value === option.value 
                       ? 'bg-gradient-to-br from-[#775fab] to-[#32284a] text-white scale-105' 
-                      : 'bg-gradient-to-br from-gray-100 to-gray-50'
+                      : 'bg-gradient-to-br from-gray-100 to-gray-50 dark:from-gray-700 dark:to-gray-800'
                     }`}>
                     {option.icon}
                   </span>
                   <div className="flex-1 text-left">
-                    <span className={`font-medium ${value === option.value ? 'text-[#775fab]' : 'text-gray-700'}`}>
+                    <span className={`font-medium ${value === option.value ? 'text-[#775fab]' : 'text-gray-700 dark:text-gray-200'}`}>
                       {option.label}
                     </span>
                     {option.description && (
@@ -110,7 +110,7 @@ const FormDropdown = ({
         )}
       </div>
       
-      {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
+      {error && <p className="text-red-500 dark:text-red-400 text-xs mt-1">{error}</p>}
     </div>
   );
 };
@@ -119,16 +119,16 @@ const PersonalInfoStep = ({ register, errors }) => {
 	return (
 		<div className="space-y-5">
 			<div className="text-center mb-6">
-				<div className="w-14 h-14 bg-gradient-to-r from-[#775fab]/10 to-[#32284a]/10 rounded-full flex items-center justify-center mx-auto mb-3">
+				<div className="w-14 h-14 bg-gradient-to-r from-[#775fab]/10 to-[#32284a]/10 dark:from-[#775fab]/20 dark:to-[#32284a]/20 rounded-full flex items-center justify-center mx-auto mb-3">
 					<i className="fa-solid fa-user text-[#775fab] text-xl"></i>
 				</div>
-				<h2 className="text-xl font-bold text-[#32284a]">Personal Information</h2>
-				<p className="text-gray-500 text-sm">Let's start with your basic details</p>
+				<h2 className="text-xl font-bold text-[#32284a] dark:text-white">Personal Information</h2>
+				<p className="text-gray-500 dark:text-gray-400 text-sm">Let's start with your basic details</p>
 			</div>
 			
 			<div className="grid grid-cols-2 gap-4">
 				<div>
-					<label className="block text-sm font-semibold text-[#32284a] mb-2">
+					<label className="block text-sm font-semibold text-[#32284a] dark:text-gray-300 mb-2">
 						First Name
 					</label>
 					<div className="relative">
@@ -138,13 +138,13 @@ const PersonalInfoStep = ({ register, errors }) => {
 						<input
 							{...register("firstName")}
 							placeholder="John"
-							className="w-full pl-10 pr-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl text-gray-800 placeholder-gray-400 focus:outline-none focus:border-[#775fab] focus:bg-white transition-all duration-300"
+							className="w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-600 rounded-xl text-gray-800 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:border-[#775fab] focus:bg-white dark:focus:bg-gray-800 transition-all duration-300"
 						/>
 					</div>
-					{errors.firstName && <p className="text-red-500 text-xs mt-1">{errors.firstName.message}</p>}
+					{errors.firstName && <p className="text-red-500 dark:text-red-400 text-xs mt-1">{errors.firstName.message}</p>}
 				</div>
 				<div>
-					<label className="block text-sm font-semibold text-[#32284a] mb-2">
+					<label className="block text-sm font-semibold text-[#32284a] dark:text-gray-300 mb-2">
 						Last Name
 					</label>
 					<div className="relative">
@@ -154,15 +154,15 @@ const PersonalInfoStep = ({ register, errors }) => {
 						<input
 							{...register("lastName")}
 							placeholder="Doe"
-							className="w-full pl-10 pr-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl text-gray-800 placeholder-gray-400 focus:outline-none focus:border-[#775fab] focus:bg-white transition-all duration-300"
+							className="w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-600 rounded-xl text-gray-800 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:border-[#775fab] focus:bg-white dark:focus:bg-gray-800 transition-all duration-300"
 						/>
 					</div>
-					{errors.lastName && <p className="text-red-500 text-xs mt-1">{errors.lastName.message}</p>}
+					{errors.lastName && <p className="text-red-500 dark:text-red-400 text-xs mt-1">{errors.lastName.message}</p>}
 				</div>
 			</div>
 			
 			<div>
-				<label className="block text-sm font-semibold text-[#32284a] mb-2">
+				<label className="block text-sm font-semibold text-[#32284a] dark:text-gray-300 mb-2">
 					Email Address
 				</label>
 				<div className="relative">
@@ -173,14 +173,14 @@ const PersonalInfoStep = ({ register, errors }) => {
 						type="email"
 						{...register("email")}
 						placeholder="john.doe@example.com"
-						className="w-full pl-10 pr-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl text-gray-800 placeholder-gray-400 focus:outline-none focus:border-[#775fab] focus:bg-white transition-all duration-300"
+						className="w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-600 rounded-xl text-gray-800 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:border-[#775fab] focus:bg-white dark:focus:bg-gray-800 transition-all duration-300"
 					/>
 				</div>
-				{errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
+				{errors.email && <p className="text-red-500 dark:text-red-400 text-xs mt-1">{errors.email.message}</p>}
 			</div>
 
 			<div>
-				<label className="block text-sm font-semibold text-[#32284a] mb-2">
+				<label className="block text-sm font-semibold text-[#32284a] dark:text-gray-300 mb-2">
 					Phone Number
 				</label>
 				<div className="relative">
@@ -190,10 +190,10 @@ const PersonalInfoStep = ({ register, errors }) => {
 					<input
 						{...register("phone")}
 						placeholder="1234567890"
-						className="w-full pl-10 pr-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl text-gray-800 placeholder-gray-400 focus:outline-none focus:border-[#775fab] focus:bg-white transition-all duration-300"
+						className="w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-600 rounded-xl text-gray-800 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:border-[#775fab] focus:bg-white dark:focus:bg-gray-800 transition-all duration-300"
 					/>
 				</div>
-				{errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone.message}</p>}
+				{errors.phone && <p className="text-red-500 dark:text-red-400 text-xs mt-1">{errors.phone.message}</p>}
 			</div>
 		</div>
 	);
@@ -227,11 +227,11 @@ const GoalsInfoStep = ({ register, errors, watch, setValue }) => {
 	return (
 		<div className="space-y-5">
 			<div className="text-center mb-6">
-				<div className="w-14 h-14 bg-gradient-to-r from-[#775fab]/10 to-[#32284a]/10 rounded-full flex items-center justify-center mx-auto mb-3">
+				<div className="w-14 h-14 bg-gradient-to-r from-[#775fab]/10 to-[#32284a]/10 dark:from-[#775fab]/20 dark:to-[#32284a]/20 rounded-full flex items-center justify-center mx-auto mb-3">
 					<i className="fa-solid fa-bullseye text-[#775fab] text-xl"></i>
 				</div>
-				<h2 className="text-xl font-bold text-[#32284a]">Fitness Goals</h2>
-				<p className="text-gray-500 text-sm">What do you want to achieve?</p>
+				<h2 className="text-xl font-bold text-[#32284a] dark:text-white">Fitness Goals</h2>
+				<p className="text-gray-500 dark:text-gray-400 text-sm">What do you want to achieve?</p>
 			</div>
 			
 			<FormDropdown
@@ -247,17 +247,17 @@ const GoalsInfoStep = ({ register, errors, watch, setValue }) => {
 			<input type="hidden" {...register("mainGoal")} />
 
 			<div>
-				<label className="block text-sm font-semibold text-[#32284a] mb-3">Additional Goals (Optional)</label>
+				<label className="block text-sm font-semibold text-[#32284a] dark:text-white mb-3">Additional Goals (Optional)</label>
 				<div className="grid grid-cols-2 gap-3">
 					{secondaryGoals.map(goal => (
-						<label key={goal} className="flex items-center gap-3 p-3 bg-gray-50 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-[#775fab]/50 hover:bg-[#775fab]/5 transition-all duration-300 has-[:checked]:border-[#775fab] has-[:checked]:bg-[#775fab]/10">
+						<label key={goal} className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-600 rounded-xl cursor-pointer hover:border-[#775fab]/50 hover:bg-[#775fab]/5 dark:hover:bg-[#775fab]/20 transition-all duration-300 has-[:checked]:border-[#775fab] has-[:checked]:bg-[#775fab]/10 dark:has-[:checked]:bg-[#775fab]/20">
 							<input 
 								type="checkbox" 
 								value={goal}
 								{...register("goals")}
 								className="w-4 h-4 rounded accent-[#775fab]"
 							/>
-							<span className="text-sm text-gray-700">{goal}</span>
+							<span className="text-sm text-gray-700 dark:text-gray-300">{goal}</span>
 						</label>
 					))}
 				</div>
@@ -279,52 +279,52 @@ const MeasurementsInfoStep = ({ register, errors, watch, setValue }) => {
 	return (
 		<div className="space-y-5">
 			<div className="text-center mb-6">
-				<div className="w-14 h-14 bg-gradient-to-r from-[#775fab]/10 to-[#32284a]/10 rounded-full flex items-center justify-center mx-auto mb-3">
+				<div className="w-14 h-14 bg-gradient-to-r from-[#775fab]/10 to-[#32284a]/10 dark:from-[#775fab]/20 dark:to-[#32284a]/20 rounded-full flex items-center justify-center mx-auto mb-3">
 					<i className="fa-solid fa-ruler text-[#775fab] text-xl"></i>
 				</div>
-				<h2 className="text-xl font-bold text-[#32284a]">Body Measurements</h2>
-				<p className="text-gray-500 text-sm">Help us personalize your fitness plan</p>
+				<h2 className="text-xl font-bold text-[#32284a] dark:text-white">Body Measurements</h2>
+				<p className="text-gray-500 dark:text-gray-400 text-sm">Help us personalize your fitness plan</p>
 			</div>
 			
 			<div className="grid grid-cols-3 gap-4">
 				<div>
-					<label className="block text-sm font-semibold text-[#32284a] mb-2">Age</label>
+					<label className="block text-sm font-semibold text-[#32284a] dark:text-white mb-2">Age</label>
 					<div className="relative">
 						<input
 							type="number"
 							{...register("age", { valueAsNumber: true })}
 							placeholder="25"
-							className="w-full px-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl text-gray-800 placeholder-gray-400 focus:outline-none focus:border-[#775fab] focus:bg-white transition-all duration-300 text-center"
+							className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-600 rounded-xl text-gray-800 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:border-[#775fab] focus:bg-white dark:focus:bg-gray-900 transition-all duration-300 text-center"
 						/>
 						<span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs">yrs</span>
 					</div>
-					{errors.age && <p className="text-red-500 text-xs mt-1">{errors.age.message}</p>}
+					{errors.age && <p className="text-red-500 dark:text-red-400 text-xs mt-1">{errors.age.message}</p>}
 				</div>
 				<div>
-					<label className="block text-sm font-semibold text-[#32284a] mb-2">Height</label>
+					<label className="block text-sm font-semibold text-[#32284a] dark:text-white mb-2">Height</label>
 					<div className="relative">
 						<input
 							type="number"
 							{...register("height", { valueAsNumber: true })}
 							placeholder="175"
-							className="w-full px-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl text-gray-800 placeholder-gray-400 focus:outline-none focus:border-[#775fab] focus:bg-white transition-all duration-300 text-center"
+							className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-600 rounded-xl text-gray-800 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:border-[#775fab] focus:bg-white dark:focus:bg-gray-900 transition-all duration-300 text-center"
 						/>
 						<span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs">cm</span>
 					</div>
-					{errors.height && <p className="text-red-500 text-xs mt-1">{errors.height.message}</p>}
+					{errors.height && <p className="text-red-500 dark:text-red-400 text-xs mt-1">{errors.height.message}</p>}
 				</div>
 				<div>
-					<label className="block text-sm font-semibold text-[#32284a] mb-2">Weight</label>
+					<label className="block text-sm font-semibold text-[#32284a] dark:text-white mb-2">Weight</label>
 					<div className="relative">
 						<input
 							type="number"
 							{...register("weight", { valueAsNumber: true })}
 							placeholder="70"
-							className="w-full px-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl text-gray-800 placeholder-gray-400 focus:outline-none focus:border-[#775fab] focus:bg-white transition-all duration-300 text-center"
+							className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-600 rounded-xl text-gray-800 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:border-[#775fab] focus:bg-white dark:focus:bg-gray-900 transition-all duration-300 text-center"
 						/>
 						<span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs">kg</span>
 					</div>
-					{errors.weight && <p className="text-red-500 text-xs mt-1">{errors.weight.message}</p>}
+					{errors.weight && <p className="text-red-500 dark:text-red-400 text-xs mt-1">{errors.weight.message}</p>}
 				</div>
 			</div>
 
@@ -368,18 +368,18 @@ const FitnessLevelStep = ({ register, errors }) => {
 	return (
 		<div className="space-y-5">
 			<div className="text-center mb-6">
-				<div className="w-14 h-14 bg-gradient-to-r from-[#775fab]/10 to-[#32284a]/10 rounded-full flex items-center justify-center mx-auto mb-3">
+				<div className="w-14 h-14 bg-gradient-to-r from-[#775fab]/10 to-[#32284a]/10 dark:from-[#775fab]/20 dark:to-[#32284a]/20 rounded-full flex items-center justify-center mx-auto mb-3">
 					<i className="fa-solid fa-dumbbell text-[#775fab] text-xl"></i>
 				</div>
-				<h2 className="text-xl font-bold text-[#32284a]">Fitness Level</h2>
-				<p className="text-gray-500 text-sm">Where are you in your fitness journey?</p>
+				<h2 className="text-xl font-bold text-[#32284a] dark:text-white">Fitness Level</h2>
+				<p className="text-gray-500 dark:text-gray-400 text-sm">Where are you in your fitness journey?</p>
 			</div>
 			
 			<div className="space-y-3">
 				{fitnessLevels.map(level => (
 					<label 
 						key={level.value} 
-						className="flex items-center gap-4 p-4 bg-gray-50 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-[#775fab]/50 hover:bg-[#775fab]/5 transition-all duration-300 has-[:checked]:border-[#775fab] has-[:checked]:bg-[#775fab]/10"
+						className="flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-600 rounded-xl cursor-pointer hover:border-[#775fab]/50 hover:bg-[#775fab]/5 dark:hover:bg-[#775fab]/20 transition-all duration-300 has-[:checked]:border-[#775fab] has-[:checked]:bg-[#775fab]/10 dark:has-[:checked]:bg-[#775fab]/20"
 					>
 						<input 
 							type="radio" 
@@ -387,17 +387,17 @@ const FitnessLevelStep = ({ register, errors }) => {
 							{...register("fitnessLevel")}
 							className="w-5 h-5 accent-[#775fab]"
 						/>
-						<div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-sm">
+						<div className="w-12 h-12 bg-white dark:bg-gray-900 rounded-xl flex items-center justify-center shadow-sm">
 							<i className={`fa-solid ${level.icon} text-[#775fab] text-lg`}></i>
 						</div>
 						<div className="flex-1">
-							<h4 className="font-semibold text-[#32284a]">{level.label}</h4>
-							<p className="text-sm text-gray-500">{level.description}</p>
+							<h4 className="font-semibold text-[#32284a] dark:text-white">{level.label}</h4>
+							<p className="text-sm text-gray-500 dark:text-gray-400">{level.description}</p>
 						</div>
 					</label>
 				))}
 			</div>
-			{errors.fitnessLevel && <p className="text-red-500 text-xs mt-1">{errors.fitnessLevel.message}</p>}
+			{errors.fitnessLevel && <p className="text-red-500 dark:text-red-400 text-xs mt-1">{errors.fitnessLevel.message}</p>}
 		</div>
 	);
 };
@@ -406,15 +406,15 @@ const CredentialsInfoStep = ({ register, errors }) => {
 	return (
 		<div className="space-y-5">
 			<div className="text-center mb-6">
-				<div className="w-14 h-14 bg-gradient-to-r from-[#775fab]/10 to-[#32284a]/10 rounded-full flex items-center justify-center mx-auto mb-3">
+				<div className="w-14 h-14 bg-gradient-to-r from-[#775fab]/10 to-[#32284a]/10 dark:from-[#775fab]/20 dark:to-[#32284a]/20 rounded-full flex items-center justify-center mx-auto mb-3">
 					<i className="fa-solid fa-lock text-[#775fab] text-xl"></i>
 				</div>
-				<h2 className="text-xl font-bold text-[#32284a]">Secure Your Account</h2>
-				<p className="text-gray-500 text-sm">Create a password to protect your account</p>
+				<h2 className="text-xl font-bold text-[#32284a] dark:text-white">Secure Your Account</h2>
+				<p className="text-gray-500 dark:text-gray-400 text-sm">Create a password to protect your account</p>
 			</div>
 			
 			<div>
-				<label className="block text-sm font-semibold text-[#32284a] mb-2">Password</label>
+				<label className="block text-sm font-semibold text-[#32284a] dark:text-white mb-2">Password</label>
 				<div className="relative">
 					<span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
 						<i className="fa-solid fa-key text-sm"></i>
@@ -423,20 +423,20 @@ const CredentialsInfoStep = ({ register, errors }) => {
 						type="password"
 						{...register("password")}
 						placeholder="Create a secure password"
-						className="w-full pl-10 pr-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl text-gray-800 placeholder-gray-400 focus:outline-none focus:border-[#775fab] focus:bg-white transition-all duration-300"
+						className="w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-600 rounded-xl text-gray-800 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:border-[#775fab] focus:bg-white dark:focus:bg-gray-900 transition-all duration-300"
 					/>
 				</div>
-				{errors.password && <p className="text-red-500 text-xs mt-1">{errors.password.message}</p>}
+				{errors.password && <p className="text-red-500 dark:text-red-400 text-xs mt-1">{errors.password.message}</p>}
 			</div>
 
-			<div className="bg-gradient-to-r from-[#775fab]/5 to-[#32284a]/5 border border-[#775fab]/20 rounded-xl p-4">
+			<div className="bg-gradient-to-r from-[#775fab]/5 to-[#32284a]/5 dark:from-[#775fab]/10 dark:to-[#32284a]/10 border border-[#775fab]/20 dark:border-[#775fab]/30 rounded-xl p-4">
 				<div className="flex items-start gap-3">
-					<div className="w-8 h-8 bg-[#775fab]/10 rounded-lg flex items-center justify-center flex-shrink-0">
+					<div className="w-8 h-8 bg-[#775fab]/10 dark:bg-[#775fab]/20 rounded-lg flex items-center justify-center flex-shrink-0">
 						<i className="fa-solid fa-shield-halved text-[#775fab] text-sm"></i>
 					</div>
 					<div>
-						<p className="font-semibold text-[#32284a] text-sm mb-2">Password Requirements</p>
-						<ul className="space-y-1 text-sm text-gray-600">
+						<p className="font-semibold text-[#32284a] dark:text-white text-sm mb-2">Password Requirements</p>
+						<ul className="space-y-1 text-sm text-gray-600 dark:text-gray-400">
 							<li className="flex items-center gap-2">
 								<i className="fa-solid fa-check text-green-500 text-xs"></i>
 								At least 6 characters

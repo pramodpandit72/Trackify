@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import Button from "../ui/Button";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import navLogo from "../../assets/nav_logo.png";
+import { useTheme } from "../../context/ThemeContext";
 
 function NavBar() {
 	const [isHovered, setIsHovered] = useState(false);
@@ -12,6 +13,7 @@ function NavBar() {
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 	const location = useLocation();
 	const navigate = useNavigate();
+	const { darkMode, toggleTheme } = useTheme();
 
 	// Handle scroll effect
 	useEffect(() => {
@@ -54,10 +56,10 @@ function NavBar() {
 			<header
 				className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
 					scrolled 
-						? "py-2 bg-white/95 backdrop-blur-xl shadow-lg shadow-gray-200/50" 
+						? "py-2 bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl shadow-lg shadow-gray-200/50 dark:shadow-black/20" 
 						: isHome 
 							? "py-4 bg-gradient-to-r from-[#32284a]/90 via-[#443049]/85 to-[#32284a]/90 backdrop-blur-md" 
-							: "py-4 bg-white/90 backdrop-blur-md"
+							: "py-4 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md"
 				}`}
 			>
 				<div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -244,8 +246,25 @@ function NavBar() {
 							</NavLink>
 						</nav>
 
-						{/* Right Side - Auth */}
-						<div className="flex items-center gap-4">
+						{/* Right Side - Theme Toggle & Auth */}
+						<div className="flex items-center gap-3">
+							{/* Theme Toggle Button */}
+							<button
+								onClick={toggleTheme}
+								className={`p-2.5 rounded-xl transition-all duration-300 ${
+									scrolled || !isHome
+										? "bg-gray-100 dark:bg-gray-800 text-[#443049] dark:text-gray-300 hover:bg-[#775fab]/20 dark:hover:bg-[#775fab]/30"
+										: "bg-white/10 text-white hover:bg-white/20"
+								}`}
+								aria-label="Toggle theme"
+							>
+								{darkMode ? (
+									<i className="fa-regular fa-sun text-lg"></i>
+								) : (
+									<i className="fa-solid fa-moon text-lg"></i>
+								)}
+							</button>
+
 							{user ? (
 								<div className="relative">
 									<button

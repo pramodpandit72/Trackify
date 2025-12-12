@@ -49,16 +49,16 @@ function TrainerDetail() {
 
   if (loading) {
     return (
-      <div className="pt-25 min-h-screen flex items-center justify-center">
-        <p className="text-gray-600">Loading trainer details...</p>
+      <div className="pt-25 min-h-screen flex items-center justify-center dark:bg-black">
+        <p className="text-gray-600 dark:text-gray-400">Loading trainer details...</p>
       </div>
     );
   }
 
   if (!trainer) {
     return (
-      <div className="pt-25 min-h-screen flex flex-col items-center justify-center">
-        <p className="text-gray-600 mb-6">Trainer not found</p>
+      <div className="pt-25 min-h-screen flex flex-col items-center justify-center dark:bg-black">
+        <p className="text-gray-600 dark:text-gray-400 mb-6">Trainer not found</p>
         <button
           onClick={() => navigate('/trainers')}
           className="bg-[#775fab] text-white px-6 py-2 rounded-lg hover:bg-[#5d3d89]"
@@ -70,7 +70,7 @@ function TrainerDetail() {
   }
 
   return (
-    <div className="pt-25 min-h-screen bg-gray-50">
+    <div className="pt-25 min-h-screen bg-gray-50 dark:bg-black">
       <div className="max-w-4xl mx-auto px-4 py-12">
         {/* Back Button */}
         <button
@@ -81,7 +81,7 @@ function TrainerDetail() {
         </button>
 
         {/* Trainer Header */}
-        <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
+        <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg dark:shadow-black/30 p-8 mb-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Profile Image */}
             <div className="md:col-span-1">
@@ -96,19 +96,19 @@ function TrainerDetail() {
 
             {/* Trainer Info */}
             <div className="md:col-span-2">
-              <h1 className="text-4xl font-bold text-[#443049] mb-2">{trainer.name}</h1>
-              <p className="text-purple-600 text-lg font-semibold mb-4">{trainer.title}</p>
+              <h1 className="text-4xl font-bold text-[#443049] dark:text-white mb-2">{trainer.name}</h1>
+              <p className="text-purple-600 dark:text-purple-400 text-lg font-semibold mb-4">{trainer.title}</p>
 
               {/* Rating */}
               <div className="flex items-center gap-3 mb-6">
                 <div className="flex gap-1">
                   {[...Array(5)].map((_, i) => (
-                    <span key={i} className={i < Math.floor(trainer.rating) ? "text-2xl text-yellow-400" : "text-2xl text-gray-300"}>
+                    <span key={i} className={i < Math.floor(trainer.rating) ? "text-2xl text-yellow-400" : "text-2xl text-gray-300 dark:text-gray-600"}>
                       ⭐
                     </span>
                   ))}
                 </div>
-                <span className="text-gray-700">
+                <span className="text-gray-700 dark:text-gray-300">
                   {trainer.rating?.toFixed(1) || 'N/A'} ({trainer.reviewsCount || 0} reviews)
                 </span>
               </div>
@@ -116,19 +116,19 @@ function TrainerDetail() {
               {/* Quick Info */}
               <div className="space-y-3 mb-6">
                 <div>
-                  <p className="text-sm text-gray-600">Experience</p>
-                  <p className="text-lg font-semibold text-[#443049]">{trainer.experienceYears} years</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">Experience</p>
+                  <p className="text-lg font-semibold text-[#443049] dark:text-white">{trainer.experienceYears} years</p>
                 </div>
                 {trainer.pricePerSession && (
                   <div>
-                    <p className="text-sm text-gray-600">Price per Session</p>
-                    <p className="text-lg font-semibold text-[#443049]">${trainer.pricePerSession}</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">Price per Session</p>
+                    <p className="text-lg font-semibold text-[#443049] dark:text-white">${trainer.pricePerSession}</p>
                   </div>
                 )}
                 {trainer.location && (
                   <div>
-                    <p className="text-sm text-gray-600">Location</p>
-                    <p className="text-lg font-semibold text-[#443049]">{trainer.location}</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">Location</p>
+                    <p className="text-lg font-semibold text-[#443049] dark:text-white">{trainer.location}</p>
                   </div>
                 )}
               </div>
@@ -145,19 +145,19 @@ function TrainerDetail() {
         </div>
 
         {/* Bio */}
-        <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
-          <h2 className="text-2xl font-bold text-[#443049] mb-4">About</h2>
-          <p className="text-gray-700 leading-relaxed">{trainer.bio}</p>
+        <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg dark:shadow-black/30 p-8 mb-8">
+          <h2 className="text-2xl font-bold text-[#443049] dark:text-white mb-4">About</h2>
+          <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{trainer.bio}</p>
         </div>
 
         {/* Specialties */}
-        <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
-          <h2 className="text-2xl font-bold text-[#443049] mb-4">Specialties</h2>
+        <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg dark:shadow-black/30 p-8 mb-8">
+          <h2 className="text-2xl font-bold text-[#443049] dark:text-white mb-4">Specialties</h2>
           <div className="flex flex-wrap gap-2">
             {trainer.specialties?.map((specialty, i) => (
               <span
                 key={i}
-                className="bg-purple-100 text-purple-700 px-4 py-2 rounded-full font-medium"
+                className="bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 px-4 py-2 rounded-full font-medium"
               >
                 {specialty}
               </span>
@@ -167,8 +167,8 @@ function TrainerDetail() {
 
         {/* Reviews */}
         {reviews.length > 0 && (
-          <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
-            <h2 className="text-2xl font-bold text-[#443049] mb-6">Client Reviews</h2>
+          <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg dark:shadow-black/30 p-8 mb-8">
+            <h2 className="text-2xl font-bold text-[#443049] dark:text-white mb-6">Client Reviews</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {reviews.map((review, index) => (
                 <TestimonialCard key={index} review={review} />

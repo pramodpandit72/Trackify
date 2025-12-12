@@ -51,7 +51,7 @@ export default function Faq() {
   };
 
   return (
-    <div className="pt-25 min-h-screen bg-gray-50">
+    <div className="pt-25 min-h-screen bg-gray-50 dark:bg-black">
       {/* Header */}
       <div className="bg-linear-to-r from-[#32284a] to-[#443049] text-white py-12 px-4">
         <div className="max-w-4xl mx-auto">
@@ -68,13 +68,13 @@ export default function Faq() {
           {faqs.map((faq) => (
             <div
               key={faq.id}
-              className="bg-white rounded-lg shadow-md overflow-hidden"
+              className="bg-white dark:bg-gray-900 rounded-lg shadow-md dark:shadow-black/20 overflow-hidden"
             >
               <button
                 onClick={() => toggleExpanded(faq.id)}
-                className="w-full px-6 py-4 flex items-center justify-between hover:bg-gray-50 transition-colors"
+                className="w-full px-6 py-4 flex items-center justify-between hover:bg-gray-50 dark:hover:bg-[#252542] transition-colors"
               >
-                <h3 className="text-lg font-semibold text-[#443049] text-left">
+                <h3 className="text-lg font-semibold text-[#443049] dark:text-white text-left">
                   {faq.question}
                 </h3>
                 <span className={`text-2xl text-[#775fab] transition-transform ${
@@ -85,8 +85,8 @@ export default function Faq() {
               </button>
 
               {expanded === faq.id && (
-                <div className="px-6 py-4 bg-gray-50 border-t border-gray-200">
-                  <p className="text-gray-700 leading-relaxed">
+                <div className="px-6 py-4 bg-gray-50 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                     {faq.answer}
                   </p>
                 </div>
@@ -96,9 +96,9 @@ export default function Faq() {
         </div>
 
         {/* Still have questions */}
-        <div className="mt-16 bg-purple-50 p-8 rounded-lg text-center">
-          <h2 className="text-2xl font-bold text-[#443049] mb-4">Still have questions?</h2>
-          <p className="text-gray-700 mb-6">
+        <div className="mt-16 bg-purple-50 dark:bg-gray-900 p-8 rounded-lg text-center">
+          <h2 className="text-2xl font-bold text-[#443049] dark:text-white mb-4">Still have questions?</h2>
+          <p className="text-gray-700 dark:text-gray-300 mb-6">
             Our support team is here to help you get started.
           </p>
           <a

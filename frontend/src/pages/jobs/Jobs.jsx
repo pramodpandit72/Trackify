@@ -102,30 +102,30 @@ export default function Jobs() {
   return (
     <div className="pt-25 min-h-screen">
       {/* Hero Section */}
-      <section className="relative bg-linear-to-br from-[#f8f9fa] to-[#e9ecef] py-24 px-4 overflow-hidden">
+      <section className="relative bg-linear-to-br from-[#f8f9fa] to-[#e9ecef] dark:from-black dark:to-gray-900 py-24 px-4 overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-[#775fab]/10 rounded-full blur-3xl"></div>
         
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8">
-              <h1 className="text-5xl lg:text-6xl font-bold text-[#1a1a1a] leading-tight">
+              <h1 className="text-5xl lg:text-6xl font-bold text-[#1a1a1a] dark:text-white leading-tight">
                 Want to be a Trainer at Trackify?
               </h1>
-              <p className="text-xl text-gray-600 leading-relaxed">
+              <p className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
                 Join our team of extraordinary certified trainers and help empower individuals to lead healthier, more confident lives through personalized virtual training.
               </p>
               <div className="space-y-4">
                 <div className="flex items-center gap-3 text-lg">
                   <span className="text-2xl">✓</span>
-                  <span className="text-gray-700">Work remotely from anywhere</span>
+                  <span className="text-gray-700 dark:text-gray-300">Work remotely from anywhere</span>
                 </div>
                 <div className="flex items-center gap-3 text-lg">
                   <span className="text-2xl">✓</span>
-                  <span className="text-gray-700">Set your own schedule</span>
+                  <span className="text-gray-700 dark:text-gray-300">Set your own schedule</span>
                 </div>
                 <div className="flex items-center gap-3 text-lg">
                   <span className="text-2xl">✓</span>
-                  <span className="text-gray-700">Competitive pay and benefits</span>
+                  <span className="text-gray-700 dark:text-gray-300">Competitive pay and benefits</span>
                 </div>
               </div>
               <a
@@ -150,23 +150,23 @@ export default function Jobs() {
       </section>
 
       {/* Values Section */}
-      <section className="py-24 px-4 bg-white">
+      <section className="py-24 px-4 bg-white dark:bg-black">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-[#1a1a1a] mb-4">
+            <h2 className="text-4xl lg:text-5xl font-bold text-[#1a1a1a] dark:text-white mb-4">
               What We Look For
             </h2>
-            <p className="text-xl text-gray-600">
+            <p className="text-xl text-gray-600 dark:text-gray-400">
               Our trainers are the backbone of what we do
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {values.map((value, idx) => (
-              <div key={idx} className="bg-linear-to-br from-gray-50 to-white border border-gray-200 rounded-2xl p-8 text-center hover:shadow-xl transition-all duration-300">
+              <div key={idx} className="bg-linear-to-br from-gray-50 to-white dark:from-gray-900 dark:to-[#252542] border border-gray-200 dark:border-gray-700 rounded-2xl p-8 text-center hover:shadow-xl dark:hover:shadow-black/30 transition-all duration-300">
                 <div className="text-5xl mb-4">{value.icon}</div>
-                <h3 className="text-xl font-bold text-[#1a1a1a] mb-2">{value.title}</h3>
-                <p className="text-gray-600">{value.description}</p>
+                <h3 className="text-xl font-bold text-[#1a1a1a] dark:text-white mb-2">{value.title}</h3>
+                <p className="text-gray-600 dark:text-gray-400">{value.description}</p>
               </div>
             ))}
           </div>
@@ -174,13 +174,13 @@ export default function Jobs() {
       </section>
 
       {/* Open Positions */}
-      <section id="positions" className="py-24 px-4 bg-linear-to-br from-gray-50 to-white">
+      <section id="positions" className="py-24 px-4 bg-linear-to-br from-gray-50 to-white dark:from-gray-900 dark:to-black">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-[#1a1a1a] mb-4">
+            <h2 className="text-4xl lg:text-5xl font-bold text-[#1a1a1a] dark:text-white mb-4">
               Trainer Openings
             </h2>
-            <p className="text-xl text-gray-600">
+            <p className="text-xl text-gray-600 dark:text-gray-400">
               We're looking for passionate, certified trainers to join our growing team
             </p>
           </div>
@@ -192,10 +192,10 @@ export default function Jobs() {
               ))}
             </div>
           ) : (
-            <div className="bg-white rounded-2xl border border-gray-200 p-12 text-center">
+            <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-700 p-12 text-center">
               <div className="text-6xl mb-4">📭</div>
-              <h3 className="text-2xl font-bold text-[#1a1a1a] mb-2">No Open Positions Right Now</h3>
-              <p className="text-gray-600 mb-6">
+              <h3 className="text-2xl font-bold text-[#1a1a1a] dark:text-white mb-2">No Open Positions Right Now</h3>
+              <p className="text-gray-600 dark:text-gray-400 mb-6">
                 We don't have any open positions at the moment, but we're always looking for talented people. Check back soon or send us your resume!
               </p>
               <Link 
@@ -210,22 +210,22 @@ export default function Jobs() {
       </section>
 
       {/* Perks Section */}
-      <section className="py-24 px-4 bg-white">
+      <section className="py-24 px-4 bg-white dark:bg-black">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-[#1a1a1a] mb-4">
+            <h2 className="text-4xl lg:text-5xl font-bold text-[#1a1a1a] dark:text-white mb-4">
               Trainer Benefits
             </h2>
-            <p className="text-xl text-gray-600">
+            <p className="text-xl text-gray-600 dark:text-gray-400">
               We invest in our trainers so they can focus on what matters most - their clients
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {perks.map((perk, idx) => (
-              <div key={idx} className="flex items-center gap-4 bg-linear-to-br from-purple-50 to-white border border-purple-100 rounded-xl p-6">
+              <div key={idx} className="flex items-center gap-4 bg-linear-to-br from-purple-50 to-white dark:from-gray-900 dark:to-[#252542] border border-purple-100 dark:border-gray-700 rounded-xl p-6">
                 <div className="text-4xl">{perk.icon}</div>
-                <p className="text-gray-700 font-medium">{perk.text}</p>
+                <p className="text-gray-700 dark:text-gray-300 font-medium">{perk.text}</p>
               </div>
             ))}
           </div>
@@ -264,12 +264,12 @@ export default function Jobs() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 px-4 bg-linear-to-br from-gray-50 to-white">
+      <section className="py-24 px-4 bg-linear-to-br from-gray-50 to-white dark:from-gray-900 dark:to-black">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl lg:text-5xl font-bold text-[#1a1a1a] mb-6">
+          <h2 className="text-4xl lg:text-5xl font-bold text-[#1a1a1a] dark:text-white mb-6">
             Ready to Join Our Team?
           </h2>
-          <p className="text-xl text-gray-600 mb-10">
+          <p className="text-xl text-gray-600 dark:text-gray-400 mb-10">
             If you're passionate about fitness and helping others achieve their goals, we'd love to hear from you. Apply today and start making an impact!
           </p>
           <a 

@@ -94,7 +94,7 @@ function Trainers() {
   }, [page, search, selectedSpecialty]);
 
   return (
-    <div className="pt-25 min-h-screen bg-gray-50">
+    <div className="pt-25 min-h-screen bg-gray-50 dark:bg-black">
       {/* Header */}
       <div className="bg-linear-to-r from-[#32284a] to-[#443049] text-white py-12 px-4">
         <div className="max-w-6xl mx-auto">
@@ -106,12 +106,12 @@ function Trainers() {
       </div>
 
       {/* Filters Section */}
-      <div className="bg-white border-b border-gray-200 sticky top-25 z-40 py-6 px-4">
+      <div className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 sticky top-25 z-40 py-6 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Search */}
             <div>
-              <label className="block text-sm font-semibold text-[#443049] mb-2">
+              <label className="block text-sm font-semibold text-[#443049] dark:text-gray-200 mb-2">
                 <i className="fa-solid fa-magnifying-glass mr-2 text-[#775fab]"></i>
                 Search Trainers
               </label>
@@ -127,7 +127,7 @@ function Trainers() {
                     setSearch(e.target.value);
                     setPage(1);
                   }}
-                  className="w-full pl-11 pr-4 py-3 bg-white border-2 border-gray-200 rounded-xl text-gray-700 placeholder-gray-400 transition-all duration-300 hover:border-[#775fab]/50 hover:shadow-md focus:outline-none focus:border-[#775fab] focus:shadow-lg focus:shadow-[#775fab]/10"
+                  className="w-full pl-11 pr-4 py-3 bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-600 rounded-xl text-gray-700 dark:text-white placeholder-gray-400 transition-all duration-300 hover:border-[#775fab]/50 hover:shadow-md focus:outline-none focus:border-[#775fab] focus:shadow-lg focus:shadow-[#775fab]/10"
                 />
               </div>
             </div>
@@ -168,14 +168,14 @@ function Trainers() {
           {loading ? (
             <div className="flex justify-center items-center min-h-96">
               <div className="text-center">
-                <p className="text-gray-600 text-lg">Loading trainers...</p>
+                <p className="text-gray-600 dark:text-gray-400 text-lg">Loading trainers...</p>
               </div>
             </div>
           ) : filteredTrainers.length > 0 ? (
             <>
               <div className="mb-6">
-                <p className="text-gray-600">
-                  Found <strong>{filteredTrainers.length}</strong> trainer(s)
+                <p className="text-gray-600 dark:text-gray-400">
+                  Found <strong className="dark:text-white">{filteredTrainers.length}</strong> trainer(s)
                 </p>
               </div>
 
@@ -191,7 +191,7 @@ function Trainers() {
                   <button
                     onClick={() => setPage(prev => Math.max(1, prev - 1))}
                     disabled={page === 1}
-                    className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-100 disabled:opacity-50"
+                    className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-100 dark:hover:bg-[#252542] dark:text-white disabled:opacity-50"
                   >
                     Previous
                   </button>
@@ -202,7 +202,7 @@ function Trainers() {
                       className={`px-4 py-2 rounded-lg ${
                         page === i + 1
                           ? 'bg-[#775fab] text-white'
-                          : 'border border-gray-300 hover:bg-gray-100'
+                          : 'border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-[#252542] dark:text-white'
                       }`}
                     >
                       {i + 1}
@@ -211,7 +211,7 @@ function Trainers() {
                   <button
                     onClick={() => setPage(prev => Math.min(totalPages, prev + 1))}
                     disabled={page === totalPages}
-                    className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-100 disabled:opacity-50"
+                    className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-100 dark:hover:bg-[#252542] dark:text-white disabled:opacity-50"
                   >
                     Next
                   </button>
@@ -220,7 +220,7 @@ function Trainers() {
             </>
           ) : (
             <div className="text-center py-12">
-              <p className="text-gray-600 text-lg">No trainers found. Try adjusting your filters.</p>
+              <p className="text-gray-600 dark:text-gray-400 text-lg">No trainers found. Try adjusting your filters.</p>
             </div>
           )}
         </div>

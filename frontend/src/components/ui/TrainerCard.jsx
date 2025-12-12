@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 function TrainerCard({ trainer }) {
   return (
-    <div className="group bg-white rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300 border border-gray-100 h-full flex flex-col">
+    <div className="group bg-white dark:bg-gray-900 rounded-2xl overflow-hidden hover:shadow-2xl dark:hover:shadow-black/30 transition-all duration-300 border border-gray-100 dark:border-gray-700 h-full flex flex-col">
       {/* Profile Picture */}
       <div className="relative h-64 bg-linear-to-br from-[#775fab] to-[#32284a] overflow-hidden">
         {trainer.profilePicture ? (
@@ -29,9 +29,9 @@ function TrainerCard({ trainer }) {
       {/* Content */}
       <div className="p-6 flex-1 flex flex-col">
         <div className="mb-4">
-          <h3 className="text-2xl font-bold text-[#1a1a1a] mb-1">{trainer.name}</h3>
+          <h3 className="text-2xl font-bold text-[#1a1a1a] dark:text-white mb-1">{trainer.name}</h3>
           <p className="text-[#775fab] font-semibold">{trainer.title}</p>
-          <p className="text-sm text-gray-500 mt-1">
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
             {trainer.experienceYears} years experience
           </p>
         </div>
@@ -39,12 +39,12 @@ function TrainerCard({ trainer }) {
         {/* Specialties */}
         <div className="flex flex-wrap gap-2 mb-4">
           {trainer.specialties?.slice(0, 3).map((specialty, i) => (
-            <span key={i} className="text-xs bg-purple-50 text-purple-700 px-3 py-1 rounded-full font-medium">
+            <span key={i} className="text-xs bg-purple-50 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 px-3 py-1 rounded-full font-medium">
               {specialty}
             </span>
           ))}
           {trainer.specialties?.length > 3 && (
-            <span className="text-xs bg-purple-50 text-purple-700 px-3 py-1 rounded-full font-medium">
+            <span className="text-xs bg-purple-50 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 px-3 py-1 rounded-full font-medium">
               +{trainer.specialties.length - 3} more
             </span>
           )}
@@ -52,7 +52,7 @@ function TrainerCard({ trainer }) {
 
         {/* Bio excerpt */}
         {trainer.bio && (
-          <p className="text-sm text-gray-600 line-clamp-2 mb-4">
+          <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2 mb-4">
             {trainer.bio}
           </p>
         )}
@@ -60,9 +60,9 @@ function TrainerCard({ trainer }) {
         {/* Price and Button */}
         <div className="mt-auto">
           {trainer.pricePerSession && (
-            <div className="mb-3 pb-3 border-b border-gray-100">
-              <span className="text-2xl font-bold text-[#1a1a1a]">${trainer.pricePerSession}</span>
-              <span className="text-gray-500 text-sm">/session</span>
+            <div className="mb-3 pb-3 border-b border-gray-100 dark:border-gray-700">
+              <span className="text-2xl font-bold text-[#1a1a1a] dark:text-white">${trainer.pricePerSession}</span>
+              <span className="text-gray-500 dark:text-gray-400 text-sm">/session</span>
             </div>
           )}
           <Link 

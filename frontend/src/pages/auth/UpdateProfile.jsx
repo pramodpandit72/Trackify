@@ -128,31 +128,31 @@ function UpdateProfile() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center dark:bg-black">
         <div className="text-center">
-          <div className="spinner border-4 border-gray-300 border-t-[#775fab] rounded-full w-12 h-12 animate-spin mx-auto mb-4"></div>
-          <p>Loading profile...</p>
+          <div className="spinner border-4 border-gray-300 dark:border-gray-700 border-t-[#775fab] rounded-full w-12 h-12 animate-spin mx-auto mb-4"></div>
+          <p className="dark:text-gray-400">Loading profile...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 mt-20">
-      <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-md p-8">
+    <div className="min-h-screen bg-gray-50 dark:bg-black py-12 px-4 sm:px-6 lg:px-8 mt-20">
+      <div className="max-w-2xl mx-auto bg-white dark:bg-gray-900 rounded-lg shadow-md p-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Update Profile</h1>
-          <p className="text-gray-600">Manage your account information and preferences</p>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Update Profile</h1>
+          <p className="text-gray-600 dark:text-gray-400">Manage your account information and preferences</p>
         </div>
 
         {error && (
-          <div className="mb-6 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg">
+          <div className="mb-6 p-4 bg-red-100 dark:bg-red-900/30 border border-red-400 dark:border-red-800 text-red-700 dark:text-red-400 rounded-lg">
             {error}
           </div>
         )}
 
         {success && (
-          <div className="mb-6 p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg">
+          <div className="mb-6 p-4 bg-green-100 dark:bg-green-900/30 border border-green-400 dark:border-green-800 text-green-700 dark:text-green-400 rounded-lg">
             {success}
           </div>
         )}
@@ -160,13 +160,13 @@ function UpdateProfile() {
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Personal Information */}
           <div>
-            <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
               <i className="fa-solid fa-user"></i>
               Personal Information
             </h2>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   First Name
                 </label>
                 <input
@@ -175,12 +175,12 @@ function UpdateProfile() {
                   name="firstName"
                   value={formData.firstName}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#775fab]"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#775fab]"
                   required
                 />
               </div>
               <div>
-                <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Last Name
                 </label>
                 <input
@@ -189,13 +189,13 @@ function UpdateProfile() {
                   name="lastName"
                   value={formData.lastName}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#775fab]"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#775fab]"
                   required
                 />
               </div>
             </div>
             <div className="mt-4">
-              <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="phone" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Phone Number
               </label>
               <input
@@ -205,20 +205,20 @@ function UpdateProfile() {
                 value={formData.phone}
                 onChange={handleChange}
                 placeholder="10-digit phone number"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#775fab]"
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#775fab]"
               />
             </div>
           </div>
 
           {/* Body Measurements */}
           <div>
-            <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
               <i className="fa-solid fa-weight-scale"></i>
               Body Measurements
             </h2>
             <div className="grid grid-cols-3 gap-4">
               <div>
-                <label htmlFor="age" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="age" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Age
                 </label>
                 <input
@@ -227,11 +227,11 @@ function UpdateProfile() {
                   name="age"
                   value={formData.age}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#775fab]"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#775fab]"
                 />
               </div>
               <div>
-                <label htmlFor="height" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="height" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Height (cm)
                 </label>
                 <input
@@ -241,11 +241,11 @@ function UpdateProfile() {
                   value={formData.height}
                   onChange={handleChange}
                   placeholder="e.g., 180"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#775fab]"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#775fab]"
                 />
               </div>
               <div>
-                <label htmlFor="weight" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="weight" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Weight (kg)
                 </label>
                 <input
@@ -255,7 +255,7 @@ function UpdateProfile() {
                   value={formData.weight}
                   onChange={handleChange}
                   placeholder="e.g., 75"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#775fab]"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#775fab]"
                 />
               </div>
             </div>
@@ -263,13 +263,13 @@ function UpdateProfile() {
 
           {/* Fitness Information */}
           <div>
-            <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
               <i className="fa-solid fa-dumbbell"></i>
               Fitness Information
             </h2>
 
             <div className="mb-4">
-              <label htmlFor="mainGoal" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="mainGoal" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Primary Goal
               </label>
               <select
@@ -277,7 +277,7 @@ function UpdateProfile() {
                 name="mainGoal"
                 value={formData.mainGoal}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#775fab]"
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#775fab]"
               >
                 <option value="">Select a goal</option>
                 {goals.map(goal => (
@@ -287,26 +287,26 @@ function UpdateProfile() {
             </div>
 
             <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Other Goals (Select multiple)
               </label>
               <div className="grid grid-cols-2 gap-3">
                 {goals.map(goal => (
-                  <label key={goal} className="flex items-center gap-2 cursor-pointer p-2 rounded hover:bg-gray-100">
+                  <label key={goal} className="flex items-center gap-2 cursor-pointer p-2 rounded hover:bg-gray-100 dark:hover:bg-[#252542]">
                     <input
                       type="checkbox"
                       checked={formData.goals.includes(goal)}
                       onChange={() => handleGoalToggle(goal)}
                       className="w-4 h-4 rounded accent-[#775fab]"
                     />
-                    <span className="text-sm">{goal}</span>
+                    <span className="text-sm dark:text-gray-300">{goal}</span>
                   </label>
                 ))}
               </div>
             </div>
 
             <div>
-              <label htmlFor="fitnessLevel" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="fitnessLevel" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Fitness Level
               </label>
               <select
@@ -314,7 +314,7 @@ function UpdateProfile() {
                 name="fitnessLevel"
                 value={formData.fitnessLevel}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#775fab]"
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#775fab]"
               >
                 <option value="">Select fitness level</option>
                 <option value="beginner">Beginner</option>
@@ -325,7 +325,7 @@ function UpdateProfile() {
           </div>
 
           {/* Actions */}
-          <div className="flex gap-4 pt-6 border-t border-gray-200">
+          <div className="flex gap-4 pt-6 border-t border-gray-200 dark:border-gray-700">
             <button
               type="submit"
               disabled={saving}
@@ -336,7 +336,7 @@ function UpdateProfile() {
             <button
               type="button"
               onClick={() => navigate('/dashboard')}
-              className="flex-1 bg-gray-200 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-300 transition-colors font-medium"
+              className="flex-1 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 py-2 px-4 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors font-medium"
             >
               Cancel
             </button>

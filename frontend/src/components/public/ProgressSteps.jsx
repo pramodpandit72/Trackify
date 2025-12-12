@@ -5,7 +5,7 @@ function ProgressSteps({ currentStep, steps }) {
 		<div className="w-full">
 			{/* Progress Bar */}
 			<div className="relative mb-2">
-				<div className="absolute top-1/2 left-0 right-0 h-1 bg-gray-200 -translate-y-1/2 rounded-full"></div>
+				<div className="absolute top-1/2 left-0 right-0 h-1 bg-gray-200 dark:bg-gray-700 -translate-y-1/2 rounded-full"></div>
 				<div 
 					className="absolute top-1/2 left-0 h-1 bg-gradient-to-r from-[#775fab] to-[#32284a] -translate-y-1/2 rounded-full transition-all duration-500 ease-out"
 					style={{ width: `${(currentStep / (steps.length - 1)) * 100}%` }}
@@ -24,7 +24,7 @@ function ProgressSteps({ currentStep, steps }) {
 											? "bg-gradient-to-r from-[#775fab] to-[#32284a] text-white shadow-lg shadow-[#775fab]/30"
 											: isCurrent
 											? "bg-gradient-to-r from-[#775fab] to-[#32284a] text-white shadow-lg shadow-[#775fab]/30 ring-4 ring-[#775fab]/20"
-											: "bg-gray-100 text-gray-400 border-2 border-gray-200"
+											: "bg-gray-100 dark:bg-gray-800 text-gray-400 border-2 border-gray-200 dark:border-gray-700"
 									}`}
 								>
 									{isCompleted ? (
@@ -34,7 +34,7 @@ function ProgressSteps({ currentStep, steps }) {
 									)}
 								</div>
 								<span className={`text-xs mt-2 font-medium transition-colors duration-300 ${
-									isCurrent ? "text-[#775fab]" : isCompleted ? "text-[#32284a]" : "text-gray-400"
+									isCurrent ? "text-[#775fab]" : isCompleted ? "text-[#32284a] dark:text-purple-300" : "text-gray-400"
 								}`}>
 									{step.name}
 								</span>
@@ -46,7 +46,7 @@ function ProgressSteps({ currentStep, steps }) {
 			
 			{/* Step Counter */}
 			<div className="text-center mt-4">
-				<span className="text-sm text-gray-500">
+				<span className="text-sm text-gray-500 dark:text-gray-400">
 					Step <span className="font-semibold text-[#775fab]">{currentStep + 1}</span> of {steps.length}
 				</span>
 			</div>
