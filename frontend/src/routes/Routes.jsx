@@ -19,6 +19,8 @@ import SignUp from "../pages/public/Signup";
 import ForgotPassword from "../pages/public/ForgotPassword";
 import ResetPassword from "../pages/public/ResetPassword";
 import KnowUs from "../components/public/KnowUs";
+import Terms from "../pages/public/Terms";
+import Policy from "../pages/public/Policy";
 
 // Auth pages
 import UserDashboard from "../pages/auth/UserDashboard";
@@ -53,6 +55,8 @@ function RoutesClient() {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password/:token" element={<ResetPassword />} />
         <Route path="/knowus" element={<KnowUs />} />
+        <Route path="/terms" element={<Terms />} />
+        <Route path="/policy" element={<Policy />} />
 
         {/* auth pages - protected routes */}
         <Route path="/dashboard" element={<UserDashboard />} />

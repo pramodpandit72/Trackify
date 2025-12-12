@@ -78,6 +78,14 @@ const userSchema = new mongoose.Schema(
     fitnessLevel: {
       type: String,
       enum: ["beginner", "intermediate", "advanced"]
+    },
+    resetPasswordToken: {
+      type: String,
+      default: null
+    },
+    resetPasswordExpiry: {
+      type: Date,
+      default: null
     }
   },
   {

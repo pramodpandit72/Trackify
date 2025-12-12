@@ -56,6 +56,14 @@ const adminSchema = new mongoose.Schema(
     isSuperAdmin: {
       type: Boolean,
       default: false
+    },
+    resetPasswordToken: {
+      type: String,
+      default: null
+    },
+    resetPasswordExpiry: {
+      type: Date,
+      default: null
     }
   },
   {

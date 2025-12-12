@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import TrainerCard from '../../components/ui/TrainerCard';
+import CustomDropdown from '../../components/ui/CustomDropdown';
 import axios from 'axios';
 
 function Trainers() {
@@ -11,17 +12,14 @@ function Trainers() {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
-  // Exercise-related specialties matching the exercise library
+  // Important fitness specialties
   const specialties = [
+    'Weight Loss',
+    'Muscle Building',
     'Strength Training',
     'Cardio',
     'Flexibility',
-    'Functional Training',
-    'Core Training',
-    'Upper Body',
-    'Lower Body',
-    'Weight Loss',
-    'Muscle Building'
+    'Core Training'
   ];
 
   const ITEMS_PER_PAGE = 12;
@@ -113,42 +111,53 @@ function Trainers() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Search */}
             <div>
-              <label className="block text-sm font-medium text-[#443049] mb-2">
+              <label className="block text-sm font-semibold text-[#443049] mb-2">
+                <i className="fa-solid fa-magnifying-glass mr-2 text-[#775fab]"></i>
                 Search Trainers
               </label>
-              <input
-                type="text"
-                placeholder="Search by name, specialty..."
-                value={search}
-                onChange={(e) => {
-                  setSearch(e.target.value);
-                  setPage(1);
-                }}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#775fab]"
-              />
+              <div className="relative group">
+                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 transition-colors duration-300 group-focus-within:text-[#775fab]">
+                  <i className="fa-solid fa-search"></i>
+                </span>
+                <input
+                  type="text"
+                  placeholder="Search by name, specialty..."
+                  value={search}
+                  onChange={(e) => {
+                    setSearch(e.target.value);
+                    setPage(1);
+                  }}
+                  className="w-full pl-11 pr-4 py-3 bg-white border-2 border-gray-200 rounded-xl text-gray-700 placeholder-gray-400 transition-all duration-300 hover:border-[#775fab]/50 hover:shadow-md focus:outline-none focus:border-[#775fab] focus:shadow-lg focus:shadow-[#775fab]/10"
+                />
+              </div>
             </div>
 
             {/* Specialty Filter */}
-            <div>
-              <label className="block text-sm font-medium text-[#443049] mb-2">
-                Filter by Specialty
-              </label>
-              <select
-                value={selectedSpecialty}
-                onChange={(e) => {
-                  setSelectedSpecialty(e.target.value);
-                  setPage(1);
-                }}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#775fab]"
-              >
-                <option value="">All Specialties</option>
-                {specialties.map(specialty => (
-                  <option key={specialty} value={specialty}>
-                    {specialty}
-                  </option>
-                ))}
-              </select>
-            </div>
+            <CustomDropdown
+              label="Filter by Specialty"
+              icon="fa-solid fa-dumbbell"
+              value={selectedSpecialty}
+              onChange={(val) => {
+                setSelectedSpecialty(val);
+                setPage(1);
+              }}
+              placeholder="All Specialties"
+              placeholderIcon="💪"
+              options={specialties.map(specialty => ({
+                value: specialty,
+                label: specialty,
+                icon: specialty === 'Weight Loss' ? '🏃' :
+                      specialty === 'Muscle Building' ? '💪' :
+                      specialty === 'Strength Training' ? '🏋️' :
+                      specialty === 'Cardio' ? '❤️' :
+                      specialty === 'Flexibility' ? '🧘' : '🎯',
+                description: specialty === 'Weight Loss' ? 'Burn calories & shed fat' :
+                             specialty === 'Muscle Building' ? 'Build lean muscle mass' :
+                             specialty === 'Strength Training' ? 'Increase raw strength' :
+                             specialty === 'Cardio' ? 'Improve heart health' :
+                             specialty === 'Flexibility' ? 'Enhance mobility' : 'Core stability & strength'
+              }))}
+            />
           </div>
         </div>
       </div>

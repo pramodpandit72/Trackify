@@ -25,7 +25,7 @@ export const listTrainers = async (req, res, next) => {
     }
     
     if (req.query.specialty) {
-      filter.specialties = req.query.specialty;
+      filter.specialties = { $regex: new RegExp(`^${req.query.specialty}$`, 'i') };
     }
     
     if (req.query.minRating) {

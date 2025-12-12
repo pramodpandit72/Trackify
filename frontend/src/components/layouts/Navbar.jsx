@@ -2,17 +2,27 @@ import React, { useState, useEffect } from "react";
 
 import Button from "../ui/Button";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
+import navLogo from "../../assets/nav_logo.png";
 
 function NavBar() {
-	// 2. Create state to track visibility
 	const [isHovered, setIsHovered] = useState(false);
 	const [user, setUser] = useState(null);
 	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+	const [scrolled, setScrolled] = useState(false);
+	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 	const location = useLocation();
 	const navigate = useNavigate();
 
+	// Handle scroll effect
 	useEffect(() => {
-		// Check if user is logged in
+		const handleScroll = () => {
+			setScrolled(window.scrollY > 20);
+		};
+		window.addEventListener('scroll', handleScroll);
+		return () => window.removeEventListener('scroll', handleScroll);
+	}, []);
+
+	useEffect(() => {
 		const storedUser = localStorage.getItem('user');
 		if (storedUser) {
 			setUser(JSON.parse(storedUser));
@@ -37,235 +47,297 @@ function NavBar() {
 		setIsDropdownOpen(false);
 	};
 
+	const isHome = location.pathname === "/";
+
 	return (
 		<>
-			<section
-				className={`${
-					location.pathname === "/"
-						? "bg-[#32284a]/80 text-white"
-						: "bg-white/80 text-[#443049]"
-				} backdrop-blur-md flex justify-between items-center px-15 h-25 z-50 fixed top-0 left-0 w-full`}
+			<header
+				className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
+					scrolled 
+						? "py-2 bg-white/95 backdrop-blur-xl shadow-lg shadow-gray-200/50" 
+						: isHome 
+							? "py-4 bg-gradient-to-r from-[#32284a]/90 via-[#443049]/85 to-[#32284a]/90 backdrop-blur-md" 
+							: "py-4 bg-white/90 backdrop-blur-md"
+				}`}
 			>
-				<div className="cursor-pointer">
-					<NavLink to="/">
-						<img
-							src={
-								location.pathname === "/"
-									? "/logo.png"
-									: "/logo1.png"
-							}
-							alt="LOGO"
-							width={200}
-							height={200}
-							className={`${location.pathname === "/" ? "" : ""}`}
-						/>
-					</NavLink>
-				</div>
-				<div className="flex justify-center items-center gap-8 text-[1rem] font-medium">
-					<nav>
-						<ul
-							className={`flex flex-row gap-7 justify-center items-center ${
-								location.pathname === "/" ? "" : ""
-							}`}
-						>
-							<li>
-								<NavLink
-									to="/"
-									className={({ isActive }) =>
+				<div className="max-w-7xl mx-auto px-6 lg:px-8">
+					<div className="flex justify-between items-center">
+						{/* Logo */}
+						<NavLink to="/" className="flex items-center gap-3 group">
+							<div className={`relative p-1 rounded-full transition-all duration-300 ${
+								scrolled || !isHome 
+									? "bg-gradient-to-br from-[#775fab] to-[#32284a]" 
+									: "bg-white/20"
+							}`}>
+								<img
+									src={navLogo}
+									alt="Trackify Logo"
+									className="h-11 w-11 object-cover rounded-full transition-transform duration-300 group-hover:scale-110"
+								/>
+							</div>
+							<span className={`text-xl font-bold tracking-tight transition-colors duration-300 ${
+								scrolled || !isHome ? "text-[#32284a]" : "text-white"
+							}`}>
+								Trackify
+							</span>
+						</NavLink>
+
+						{/* Desktop Navigation */}
+						<nav className="hidden lg:flex items-center gap-1">
+							{/* Home */}
+							<NavLink
+								to="/"
+								className={({ isActive }) =>
+									`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
 										isActive
-											? "text-[#775fab]"
-											: location.pathname === "/"
-											? "hover:text-[#dedaee]"
-											: "hover:text-[#775fab] text-[#443361]"
-									}
-								>
-									Home
-								</NavLink>
-							</li>
-							<li
-								className={`${
-									isHovered
-										? location.pathname === "/"
-											? "relative bg-[#32284a] px-2"
-											: "relative bg-white px-2"
-										: "px-2"
-								}`}
+											? "bg-[#775fab] text-white shadow-md shadow-[#775fab]/30"
+											: scrolled || !isHome
+												? "text-[#443049] hover:bg-[#775fab]/10 hover:text-[#775fab]"
+												: "text-white/90 hover:bg-white/10 hover:text-white"
+									}`
+								}
+							>
+								Home
+							</NavLink>
+
+							{/* What is Trackify Dropdown */}
+							<div
+								className="relative"
 								onMouseEnter={() => setIsHovered(true)}
 								onMouseLeave={() => setIsHovered(false)}
 							>
-								<p
-									className={`cursor-pointer ${
-										location.pathname === "/"
-											? ""
-											: "text-[#443361]"
+								<button
+									className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 flex items-center gap-1 ${
+										scrolled || !isHome
+											? "text-[#443049] hover:bg-[#775fab]/10 hover:text-[#775fab]"
+											: "text-white/90 hover:bg-white/10 hover:text-white"
 									}`}
 								>
-									What is Trackify?
-									<i className="fa-solid fa-angle-down"></i>
-								</p>
+									Discover
+									<i className={`fa-solid fa-chevron-down text-xs transition-transform duration-300 ${isHovered ? 'rotate-180' : ''}`}></i>
+								</button>
 
-								{/* 4. Use the state to decide the class */}
-								<ul
-									className={`${
-										isHovered
-											? location.pathname === "/"
-												? "block absolute bg-[#32284a] rounded px-8 py-4 top-full left-0 border border-[#150d26]"
-												: "block absolute bg-white rounded px-8 py-4 top-full left-0 border border-[#150d26]"
-											: "hidden"
-									} ${
-										location.pathname === "/"
-											? ""
-											: "text-[#443361]"
+								{/* Dropdown Menu */}
+								<div
+									className={`absolute top-full left-0 mt-2 w-56 transition-all duration-300 ${
+										isHovered ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-2"
 									}`}
 								>
-										<li className="mb-1">
-											<NavLink
-												to="/about"
-												className={({ isActive }) =>
+									<div className="bg-white rounded-2xl shadow-xl shadow-gray-200/50 border border-gray-100 overflow-hidden p-2">
+										<NavLink
+											to="/about"
+											className={({ isActive }) =>
+												`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 ${
 													isActive
-														? "block w-full py-1 text-[#775fab] font-semibold"
-														: location.pathname === "/"
-														? "block w-full py-1 text-white hover:text-[#dedaee]"
-														: "block w-full py-1 text-[#443361] hover:text-[#775fab]"
-												}
-											>
-												About
-											</NavLink>
-										</li>
-									<hr className="border-[#150d26]" />
-										<li className={`mb-1`}>
-											<NavLink
-												to="/contact"
-												className={({ isActive }) =>
+														? "bg-[#775fab] text-white"
+														: "text-[#443049] hover:bg-[#775fab]/10"
+												}`
+											}
+										>
+											<div className={`w-8 h-8 rounded-lg flex items-center justify-center bg-[#775fab]/10`}>
+												<i className="fa-solid fa-info-circle text-[#775fab]"></i>
+											</div>
+											<div>
+												<span className="font-medium">About Us</span>
+												<p className="text-xs text-gray-400">Learn our story</p>
+											</div>
+										</NavLink>
+										<NavLink
+											to="/contact"
+											className={({ isActive }) =>
+												`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 ${
 													isActive
-														? "block w-full py-1 text-[#775fab] font-semibold"
-														: location.pathname === "/"
-														? "block w-full py-1 text-white hover:text-[#dedaee]"
-														: "block w-full py-1 text-[#443361] hover:text-[#775fab]"
-												}
-											>
-												Contact
-											</NavLink>
-										</li>
-									<hr className="border-[#150d26]" />
-										<li>
-											<NavLink
-												to="/faq"
-												className={({ isActive }) =>
+														? "bg-[#775fab] text-white"
+														: "text-[#443049] hover:bg-[#775fab]/10"
+												}`
+											}
+										>
+											<div className={`w-8 h-8 rounded-lg flex items-center justify-center bg-[#775fab]/10`}>
+												<i className="fa-solid fa-envelope text-[#775fab]"></i>
+											</div>
+											<div>
+												<span className="font-medium">Contact</span>
+												<p className="text-xs text-gray-400">Get in touch</p>
+											</div>
+										</NavLink>
+										<NavLink
+											to="/faq"
+											className={({ isActive }) =>
+												`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 ${
 													isActive
-														? "block w-full py-1 text-[#775fab] font-semibold"
-														: location.pathname === "/"
-														? "block w-full py-1 text-white hover:text-[#dedaee]"
-														: "block w-full py-1 text-[#443361] hover:text-[#775fab]"
-												}
-											>
-												FAQ (optional)
-											</NavLink>
-										</li>
-								</ul>
-							</li>
-							<li>
-								<NavLink
-									to="/trainers"
-									className={({ isActive }) =>
-										isActive
-											? "text-[#775fab] font-semibold"
-											: location.pathname === "/"
-											? "text-white hover:text-[#dedaee]"
-											: "text-[#443361] hover:text-[#775fab]"
-									}
-								>
-									Trainers
-								</NavLink>
-							</li>
-							<li>
-								<NavLink
-									to="/exercise"
-									className={({ isActive }) =>
-										isActive
-											? "text-[#775fab] font-semibold"
-											: location.pathname === "/"
-											? "text-white hover:text-[#dedaee]"
-											: "text-[#443361] hover:text-[#775fab]"
-									}
-								>
-									Exercise Library
-								</NavLink>
-							</li>
-							<li>
-								<NavLink
-									to="/reviews"
-									className={({ isActive }) =>
-										isActive
-											? "text-[#775fab] font-semibold"
-											: location.pathname === "/"
-											? "text-white hover:text-[#dedaee]"
-											: "text-[#443361] hover:text-[#775fab]"
-									}
-								>
-									Reviews
-								</NavLink>
-							</li>
-							<li>
-								<NavLink
-									to="/jobs"
-									className={({ isActive }) =>
-										isActive
-											? "text-[#775fab] font-semibold"
-											: location.pathname === "/"
-											? "text-white hover:text-[#dedaee]"
-											: "text-[#443361] hover:text-[#775fab]"
-									}
-								>
-									Jobs
-								</NavLink>
-							</li>
-						</ul>
-					</nav>
-					{user ? (
-						<div className="relative">
-							<button
-								onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-								className={`bg-[#c3d7ff] text-[1rem] py-2 px-4 text-[#32284a] transition-all duration-300 hover:scale-105 ease-in-out cursor-pointer rounded-[25px] font-medium flex items-center gap-2`}
-							>
-								<i className="fa-solid fa-user-circle"></i>
-								{user.firstName || 'User'}
-								<i className={`fa-solid fa-chevron-down transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`}></i>
-							</button>
-							{isDropdownOpen && (
-								<div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg z-50 border border-gray-200">
-									<button
-										onClick={handleProfileClick}
-										className="w-full text-left px-4 py-3 hover:bg-gray-100 text-[#443361] font-medium flex items-center gap-2"
-									>
-										<i className="fa-solid fa-user"></i>
-										My Profile
-									</button>
-									<button
-										onClick={handleLogout}
-										className="w-full text-left px-4 py-3 hover:bg-gray-100 text-red-600 font-medium flex items-center gap-2 border-t border-gray-200"
-									>
-										<i className="fa-solid fa-sign-out-alt"></i>
-										Logout
-									</button>
+														? "bg-[#775fab] text-white"
+														: "text-[#443049] hover:bg-[#775fab]/10"
+												}`
+											}
+										>
+											<div className={`w-8 h-8 rounded-lg flex items-center justify-center bg-[#775fab]/10`}>
+												<i className="fa-solid fa-question-circle text-[#775fab]"></i>
+											</div>
+											<div>
+												<span className="font-medium">FAQ</span>
+												<p className="text-xs text-gray-400">Common questions</p>
+											</div>
+										</NavLink>
+									</div>
 								</div>
-							)}
-						</div>
-					) : (
-						<div className="flex items-center gap-3">
-							<Button
-								className={`bg-[#c3d7ff] text-[1rem] text-center py-2 px-4 text-[#32284a] transition-all duration-300 hover:scale-105 ease-in-out cursor-pointer rounded-[25px]`}
+							</div>
+
+							{/* Other Nav Items */}
+							<NavLink
+								to="/trainers"
+								className={({ isActive }) =>
+									`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+										isActive
+											? "bg-[#775fab] text-white shadow-md shadow-[#775fab]/30"
+											: scrolled || !isHome
+												? "text-[#443049] hover:bg-[#775fab]/10 hover:text-[#775fab]"
+												: "text-white/90 hover:bg-white/10 hover:text-white"
+									}`
+								}
 							>
-								<Link to="/login">
-									{location.pathname === "/"
-										? "Get Started"
-										: "Get My Plan"}
+								Trainers
+							</NavLink>
+
+							<NavLink
+								to="/exercise"
+								className={({ isActive }) =>
+									`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+										isActive
+											? "bg-[#775fab] text-white shadow-md shadow-[#775fab]/30"
+											: scrolled || !isHome
+												? "text-[#443049] hover:bg-[#775fab]/10 hover:text-[#775fab]"
+												: "text-white/90 hover:bg-white/10 hover:text-white"
+									}`
+								}
+							>
+								Exercises
+							</NavLink>
+
+							<NavLink
+								to="/reviews"
+								className={({ isActive }) =>
+									`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+										isActive
+											? "bg-[#775fab] text-white shadow-md shadow-[#775fab]/30"
+											: scrolled || !isHome
+												? "text-[#443049] hover:bg-[#775fab]/10 hover:text-[#775fab]"
+												: "text-white/90 hover:bg-white/10 hover:text-white"
+									}`
+								}
+							>
+								Reviews
+							</NavLink>
+
+							<NavLink
+								to="/jobs"
+								className={({ isActive }) =>
+									`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+										isActive
+											? "bg-[#775fab] text-white shadow-md shadow-[#775fab]/30"
+											: scrolled || !isHome
+												? "text-[#443049] hover:bg-[#775fab]/10 hover:text-[#775fab]"
+												: "text-white/90 hover:bg-white/10 hover:text-white"
+									}`
+								}
+							>
+								Jobs
+							</NavLink>
+						</nav>
+
+						{/* Right Side - Auth */}
+						<div className="flex items-center gap-4">
+							{user ? (
+								<div className="relative">
+									<button
+										onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+										className="flex items-center gap-3 pl-2 pr-4 py-2 rounded-full bg-gradient-to-r from-[#775fab]/10 to-[#32284a]/10 hover:from-[#775fab]/20 hover:to-[#32284a]/20 transition-all duration-300"
+									>
+										<div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#775fab] to-[#32284a] flex items-center justify-center text-white text-sm font-bold">
+											{user.firstName?.charAt(0) || 'U'}
+										</div>
+										<span className={`text-sm font-medium ${scrolled || !isHome ? "text-[#32284a]" : "text-white"}`}>
+											{user.firstName || 'User'}
+										</span>
+										<i className={`fa-solid fa-chevron-down text-xs transition-transform duration-300 ${
+											scrolled || !isHome ? "text-[#443049]" : "text-white/70"
+										} ${isDropdownOpen ? 'rotate-180' : ''}`}></i>
+									</button>
+									
+									{/* User Dropdown */}
+									<div className={`absolute right-0 mt-2 w-56 transition-all duration-300 ${
+										isDropdownOpen ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-2"
+									}`}>
+										<div className="bg-white rounded-2xl shadow-xl shadow-gray-200/50 border border-gray-100 overflow-hidden p-2">
+											<div className="px-4 py-3 border-b border-gray-100">
+												<p className="text-sm font-semibold text-[#32284a]">{user.firstName} {user.lastName}</p>
+												<p className="text-xs text-gray-400">{user.email}</p>
+											</div>
+											<button
+												onClick={handleProfileClick}
+												className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-[#443049] hover:bg-[#775fab]/10 transition-all duration-200"
+											>
+												<div className="w-8 h-8 rounded-lg bg-[#775fab]/10 flex items-center justify-center">
+													<i className="fa-solid fa-user text-[#775fab]"></i>
+												</div>
+												<span className="font-medium">My Dashboard</span>
+											</button>
+											<button
+												onClick={handleLogout}
+												className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-red-500 hover:bg-red-50 transition-all duration-200"
+											>
+												<div className="w-8 h-8 rounded-lg bg-red-100 flex items-center justify-center">
+													<i className="fa-solid fa-sign-out-alt text-red-500"></i>
+												</div>
+												<span className="font-medium">Logout</span>
+											</button>
+										</div>
+									</div>
+								</div>
+							) : (
+								<Link
+									to="/login"
+									className="relative group px-6 py-2.5 rounded-full font-medium text-sm overflow-hidden transition-all duration-300"
+								>
+									<span className="absolute inset-0 bg-gradient-to-r from-[#775fab] to-[#32284a] transition-transform duration-300 group-hover:scale-105"></span>
+									<span className="absolute inset-0 bg-gradient-to-r from-[#8b6fc0] to-[#443359] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+									<span className="relative text-white flex items-center gap-2">
+										Get Started
+										<i className="fa-solid fa-arrow-right text-xs transition-transform duration-300 group-hover:translate-x-1"></i>
+									</span>
 								</Link>
-							</Button>
+							)}
+
+							{/* Mobile Menu Button */}
+							<button
+								onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+								className={`lg:hidden p-2 rounded-lg transition-colors duration-300 ${
+									scrolled || !isHome ? "text-[#32284a] hover:bg-gray-100" : "text-white hover:bg-white/10"
+								}`}
+							>
+								<i className={`fa-solid ${mobileMenuOpen ? 'fa-times' : 'fa-bars'} text-xl`}></i>
+							</button>
 						</div>
-					)}
+					</div>
 				</div>
-			</section>
+
+				{/* Mobile Menu */}
+				<div className={`lg:hidden transition-all duration-300 overflow-hidden ${
+					mobileMenuOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
+				}`}>
+					<div className="bg-white border-t border-gray-100 px-6 py-4 space-y-2">
+						<NavLink to="/" onClick={() => setMobileMenuOpen(false)} className="block px-4 py-3 rounded-xl text-[#443049] hover:bg-[#775fab]/10 font-medium">Home</NavLink>
+						<NavLink to="/about" onClick={() => setMobileMenuOpen(false)} className="block px-4 py-3 rounded-xl text-[#443049] hover:bg-[#775fab]/10 font-medium">About</NavLink>
+						<NavLink to="/contact" onClick={() => setMobileMenuOpen(false)} className="block px-4 py-3 rounded-xl text-[#443049] hover:bg-[#775fab]/10 font-medium">Contact</NavLink>
+						<NavLink to="/trainers" onClick={() => setMobileMenuOpen(false)} className="block px-4 py-3 rounded-xl text-[#443049] hover:bg-[#775fab]/10 font-medium">Trainers</NavLink>
+						<NavLink to="/exercise" onClick={() => setMobileMenuOpen(false)} className="block px-4 py-3 rounded-xl text-[#443049] hover:bg-[#775fab]/10 font-medium">Exercises</NavLink>
+						<NavLink to="/reviews" onClick={() => setMobileMenuOpen(false)} className="block px-4 py-3 rounded-xl text-[#443049] hover:bg-[#775fab]/10 font-medium">Reviews</NavLink>
+						<NavLink to="/jobs" onClick={() => setMobileMenuOpen(false)} className="block px-4 py-3 rounded-xl text-[#443049] hover:bg-[#775fab]/10 font-medium">Jobs</NavLink>
+					</div>
+				</div>
+			</header>
+			
+			{/* Spacer for fixed navbar */}
+			<div className={`${scrolled ? "h-16" : "h-20"} transition-all duration-500`}></div>
 		</>
 	);
 }

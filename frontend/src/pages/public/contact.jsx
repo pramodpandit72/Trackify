@@ -107,6 +107,21 @@ function Contact() {
 
                 <div>
                   <label className="block text-sm font-medium text-[#443049] mb-2">
+                    Email Address
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#775fab]"
+                    placeholder="your.email@example.com"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-[#443049] mb-2">
                     Subject
                   </label>
                   <input

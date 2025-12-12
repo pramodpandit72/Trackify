@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ExerciseCard from '../../components/ui/ExerciseCard';
+import CustomDropdown from '../../components/ui/CustomDropdown';
 import { exercisesLibrary, exerciseCategories, difficulties } from '../../data/exercisesLibrary';
 import axios from 'axios';
 
@@ -140,64 +141,72 @@ function Exercise() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Search */}
             <div>
-              <label className="block text-sm font-medium text-[#443049] mb-2">
+              <label className="block text-sm font-semibold text-[#443049] mb-2">
+                <i className="fa-solid fa-magnifying-glass mr-2 text-[#775fab]"></i>
                 Search Exercises
               </label>
-              <input
-                type="text"
-                placeholder="Search by name..."
-                value={search}
-                onChange={(e) => {
-                  setSearch(e.target.value);
-                  setPage(1); // Reset to first page on search
-                }}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#775fab]"
-              />
+              <div className="relative group">
+                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 transition-colors duration-300 group-focus-within:text-[#775fab]">
+                  <i className="fa-solid fa-search"></i>
+                </span>
+                <input
+                  type="text"
+                  placeholder="Search by name, muscle group..."
+                  value={search}
+                  onChange={(e) => {
+                    setSearch(e.target.value);
+                    setPage(1); // Reset to first page on search
+                  }}
+                  className="w-full pl-11 pr-4 py-3 bg-white border-2 border-gray-200 rounded-xl text-gray-700 placeholder-gray-400 transition-all duration-300 hover:border-[#775fab]/50 hover:shadow-md focus:outline-none focus:border-[#775fab] focus:shadow-lg focus:shadow-[#775fab]/10"
+                />
+              </div>
             </div>
 
             {/* Category Filter */}
-            <div>
-              <label className="block text-sm font-medium text-[#443049] mb-2">
-                Filter by Category
-              </label>
-              <select
-                value={selectedCategory}
-                onChange={(e) => {
-                  setSelectedCategory(e.target.value);
-                  setPage(1);
-                }}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#775fab]"
-              >
-                <option value="">All Categories</option>
-                {categories.map(category => (
-                  <option key={category} value={category}>
-                    {category}
-                  </option>
-                ))}
-              </select>
-            </div>
+            <CustomDropdown
+              label="Filter by Category"
+              icon="fa-solid fa-layer-group"
+              value={selectedCategory}
+              onChange={(val) => {
+                setSelectedCategory(val);
+                setPage(1);
+              }}
+              placeholder="All Categories"
+              placeholderIcon="✨"
+              options={categories.map(category => ({
+                value: category,
+                label: category,
+                icon: category === 'Chest' ? '💪' :
+                      category === 'Back' ? '🔙' :
+                      category === 'Shoulders' ? '🏋️' :
+                      category === 'Arms' ? '💪' :
+                      category === 'Legs' ? '🦵' :
+                      category === 'Core' ? '🎯' :
+                      category === 'Cardio' ? '❤️' :
+                      category === 'Full Body' ? '🏃' : '⭐'
+              }))}
+            />
 
             {/* Difficulty Filter */}
-            <div>
-              <label className="block text-sm font-medium text-[#443049] mb-2">
-                Filter by Difficulty
-              </label>
-              <select
-                value={selectedDifficulty}
-                onChange={(e) => {
-                  setSelectedDifficulty(e.target.value);
-                  setPage(1);
-                }}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#775fab]"
-              >
-                <option value="">All Levels</option>
-                {difficulties.map(difficulty => (
-                  <option key={difficulty} value={difficulty}>
-                    {difficulty}
-                  </option>
-                ))}
-              </select>
-            </div>
+            <CustomDropdown
+              label="Filter by Difficulty"
+              icon="fa-solid fa-signal"
+              value={selectedDifficulty}
+              onChange={(val) => {
+                setSelectedDifficulty(val);
+                setPage(1);
+              }}
+              placeholder="All Levels"
+              placeholderIcon="🎯"
+              options={difficulties.map(difficulty => ({
+                value: difficulty,
+                label: difficulty,
+                icon: difficulty === 'Beginner' ? '🌱' :
+                      difficulty === 'Intermediate' ? '🔥' : '⚡',
+                description: difficulty === 'Beginner' ? 'Perfect for starting out' :
+                             difficulty === 'Intermediate' ? 'Some experience needed' : 'For experienced athletes'
+              }))}
+            />
           </div>
         </div>
       </div>

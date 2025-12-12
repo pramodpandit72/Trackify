@@ -30,16 +30,8 @@ export const fitnessLevelSchema = z.object({
 });
 
 export const credentialsInfoSchema = z.object({
-    username: z
-		.string()
-		.max(16, "Username cannot be greater than 16")
-		.min(4, "Username must be greater than 4 characters"),
     password: z
 		.string("password must be string")
-		.min(8, "Password must be min eight characters")
-		.max(16, "password must ne max 16 characters")
-		.regex(
-			/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()-+]).{8,}$/,
-			"Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character (e.g., !@#$%^&*).",
-		),
+		.min(6, "Password must be at least 6 characters")
+		.max(50, "Password must be less than 50 characters"),
 });

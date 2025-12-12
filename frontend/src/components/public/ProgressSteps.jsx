@@ -2,47 +2,55 @@ import React from "react";
 
 function ProgressSteps({ currentStep, steps }) {
 	return (
-		<>
-			<div className="flex justify-between items-center mt-2">
-				{steps.map((step, index) => {
-					const icon = step.icon;
-					const isCompleted = index < currentStep;
-					const isCurrent = index === currentStep;
+		<div className="w-full">
+			{/* Progress Bar */}
+			<div className="relative mb-2">
+				<div className="absolute top-1/2 left-0 right-0 h-1 bg-gray-200 -translate-y-1/2 rounded-full"></div>
+				<div 
+					className="absolute top-1/2 left-0 h-1 bg-gradient-to-r from-[#775fab] to-[#32284a] -translate-y-1/2 rounded-full transition-all duration-500 ease-out"
+					style={{ width: `${(currentStep / (steps.length - 1)) * 100}%` }}
+				></div>
+				
+				<div className="relative flex justify-between">
+					{steps.map((step, index) => {
+						const isCompleted = index < currentStep;
+						const isCurrent = index === currentStep;
 
-					return (
-						<div key={step.id} className="flex items-center flex-1">
-							<div className="flex flex-col items-center">
+						return (
+							<div key={step.id} className="flex flex-col items-center">
 								<div
-									className={`w-15 text-3xl h-15 rounded-full flex items-center justify-center transition-colors ${
+									className={`w-10 h-10 rounded-full flex items-center justify-center text-lg font-semibold transition-all duration-300 ${
 										isCompleted
-											? "bg-black text-white"
+											? "bg-gradient-to-r from-[#775fab] to-[#32284a] text-white shadow-lg shadow-[#775fab]/30"
 											: isCurrent
-											? "bg-black text-white"
-											: "bg-gray-200 text-black"
+											? "bg-gradient-to-r from-[#775fab] to-[#32284a] text-white shadow-lg shadow-[#775fab]/30 ring-4 ring-[#775fab]/20"
+											: "bg-gray-100 text-gray-400 border-2 border-gray-200"
 									}`}
 								>
 									{isCompleted ? (
-										<i className="fa-solid fa-check"></i>
+										<i className="fa-solid fa-check text-sm"></i>
 									) : (
-										icon
+										<span className="text-sm">{step.icon}</span>
 									)}
 								</div>
-								<span className="text-sm mt-2 font-light block">
+								<span className={`text-xs mt-2 font-medium transition-colors duration-300 ${
+									isCurrent ? "text-[#775fab]" : isCompleted ? "text-[#32284a]" : "text-gray-400"
+								}`}>
 									{step.name}
 								</span>
 							</div>
-							{index < steps.length - 1 && (
-								<div
-									className={`flex-1 h-1 mb-3 rounded mx-2 transition-colors ${
-										isCompleted ? "bg-black" : "bg-gray-200"
-									}`}
-								/>
-							)}
-						</div>
-					);
-				})}
+						);
+					})}
+				</div>
 			</div>
-		</>
+			
+			{/* Step Counter */}
+			<div className="text-center mt-4">
+				<span className="text-sm text-gray-500">
+					Step <span className="font-semibold text-[#775fab]">{currentStep + 1}</span> of {steps.length}
+				</span>
+			</div>
+		</div>
 	);
 }
 

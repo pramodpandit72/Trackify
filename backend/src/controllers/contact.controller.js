@@ -18,19 +18,29 @@ const createTransporter = () => {
  */
 export const sendContactMessage = async (req, res, next) => {
   try {
-    const { name, subject, message } = req.body;
+    const { name, email, subject, message } = req.body;
 
     // Validation
-    if (!name || !subject || !message) {
+    if (!name || !email || !subject || !message) {
       return res.status(400).json({
         success: false,
-        message: "All fields are required (name, subject, message)"
+        message: "All fields are required (name, email, subject, message)"
+      });
+    }
+
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return res.status(400).json({
+        success: false,
+        message: "Please provide a valid email address"
       });
     }
 
     // Always save to database first
     const contactMessage = await ContactMessage.create({
       name,
+      email,
       subject,
       message,
       emailSent: false
@@ -47,9 +57,10 @@ export const sendContactMessage = async (req, res, next) => {
 
         // Email to admin
         const adminMailOptions = {
-          from: process.env.EMAIL_USER,
+          from: `"${name} via Trackify" <${process.env.EMAIL_USER}>`,
           to: process.env.CONTACT_EMAIL || "pramod2pandit@gmail.com",
-          subject: `[Trackify Contact] ${subject}`,
+          replyTo: email, // So admin can reply directly to the sender
+          subject: `[Trackify Contact] ${subject} - from ${email}`,
           html: `
             <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
               <div style="background: linear-gradient(135deg, #775fab 0%, #32284a 100%); padding: 20px; text-align: center;">
@@ -63,6 +74,10 @@ export const sendContactMessage = async (req, res, next) => {
                     <td style="padding: 10px 0; border-bottom: 1px solid #ddd;">${name}</td>
                   </tr>
                   <tr>
+                    <td style="padding: 10px 0; border-bottom: 1px solid #ddd; font-weight: bold;">Email:</td>
+                    <td style="padding: 10px 0; border-bottom: 1px solid #ddd;"><a href="mailto:${email}" style="color: #775fab;">${email}</a></td>
+                  </tr>
+                  <tr>
                     <td style="padding: 10px 0; border-bottom: 1px solid #ddd; font-weight: bold;">Subject:</td>
                     <td style="padding: 10px 0; border-bottom: 1px solid #ddd;">${subject}</td>
                   </tr>
@@ -72,6 +87,9 @@ export const sendContactMessage = async (req, res, next) => {
                   <div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #775fab;">
                     ${message.replace(/\n/g, '<br>')}
                   </div>
+                </div>
+                <div style="margin-top: 20px; text-align: center;">
+                  <a href="mailto:${email}" style="display: inline-block; background: #775fab; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">Reply to ${name}</a>
                 </div>
               </div>
               <div style="background: #32284a; padding: 15px; text-align: center;">

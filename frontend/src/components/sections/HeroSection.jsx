@@ -61,12 +61,6 @@ function HeroSection({
       
       <div className="max-w-7xl mx-auto w-full relative z-10">
         <div className="space-y-8">
-          {/* Eyebrow Badge */}
-          <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full">
-            <span className="w-2 h-2 rounded-full" style={{ backgroundColor: ACCENT_COLOR }} />
-            <span className="text-sm font-semibold" style={{ color: ACCENT_COLOR }}>Transform Your Fitness Journey</span>
-          </div>
-
           {/* Heading */}
           <h1 className="text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight drop-shadow-lg max-w-2xl">
             {title}

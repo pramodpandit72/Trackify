@@ -56,7 +56,6 @@ const initialFormData = {
 	age: 0,
 	gender: "",
 	fitnessLevel: "",
-	username: "",
 	password: "",
 };
 

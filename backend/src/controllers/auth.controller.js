@@ -457,8 +457,7 @@ export const logout = async (req, res) => {
   });
 };
 
-// Store reset tokens temporarily (in production, use Redis or database)
-const resetTokens = new Map();
+// Reset tokens are now stored in the database (User/Admin models)
 
 /**
  * POST /api/auth/forgot-password
@@ -493,14 +492,12 @@ export const forgotPassword = async (req, res, next) => {
 
     // Generate reset token
     const resetToken = crypto.randomBytes(32).toString('hex');
-    const resetTokenExpiry = Date.now() + 3600000; // 1 hour
+    const resetTokenExpiry = new Date(Date.now() + 3600000); // 1 hour
 
-    // Store token (in production, store in database)
-    resetTokens.set(resetToken, {
-      userId: account._id,
-      isAdmin: isAdmin,
-      expiry: resetTokenExpiry
-    });
+    // Store token in database
+    account.resetPasswordToken = resetToken;
+    account.resetPasswordExpiry = resetTokenExpiry;
+    await account.save();
 
     // Create reset URL
     const resetUrl = `${process.env.FRONTEND_URL || 'http://localhost:5173'}/reset-password/${resetToken}`;
@@ -600,46 +597,31 @@ export const resetPassword = async (req, res, next) => {
       });
     }
 
-    // Get token data
-    const tokenData = resetTokens.get(token);
+    // Find account by reset token (check Admin first, then User)
+    let account = await Admin.findOne({
+      resetPasswordToken: token,
+      resetPasswordExpiry: { $gt: new Date() }
+    }).select('+password');
 
-    if (!tokenData) {
+    if (!account) {
+      account = await User.findOne({
+        resetPasswordToken: token,
+        resetPasswordExpiry: { $gt: new Date() }
+      }).select('+password');
+    }
+
+    if (!account) {
       return res.status(400).json({
         success: false,
         message: "Invalid or expired reset token"
       });
     }
 
-    // Check if token expired
-    if (Date.now() > tokenData.expiry) {
-      resetTokens.delete(token);
-      return res.status(400).json({
-        success: false,
-        message: "Reset token has expired. Please request a new one."
-      });
-    }
-
-    // Find account (Admin or User) and update password
-    let account;
-    if (tokenData.isAdmin) {
-      account = await Admin.findById(tokenData.userId).select('+password');
-    } else {
-      account = await User.findById(tokenData.userId).select('+password');
-    }
-
-    if (!account) {
-      return res.status(400).json({
-        success: false,
-        message: "Account not found"
-      });
-    }
-
-    // Update password
+    // Update password and clear reset token
     account.password = password;
+    account.resetPasswordToken = null;
+    account.resetPasswordExpiry = null;
     await account.save();
-
-    // Delete used token
-    resetTokens.delete(token);
 
     console.log(`✅ Password reset successful for ${account.email}`);
 
@@ -659,20 +641,41 @@ export const resetPassword = async (req, res, next) => {
  * Verify if reset token is valid
  */
 export const verifyResetToken = async (req, res) => {
-  const { token } = req.params;
-  const tokenData = resetTokens.get(token);
+  try {
+    const { token } = req.params;
 
-  if (!tokenData || Date.now() > tokenData.expiry) {
-    return res.status(400).json({
+    // Check Admin collection first, then User collection
+    let account = await Admin.findOne({
+      resetPasswordToken: token,
+      resetPasswordExpiry: { $gt: new Date() }
+    });
+
+    if (!account) {
+      account = await User.findOne({
+        resetPasswordToken: token,
+        resetPasswordExpiry: { $gt: new Date() }
+      });
+    }
+
+    if (!account) {
+      return res.status(400).json({
+        success: false,
+        valid: false,
+        message: "Invalid or expired reset token"
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      valid: true,
+      message: "Token is valid"
+    });
+  } catch (error) {
+    console.error("Verify token error:", error);
+    res.status(500).json({
       success: false,
       valid: false,
-      message: "Invalid or expired reset token"
+      message: "Error verifying token"
     });
   }
-
-  res.status(200).json({
-    success: true,
-    valid: true,
-    message: "Token is valid"
-  });
 };
