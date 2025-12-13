@@ -137,7 +137,7 @@ const PersonalInfoStep = ({ register, errors }) => {
 						</span>
 						<input
 							{...register("firstName")}
-							placeholder="John"
+							placeholder="First Name"
 							className="w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-600 rounded-xl text-gray-800 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:border-[#775fab] focus:bg-white dark:focus:bg-gray-800 transition-all duration-300"
 						/>
 					</div>
@@ -153,7 +153,7 @@ const PersonalInfoStep = ({ register, errors }) => {
 						</span>
 						<input
 							{...register("lastName")}
-							placeholder="Doe"
+							placeholder="Last Name"
 							className="w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-600 rounded-xl text-gray-800 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:border-[#775fab] focus:bg-white dark:focus:bg-gray-800 transition-all duration-300"
 						/>
 					</div>
@@ -172,7 +172,7 @@ const PersonalInfoStep = ({ register, errors }) => {
 					<input
 						type="email"
 						{...register("email")}
-						placeholder="john.doe@example.com"
+						placeholder="Enter email"
 						className="w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-600 rounded-xl text-gray-800 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:border-[#775fab] focus:bg-white dark:focus:bg-gray-800 transition-all duration-300"
 					/>
 				</div>
@@ -189,7 +189,7 @@ const PersonalInfoStep = ({ register, errors }) => {
 					</span>
 					<input
 						{...register("phone")}
-						placeholder="1234567890"
+						placeholder="Enter mobile number"
 						className="w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-600 rounded-xl text-gray-800 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:border-[#775fab] focus:bg-white dark:focus:bg-gray-800 transition-all duration-300"
 					/>
 				</div>
@@ -293,7 +293,7 @@ const MeasurementsInfoStep = ({ register, errors, watch, setValue }) => {
 						<input
 							type="number"
 							{...register("age", { valueAsNumber: true })}
-							placeholder="25"
+							placeholder="Enter age"
 							className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-600 rounded-xl text-gray-800 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:border-[#775fab] focus:bg-white dark:focus:bg-gray-900 transition-all duration-300 text-center"
 						/>
 						<span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs">yrs</span>
@@ -306,7 +306,7 @@ const MeasurementsInfoStep = ({ register, errors, watch, setValue }) => {
 						<input
 							type="number"
 							{...register("height", { valueAsNumber: true })}
-							placeholder="175"
+							placeholder="Enter height"
 							className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-600 rounded-xl text-gray-800 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:border-[#775fab] focus:bg-white dark:focus:bg-gray-900 transition-all duration-300 text-center"
 						/>
 						<span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs">cm</span>
@@ -319,7 +319,7 @@ const MeasurementsInfoStep = ({ register, errors, watch, setValue }) => {
 						<input
 							type="number"
 							{...register("weight", { valueAsNumber: true })}
-							placeholder="70"
+							placeholder="Enter body weight"
 							className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-600 rounded-xl text-gray-800 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:border-[#775fab] focus:bg-white dark:focus:bg-gray-900 transition-all duration-300 text-center"
 						/>
 						<span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs">kg</span>
