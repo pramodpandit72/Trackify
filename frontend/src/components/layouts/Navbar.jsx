@@ -77,9 +77,11 @@ function NavBar() {
 									className="h-11 w-11 object-cover rounded-full transition-transform duration-300 group-hover:scale-110"
 								/>
 							</div>
-							<span className={`text-xl font-bold tracking-tight transition-colors duration-300 ${
-								scrolled || !isHome ? "text-[#32284a]" : "text-white"
-							}`}>
+							<span className={`text-2xl font-bold transition-all duration-300 ${
+								scrolled || !isHome 
+									? "bg-gradient-to-r from-[#775fab] via-[#9b7fd1] to-[#443049] bg-clip-text text-transparent dark:from-[#a78bda] dark:via-[#c4b5fd] dark:to-[#9b7fd1]" 
+									: "text-white drop-shadow-[0_2px_8px_rgba(255,255,255,0.25)]"
+							}`} style={{ fontFamily: "'Playfair Display', serif", letterSpacing: '0.02em' }}>
 								Trackify
 							</span>
 						</NavLink>
@@ -94,7 +96,7 @@ function NavBar() {
 										isActive
 											? "bg-[#775fab] text-white shadow-md shadow-[#775fab]/30"
 											: scrolled || !isHome
-												? "text-[#443049] hover:bg-[#775fab]/10 hover:text-[#775fab]"
+												? "text-[#443049] dark:text-gray-200 hover:bg-[#775fab]/10 hover:text-[#775fab] dark:hover:text-[#a78bda]"
 												: "text-white/90 hover:bg-white/10 hover:text-white"
 									}`
 								}
@@ -111,7 +113,7 @@ function NavBar() {
 								<button
 									className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 flex items-center gap-1 ${
 										scrolled || !isHome
-											? "text-[#443049] hover:bg-[#775fab]/10 hover:text-[#775fab]"
+											? "text-[#443049] dark:text-gray-200 hover:bg-[#775fab]/10 hover:text-[#775fab] dark:hover:text-[#a78bda]"
 											: "text-white/90 hover:bg-white/10 hover:text-white"
 									}`}
 								>
@@ -192,7 +194,7 @@ function NavBar() {
 										isActive
 											? "bg-[#775fab] text-white shadow-md shadow-[#775fab]/30"
 											: scrolled || !isHome
-												? "text-[#443049] hover:bg-[#775fab]/10 hover:text-[#775fab]"
+												? "text-[#443049] dark:text-gray-200 hover:bg-[#775fab]/10 hover:text-[#775fab] dark:hover:text-[#a78bda]"
 												: "text-white/90 hover:bg-white/10 hover:text-white"
 									}`
 								}
@@ -207,7 +209,7 @@ function NavBar() {
 										isActive
 											? "bg-[#775fab] text-white shadow-md shadow-[#775fab]/30"
 											: scrolled || !isHome
-												? "text-[#443049] hover:bg-[#775fab]/10 hover:text-[#775fab]"
+												? "text-[#443049] dark:text-gray-200 hover:bg-[#775fab]/10 hover:text-[#775fab] dark:hover:text-[#a78bda]"
 												: "text-white/90 hover:bg-white/10 hover:text-white"
 									}`
 								}
@@ -222,7 +224,7 @@ function NavBar() {
 										isActive
 											? "bg-[#775fab] text-white shadow-md shadow-[#775fab]/30"
 											: scrolled || !isHome
-												? "text-[#443049] hover:bg-[#775fab]/10 hover:text-[#775fab]"
+												? "text-[#443049] dark:text-gray-200 hover:bg-[#775fab]/10 hover:text-[#775fab] dark:hover:text-[#a78bda]"
 												: "text-white/90 hover:bg-white/10 hover:text-white"
 									}`
 								}
@@ -237,7 +239,7 @@ function NavBar() {
 										isActive
 											? "bg-[#775fab] text-white shadow-md shadow-[#775fab]/30"
 											: scrolled || !isHome
-												? "text-[#443049] hover:bg-[#775fab]/10 hover:text-[#775fab]"
+												? "text-[#443049] dark:text-gray-200 hover:bg-[#775fab]/10 hover:text-[#775fab] dark:hover:text-[#a78bda]"
 												: "text-white/90 hover:bg-white/10 hover:text-white"
 									}`
 								}
@@ -343,14 +345,14 @@ function NavBar() {
 				<div className={`lg:hidden transition-all duration-300 overflow-hidden ${
 					mobileMenuOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
 				}`}>
-					<div className="bg-white border-t border-gray-100 px-6 py-4 space-y-2">
-						<NavLink to="/" onClick={() => setMobileMenuOpen(false)} className="block px-4 py-3 rounded-xl text-[#443049] hover:bg-[#775fab]/10 font-medium">Home</NavLink>
-						<NavLink to="/about" onClick={() => setMobileMenuOpen(false)} className="block px-4 py-3 rounded-xl text-[#443049] hover:bg-[#775fab]/10 font-medium">About</NavLink>
-						<NavLink to="/contact" onClick={() => setMobileMenuOpen(false)} className="block px-4 py-3 rounded-xl text-[#443049] hover:bg-[#775fab]/10 font-medium">Contact</NavLink>
-						<NavLink to="/trainers" onClick={() => setMobileMenuOpen(false)} className="block px-4 py-3 rounded-xl text-[#443049] hover:bg-[#775fab]/10 font-medium">Trainers</NavLink>
-						<NavLink to="/exercise" onClick={() => setMobileMenuOpen(false)} className="block px-4 py-3 rounded-xl text-[#443049] hover:bg-[#775fab]/10 font-medium">Exercises</NavLink>
-						<NavLink to="/reviews" onClick={() => setMobileMenuOpen(false)} className="block px-4 py-3 rounded-xl text-[#443049] hover:bg-[#775fab]/10 font-medium">Reviews</NavLink>
-						<NavLink to="/jobs" onClick={() => setMobileMenuOpen(false)} className="block px-4 py-3 rounded-xl text-[#443049] hover:bg-[#775fab]/10 font-medium">Jobs</NavLink>
+					<div className="bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800 px-6 py-4 space-y-2">
+						<NavLink to="/" onClick={() => setMobileMenuOpen(false)} className="block px-4 py-3 rounded-xl text-[#443049] dark:text-gray-200 hover:bg-[#775fab]/10 font-medium">Home</NavLink>
+						<NavLink to="/about" onClick={() => setMobileMenuOpen(false)} className="block px-4 py-3 rounded-xl text-[#443049] dark:text-gray-200 hover:bg-[#775fab]/10 font-medium">About</NavLink>
+						<NavLink to="/contact" onClick={() => setMobileMenuOpen(false)} className="block px-4 py-3 rounded-xl text-[#443049] dark:text-gray-200 hover:bg-[#775fab]/10 font-medium">Contact</NavLink>
+						<NavLink to="/trainers" onClick={() => setMobileMenuOpen(false)} className="block px-4 py-3 rounded-xl text-[#443049] dark:text-gray-200 hover:bg-[#775fab]/10 font-medium">Trainers</NavLink>
+						<NavLink to="/exercise" onClick={() => setMobileMenuOpen(false)} className="block px-4 py-3 rounded-xl text-[#443049] dark:text-gray-200 hover:bg-[#775fab]/10 font-medium">Exercises</NavLink>
+						<NavLink to="/reviews" onClick={() => setMobileMenuOpen(false)} className="block px-4 py-3 rounded-xl text-[#443049] dark:text-gray-200 hover:bg-[#775fab]/10 font-medium">Reviews</NavLink>
+						<NavLink to="/jobs" onClick={() => setMobileMenuOpen(false)} className="block px-4 py-3 rounded-xl text-[#443049] dark:text-gray-200 hover:bg-[#775fab]/10 font-medium">Jobs</NavLink>
 					</div>
 				</div>
 			</header>

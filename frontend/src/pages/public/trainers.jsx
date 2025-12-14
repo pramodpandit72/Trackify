@@ -1,9 +1,10 @@
+
 import React, { useState, useEffect } from 'react';
 import TrainerCard from '../../components/ui/TrainerCard';
 import CustomDropdown from '../../components/ui/CustomDropdown';
 import axios from 'axios';
 
-function Trainers() {
+const Trainers = () => {
   const [trainers, setTrainers] = useState([]);
   const [filteredTrainers, setFilteredTrainers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -11,40 +12,28 @@ function Trainers() {
   const [selectedSpecialty, setSelectedSpecialty] = useState('');
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-
-  // Important fitness specialties
   const specialties = [
     'Weight Loss',
     'Muscle Building',
     'Strength Training',
     'Cardio',
     'Flexibility',
-    'Core Training'
+    'Core Training',
+    'Functional Training',
   ];
 
-  const ITEMS_PER_PAGE = 12;
-
-  // Fetch trainers
   useEffect(() => {
     const fetchTrainers = async () => {
+      setLoading(true);
       try {
-        setLoading(true);
-        const params = {
-          page,
-          limit: ITEMS_PER_PAGE,
-          ...(search && { search }),
-          ...(selectedSpecialty && { specialty: selectedSpecialty })
-        };
-
-        const response = await axios.get('/api/trainers', { params });
-        const data = response.data;
-
-        setTrainers(data.items || []);
-        setFilteredTrainers(data.items || []);
-        setTotalPages(data.totalPages || 1);
+        // Replace with your API endpoint
+        const response = await axios.get('/api/trainers');
+        // Support both {items: [...]} and [...] for trainers
+        const trainersData = Array.isArray(response.data) ? response.data : response.data.items || [];
+        setTrainers(trainersData);
       } catch (error) {
         console.error('Error fetching trainers:', error);
-        // Dummy data
+        // Dummy data fallback
         const dummyTrainers = [
           {
             _id: '1',
@@ -56,7 +45,7 @@ function Trainers() {
             reviewsCount: 715,
             experienceYears: 4,
             profilePicture: null,
-            pricePerSession: 50
+            pricePerSession: 1800
           },
           {
             _id: '2',
@@ -68,7 +57,7 @@ function Trainers() {
             reviewsCount: 547,
             experienceYears: 13,
             profilePicture: null,
-            pricePerSession: 55
+            pricePerSession: 2200
           },
           {
             _id: '3',
@@ -80,7 +69,19 @@ function Trainers() {
             reviewsCount: 198,
             experienceYears: 8,
             profilePicture: null,
-            pricePerSession: 48
+            pricePerSession: 2700
+          },
+          {
+            _id: '4',
+            name: 'Priya K.',
+            title: 'Yoga & Wellness Coach',
+            bio: 'Certified yoga instructor with a passion for holistic health and mindfulness.',
+            specialties: ['Flexibility', 'Weight Loss', 'Cardio'],
+            rating: 4.8,
+            reviewsCount: 320,
+            experienceYears: 6,
+            profilePicture: null,
+            pricePerSession: 2000
           }
         ];
         setTrainers(dummyTrainers);
@@ -89,9 +90,29 @@ function Trainers() {
         setLoading(false);
       }
     };
-
     fetchTrainers();
-  }, [page, search, selectedSpecialty]);
+  }, []);
+
+  useEffect(() => {
+    // Always filter the trainers list (dummy or API)
+    // Do not clear filteredTrainers if trainers is empty; just filter as normal
+    let filtered = trainers;
+    if (search) {
+      const s = search.toLowerCase();
+      filtered = filtered.filter(trainer =>
+        trainer.name.toLowerCase().includes(s) ||
+        trainer.title.toLowerCase().includes(s) ||
+        trainer.specialties.some(spec => spec.toLowerCase().includes(s))
+      );
+    }
+    if (selectedSpecialty) {
+      filtered = filtered.filter(trainer =>
+        trainer.specialties.includes(selectedSpecialty)
+      );
+    }
+    setFilteredTrainers(filtered);
+    setTotalPages(1); // Only 1 page for now
+  }, [trainers, search, selectedSpecialty]);
 
   return (
     <div className="pt-25 min-h-screen bg-gray-50 dark:bg-black">
@@ -111,7 +132,7 @@ function Trainers() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Search */}
             <div>
-              <label className="block text-sm font-semibold text-[#443049] dark:text-gray-200 mb-2">
+              <label className="block text-xs font-semibold text-[#443049] dark:text-gray-200 mb-1.5">
                 <i className="fa-solid fa-magnifying-glass mr-2 text-[#775fab]"></i>
                 Search Trainers
               </label>
@@ -127,7 +148,7 @@ function Trainers() {
                     setSearch(e.target.value);
                     setPage(1);
                   }}
-                  className="w-full pl-11 pr-4 py-3 bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-600 rounded-xl text-gray-700 dark:text-white placeholder-gray-400 transition-all duration-300 hover:border-[#775fab]/50 hover:shadow-md focus:outline-none focus:border-[#775fab] focus:shadow-lg focus:shadow-[#775fab]/10"
+                  className="w-full pl-11 pr-4 py-3 bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-600 rounded-xl text-gray-700 dark:text-white placeholder-gray-400 text-sm transition-all duration-300 hover:border-[#775fab]/50 hover:shadow-md focus:outline-none focus:border-[#775fab] focus:shadow-lg focus:shadow-[#775fab]/10"
                 />
               </div>
             </div>

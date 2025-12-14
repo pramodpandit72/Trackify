@@ -122,7 +122,7 @@ function TrainerDetail() {
                 {trainer.pricePerSession && (
                   <div>
                     <p className="text-sm text-gray-600 dark:text-gray-400">Price per Session</p>
-                    <p className="text-lg font-semibold text-[#443049] dark:text-white">${trainer.pricePerSession}</p>
+                    <p className="text-lg font-semibold text-[#443049] dark:text-white">₹{trainer.pricePerSession}</p>
                   </div>
                 )}
                 {trainer.location && (

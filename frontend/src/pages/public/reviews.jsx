@@ -64,6 +64,34 @@ function Reviews() {
             clientName: "Jennifer L.",
             trainerName: "Nicole",
             rating: 4.9
+          },
+          {
+            _id: '7',
+            text: "Trackify's nutrition tips and workout plans helped me lose 10kg in 4 months! Highly recommend for anyone serious about results.",
+            clientName: "Ravi S.",
+            trainerName: "Priya",
+            rating: 5
+          },
+          {
+            _id: '8',
+            text: "I love the variety of exercises and the motivation from my coach. Every session is different and fun!",
+            clientName: "Emily W.",
+            trainerName: "Chris",
+            rating: 4.8
+          },
+          {
+            _id: '9',
+            text: "After years of gym anxiety, I finally feel confident and strong. The support from my trainer is amazing.",
+            clientName: "Lucas P.",
+            trainerName: "Sam",
+            rating: 5
+          },
+          {
+            _id: '10',
+            text: "The app is easy to use and the progress tracking keeps me motivated. I can see real improvements every week!",
+            clientName: "Ava G.",
+            trainerName: "Taylor",
+            rating: 4.7
           }
         ];
         setReviews(dummyReviews);

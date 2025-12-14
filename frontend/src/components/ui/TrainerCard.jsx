@@ -61,7 +61,7 @@ function TrainerCard({ trainer }) {
         <div className="mt-auto">
           {trainer.pricePerSession && (
             <div className="mb-3 pb-3 border-b border-gray-100 dark:border-gray-700">
-              <span className="text-2xl font-bold text-[#1a1a1a] dark:text-white">${trainer.pricePerSession}</span>
+              <span className="text-2xl font-bold text-[#1a1a1a] dark:text-white">₹{trainer.pricePerSession}</span>
               <span className="text-gray-500 dark:text-gray-400 text-sm">/session</span>
             </div>
           )}
