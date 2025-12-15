@@ -1,8 +1,17 @@
 
 import React, { useState, useEffect } from 'react';
+
 import TrainerCard from '../../components/ui/TrainerCard';
 import CustomDropdown from '../../components/ui/CustomDropdown';
 import axios from 'axios';
+import AmitKumar from '../../assets/AmitKumar.webp';
+import ArjunReddy from '../../assets/ArjunReddy.webp';
+import KavitaNair from '../../assets/KavitaNair.webp';
+import MeeraKapoor from '../../assets/MeeraKapoor.webp';
+import PriyaDesai from '../../assets/PriyaDesai.webp';
+import RajeshPatel from '../../assets/RajeshPatel.webp';
+import SnehaSharma from '../../assets/SnehaSharma.webp';
+import VikramSingh from '../../assets/VikramSingh.webp';
 
 const Trainers = () => {
   const [trainers, setTrainers] = useState([]);
@@ -23,74 +32,108 @@ const Trainers = () => {
   ];
 
   useEffect(() => {
-    const fetchTrainers = async () => {
-      setLoading(true);
-      try {
-        // Replace with your API endpoint
-        const response = await axios.get('/api/trainers');
-        // Support both {items: [...]} and [...] for trainers
-        const trainersData = Array.isArray(response.data) ? response.data : response.data.items || [];
-        setTrainers(trainersData);
-      } catch (error) {
-        console.error('Error fetching trainers:', error);
-        // Dummy data fallback
-        const dummyTrainers = [
-          {
-            _id: '1',
-            name: 'Nate F.',
-            title: 'Certified Personal Trainer',
-            bio: 'MS in Exercise Science',
-            specialties: ['Flexibility', 'Strength Training', 'Weight Loss'],
-            rating: 4.9,
-            reviewsCount: 715,
-            experienceYears: 4,
-            profilePicture: null,
-            pricePerSession: 1800
-          },
-          {
-            _id: '2',
-            name: 'Melissa',
-            title: 'Certified Personal Trainer & Nutrition Specialist',
-            bio: 'Athlete & Mom',
-            specialties: ['Core Training', 'Cardio', 'Weight Loss'],
-            rating: 4.9,
-            reviewsCount: 547,
-            experienceYears: 13,
-            profilePicture: null,
-            pricePerSession: 2200
-          },
-          {
-            _id: '3',
-            name: 'Jay S.',
-            title: 'Strength Coach',
-            bio: 'Athlete turned pain-free performance coach',
-            specialties: ['Functional Training', 'Cardio', 'Muscle Building'],
-            rating: 5.0,
-            reviewsCount: 198,
-            experienceYears: 8,
-            profilePicture: null,
-            pricePerSession: 2700
-          },
-          {
-            _id: '4',
-            name: 'Priya K.',
-            title: 'Yoga & Wellness Coach',
-            bio: 'Certified yoga instructor with a passion for holistic health and mindfulness.',
-            specialties: ['Flexibility', 'Weight Loss', 'Cardio'],
-            rating: 4.8,
-            reviewsCount: 320,
-            experienceYears: 6,
-            profilePicture: null,
-            pricePerSession: 2000
-          }
-        ];
-        setTrainers(dummyTrainers);
-        setFilteredTrainers(dummyTrainers);
-      } finally {
-        setLoading(false);
+    setLoading(true);
+    const dummyTrainers = [
+      {
+        _id: '1',
+        name: 'Amit Kumar',
+        title: 'Certified Personal Trainer',
+        bio: 'MS in Exercise Science',
+        specialties: ['Flexibility', 'Strength Training', 'Weight Loss'],
+        rating: 4.9,
+        reviewsCount: 715,
+        experienceYears: 4,
+        profilePicture: AmitKumar,
+        pricePerSession: 1800
+      },
+      {
+        _id: '2',
+        name: 'Meera Kapoor',
+        title: 'Certified Personal Trainer & Nutrition Specialist',
+        bio: 'Athlete & Mom',
+        specialties: ['Core Training', 'Cardio', 'Weight Loss'],
+        rating: 4.9,
+        reviewsCount: 547,
+        experienceYears: 13,
+        profilePicture: MeeraKapoor,
+        pricePerSession: 2200
+      },
+      {
+        _id: '3',
+        name: 'Rajesh Patel',
+        title: 'Strength Coach',
+        bio: 'Athlete turned pain-free performance coach',
+        specialties: ['Functional Training', 'Cardio', 'Muscle Building'],
+        rating: 5.0,
+        reviewsCount: 198,
+        experienceYears: 8,
+        profilePicture: RajeshPatel,
+        pricePerSession: 2700
+      },
+      {
+        _id: '4',
+        name: 'Priya Desai',
+        title: 'Yoga & Wellness Coach',
+        bio: 'Certified yoga instructor with a passion for holistic health and mindfulness.',
+        specialties: ['Flexibility', 'Weight Loss', 'Cardio'],
+        rating: 4.8,
+        reviewsCount: 320,
+        experienceYears: 6,
+        profilePicture: PriyaDesai,
+        pricePerSession: 2000
+      },
+      {
+        _id: '5',
+        name: 'Sneha Sharma',
+        title: 'Pilates Instructor',
+        bio: 'Expert in pilates and core training.',
+        specialties: ['Core Training', 'Flexibility', 'Weight Loss'],
+        rating: 4.7,
+        reviewsCount: 410,
+        experienceYears: 5,
+        profilePicture: SnehaSharma,
+        pricePerSession: 1900
+      },
+      {
+        _id: '6',
+        name: 'Kavita Nair',
+        title: 'Cardio Specialist',
+        bio: 'Helping clients improve heart health and stamina.',
+        specialties: ['Cardio', 'Weight Loss', 'Strength Training'],
+        rating: 4.6,
+        reviewsCount: 350,
+        experienceYears: 7,
+        profilePicture: KavitaNair,
+        pricePerSession: 2100
+      },
+      {
+        _id: '7',
+        name: 'Vikram Singh',
+        title: 'Muscle Building Coach',
+        bio: 'Specialist in muscle gain and strength.',
+        specialties: ['Muscle Building', 'Strength Training', 'Cardio'],
+        rating: 4.8,
+        reviewsCount: 500,
+        experienceYears: 9,
+        profilePicture: VikramSingh,
+        pricePerSession: 2300
+      },
+      {
+        _id: '8',
+        name: 'Arjun Reddy',
+        title: 'Functional Training Expert',
+        bio: 'Focus on functional movement and injury prevention.',
+        specialties: ['Functional Training', 'Strength Training', 'Flexibility'],
+        rating: 4.9,
+        reviewsCount: 600,
+        experienceYears: 10,
+        profilePicture: ArjunReddy,
+        pricePerSession: 2500
       }
-    };
-    fetchTrainers();
+    ];
+    setTrainers(dummyTrainers);
+    setFilteredTrainers(dummyTrainers);
+    setLoading(false);
   }, []);
 
   useEffect(() => {
@@ -127,7 +170,7 @@ const Trainers = () => {
       </div>
 
       {/* Filters Section */}
-      <div className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 sticky top-25 z-40 py-6 px-4">
+      <div className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 sticky" style={{ top: '4.5rem', zIndex: 40, paddingTop: '1.5rem', paddingBottom: '1.5rem', paddingLeft: '1rem', paddingRight: '1rem' }}>
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Search */}

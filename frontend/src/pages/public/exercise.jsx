@@ -136,7 +136,7 @@ function Exercise() {
       </div>
 
       {/* Filters Section */}
-      <div className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 sticky top-25 z-40 py-4 px-4">
+      <div className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 sticky" style={{ top: '4.5rem', zIndex: 40, paddingTop: '1rem', paddingBottom: '1rem', paddingLeft: '1rem', paddingRight: '1rem' }}>
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {/* Search */}

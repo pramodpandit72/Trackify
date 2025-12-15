@@ -17,11 +17,47 @@ function Reviews() {
         const response = await axios.get('/api/reviews', {
           params: { page, limit: ITEMS_PER_PAGE }
         });
-        setReviews(response.data.items || []);
-        setTotalPages(response.data.totalPages || 1);
+        let items = response.data.items || [];
+        if (items.length === 0) {
+          // Dummy reviews fallback if backend returns empty
+          items = [
+            {
+              _id: '1',
+              text: "I found a winning combination! The personalized guidance and attentive coaching have been pivotal in my fitness journey, leading to tangible improvements in balance, stamina, and overall well-being.",
+              clientName: "Satyam",
+              trainerName: "Amit Kumar",
+              rating: 5
+            },
+            {
+              _id: '2',
+              text: "I have been with my coach for over three months and I love her! The best thing about my coach is I trust her, and I know she cares.",
+              clientName: "Mukesh",
+              trainerName: "Sneha Sharma",
+              rating: 5
+            },
+            {
+              _id: '3',
+              text: "With the help and accountability of my trainer, I overcame an injury and regained abilities I thought were gone forever.",
+              clientName: "Abhilash",
+              trainerName: "Rajesh Patel",
+              rating: 5
+            },
+            {
+              _id: '4',
+              text: "The flexibility of working out whenever I want combined with personalized programming is exactly what I needed.",
+              clientName: "Asutosh",
+              trainerName: "Priya Desai",
+              rating: 5
+            }
+          ];
+          setTotalPages(1);
+        } else {
+          setTotalPages(response.data.totalPages || 1);
+        }
+        setReviews(items);
       } catch (error) {
         console.error('Error fetching reviews:', error);
-        // Dummy reviews
+        // Dummy reviews fallback on error
         const dummyReviews = [
           {
             _id: '1',
@@ -50,48 +86,6 @@ function Reviews() {
             clientName: "Sarah M.",
             trainerName: "Alex",
             rating: 5
-          },
-          {
-            _id: '5',
-            text: "As a busy parent, this virtual option is perfect for my lifestyle, and my trainer adapts workouts to my home setup.",
-            clientName: "Michael T.",
-            trainerName: "Jordan",
-            rating: 5
-          },
-          {
-            _id: '6',
-            text: "The form correction feedback is incredible. My trainer catches things I would never notice.",
-            clientName: "Jennifer L.",
-            trainerName: "Nicole",
-            rating: 4.9
-          },
-          {
-            _id: '7',
-            text: "Trackify's nutrition tips and workout plans helped me lose 10kg in 4 months! Highly recommend for anyone serious about results.",
-            clientName: "Ravi S.",
-            trainerName: "Priya",
-            rating: 5
-          },
-          {
-            _id: '8',
-            text: "I love the variety of exercises and the motivation from my coach. Every session is different and fun!",
-            clientName: "Emily W.",
-            trainerName: "Chris",
-            rating: 4.8
-          },
-          {
-            _id: '9',
-            text: "After years of gym anxiety, I finally feel confident and strong. The support from my trainer is amazing.",
-            clientName: "Lucas P.",
-            trainerName: "Sam",
-            rating: 5
-          },
-          {
-            _id: '10',
-            text: "The app is easy to use and the progress tracking keeps me motivated. I can see real improvements every week!",
-            clientName: "Ava G.",
-            trainerName: "Taylor",
-            rating: 4.7
           }
         ];
         setReviews(dummyReviews);

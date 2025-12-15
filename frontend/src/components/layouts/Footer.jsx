@@ -1,4 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
+import footer_logo from "../../assets/footer_logo.png";
 
 function Footer() {
     const location = useLocation();
@@ -17,9 +18,9 @@ function Footer() {
                     <div className="lg:col-span-1">
                         <Link to="/" className="inline-block mb-6">
                             <img
-                                src="/logo.png"
+                                src={footer_logo}
                                 alt="Trackify"
-                                className="h-12 w-auto"
+                                className="h-12 w-12 rounded-full object-cover"
                             />
                         </Link>
                         <p className="text-gray-300 text-sm leading-relaxed mb-6">
@@ -27,46 +28,46 @@ function Footer() {
                         </p>
                         {/* Social Links */}
                         <div className="flex gap-3">
-                            <a
+                            {/* <a
                                 href="https://facebook.com"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center text-gray-300 hover:bg-[#775fab] hover:text-white transition-all duration-300"
                             >
                                 <i className="fa-brands fa-facebook-f"></i>
-                            </a>
-                            <a
+                            </a> */}
+                            {/* <a
                                 href="https://linkedin.com"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center text-gray-300 hover:bg-[#775fab] hover:text-white transition-all duration-300"
                             >
                                 <i className="fa-brands fa-linkedin-in"></i>
-                            </a>
-                            <a
+                            </a> */}
+                            {/* <a
                                 href="https://instagram.com"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center text-gray-300 hover:bg-[#775fab] hover:text-white transition-all duration-300"
                             >
                                 <i className="fa-brands fa-instagram"></i>
-                            </a>
-                            <a
+                            </a> */}
+                            {/* <a
                                 href="https://twitter.com"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center text-gray-300 hover:bg-[#775fab] hover:text-white transition-all duration-300"
                             >
                                 <i className="fa-brands fa-x-twitter"></i>
-                            </a>
-                            <a
+                            </a> */}
+                            {/* <a
                                 href="https://youtube.com"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center text-gray-300 hover:bg-[#775fab] hover:text-white transition-all duration-300"
                             >
                                 <i className="fa-brands fa-youtube"></i>
-                            </a>
+                            </a> */}
                         </div>
                     </div>
 
@@ -162,8 +163,8 @@ function Footer() {
                                     <i className="fa-solid fa-location-dot text-[#775fab]"></i>
                                 </div>
                                 <span className="text-gray-300 text-sm">
-                                    123 Fitness Street,<br />
-                                    New York, NY 10001
+                                    Phagwara, Punjab<br />
+                                    India
                                 </span>
                             </li>
                             <li className="flex items-center gap-3">
@@ -171,7 +172,7 @@ function Footer() {
                                     <i className="fa-solid fa-envelope text-[#775fab]"></i>
                                 </div>
                                 <a href="mailto:support@trackify.com" className="text-gray-300 text-sm hover:text-[#775fab] transition-colors">
-                                    support@trackify.com
+                                    trackify@gmail.com
                                 </a>
                             </li>
                             <li className="flex items-center gap-3">
@@ -179,7 +180,7 @@ function Footer() {
                                     <i className="fa-solid fa-phone text-[#775fab]"></i>
                                 </div>
                                 <a href="tel:+1234567890" className="text-gray-300 text-sm hover:text-[#775fab] transition-colors">
-                                    +1 (234) 567-890
+                                    +91 (234) 567-890
                                 </a>
                             </li>
                         </ul>
