@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import footer_logo from "../../assets/footer_logo.png";
 
 function Login() {
   const navigate = useNavigate();
@@ -59,7 +60,7 @@ function Login() {
         {/* Logo */}
         <div className="text-center mb-8">
           <Link to="/">
-            <img src="/logo1.png" alt="Trackify" className="h-12 mx-auto mb-4" />
+            <img src={footer_logo} alt="Trackify" className="mx-auto h-12 w-12 rounded-full object-cover" />
           </Link>
           <h1 className="text-3xl font-bold text-[#32284a] dark:text-white mb-2">Welcome Back</h1>
           <p className="text-gray-600 dark:text-gray-400">Sign in to continue your fitness journey</p>

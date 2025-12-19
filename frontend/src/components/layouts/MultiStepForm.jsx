@@ -3,6 +3,7 @@ import { useMultiStepForm } from '../../features/useMultiStepForm';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigate, Link } from 'react-router-dom';
+import footer_logo from "../../assets/footer_logo.png";
 
 import {
   CredentialsInfoStep,
@@ -94,7 +95,7 @@ function MultiStepForm() {
         {/* Logo & Header */}
         <div className="text-center mb-6">
           <Link to="/">
-            <img src="/logo1.png" alt="Trackify" className="h-10 mx-auto mb-4" />
+            <img src={footer_logo} alt="Trackify" className="mx-auto h-12 w-12 rounded-full object-cover" />
           </Link>
           <h1 className="text-2xl font-bold text-[#32284a] dark:text-white mb-1">Create Your Account</h1>
           <p className="text-gray-600 dark:text-gray-400 text-sm">Fill in your details to get started</p>

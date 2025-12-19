@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from '../ui/Button';
 import { Link } from 'react-router-dom';
+import footer_logo from "../../assets/footer_logo.png";
 
 function KnowUs() {
   return (
@@ -9,10 +10,10 @@ function KnowUs() {
 				<div className="w-full h-full py-10 my-5.5 bg-white px-30">
 					<div className="flex flex-col items-center">
 						<img
-							src="/logo1.png"
+							src={footer_logo}
 							alt="logo"
 							width={300}
-							className="object-fill"
+							className="h-12 w-12 rounded-full object-cover"
 						/>
 						<h1 className="bg-[#ddd7ea] w-fit p-1 text-xs mt-2 rounded">
 							Loved by 52000+ clients!

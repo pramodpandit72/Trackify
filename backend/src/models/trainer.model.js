@@ -1,6 +1,13 @@
 import mongoose from "mongoose";
 
 const TrainerSchema = new mongoose.Schema({
+    email: {
+      type: String,
+      required: [true, "Trainer email is required"],
+      trim: true,
+      lowercase: true,
+      match: [/.+@.+\..+/, "Please enter a valid email address"]
+    },
   name: { 
     type: String, 
     required: [true, "Trainer name is required"],

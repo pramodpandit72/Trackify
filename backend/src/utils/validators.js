@@ -1,7 +1,3 @@
-/**
- * Validation utilities for API requests
- */
-
 export const validateExercise = (data) => {
   const errors = [];
 

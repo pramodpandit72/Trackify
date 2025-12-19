@@ -13,10 +13,10 @@ const connectDB = async () => {
   const fullUri = `${uri}/${DB_NAME}?retryWrites=true&w=majority`;
   try {
     await mongoose.connect(fullUri);
-    console.log("✅ Connected to MongoDB successfully");
+    console.log("Connected to MongoDB successfully");
     return mongoose.connection;
   } catch (error) {
-    console.error("❌ MongoDB connection error:", error.message);
+    console.error("MongoDB connection error:", error.message);
     throw error;
   }
 };

@@ -117,7 +117,7 @@ export default function ApplyJobs() {
                     name="name"
                     value={form.name}
                     onChange={handleChange}
-                    placeholder="John Doe"
+                    placeholder="Full Name"
                     className={`w-full px-4 py-3 border-2 rounded-xl transition-all focus:outline-none dark:bg-gray-800 dark:text-white dark:placeholder-gray-500 ${
                       errors.name
                         ? "border-red-300 bg-red-50 dark:border-red-700 dark:bg-red-900/20"
@@ -137,7 +137,7 @@ export default function ApplyJobs() {
                     name="email"
                     value={form.email}
                     onChange={handleChange}
-                    placeholder="john@example.com"
+                    placeholder="Enter email"
                     className={`w-full px-4 py-3 border-2 rounded-xl transition-all focus:outline-none dark:bg-gray-800 dark:text-white dark:placeholder-gray-500 ${
                       errors.email
                         ? "border-red-300 bg-red-50 dark:border-red-700 dark:bg-red-900/20"
@@ -157,7 +157,7 @@ export default function ApplyJobs() {
                     name="phone"
                     value={form.phone}
                     onChange={handleChange}
-                    placeholder="+1 (555) 123-4567"
+                    placeholder="Enter phone number"
                     className={`w-full px-4 py-3 border-2 rounded-xl transition-all focus:outline-none dark:bg-gray-800 dark:text-white dark:placeholder-gray-500 ${
                       errors.phone
                         ? "border-red-300 bg-red-50 dark:border-red-700 dark:bg-red-900/20"
@@ -184,7 +184,7 @@ export default function ApplyJobs() {
                     name="certifications"
                     value={form.certifications}
                     onChange={handleChange}
-                    placeholder="e.g., NASM CPT, ACE Certification, CSCS, etc."
+                    
                     className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:placeholder-gray-500 rounded-xl focus:outline-none focus:border-[#775fab] focus:bg-white dark:focus:bg-gray-800 transition-all resize-none"
                     rows="3"
                   ></textarea>
@@ -201,7 +201,7 @@ export default function ApplyJobs() {
                     name="experience"
                     value={form.experience}
                     onChange={handleChange}
-                    placeholder="e.g., 5 years"
+                    
                     className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:placeholder-gray-500 rounded-xl focus:outline-none focus:border-[#775fab] focus:bg-white dark:focus:bg-gray-800 transition-all"
                   />
                 </div>
@@ -216,7 +216,7 @@ export default function ApplyJobs() {
                     name="resumeLink"
                     value={form.resumeLink}
                     onChange={handleChange}
-                    placeholder="https://link-to-your-resume.com"
+                    
                     className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:placeholder-gray-500 rounded-xl focus:outline-none focus:border-[#775fab] focus:bg-white dark:focus:bg-gray-800 transition-all"
                   />
                   <p className="text-xs text-gray-500 mt-1">You can use Google Drive, Dropbox, or any cloud storage link</p>
@@ -234,7 +234,7 @@ export default function ApplyJobs() {
                   name="message"
                   value={form.message}
                   onChange={handleChange}
-                  placeholder="Share your passion for fitness training and why you'd be a great fit for our team..."
+                 
                   className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:placeholder-gray-500 rounded-xl focus:outline-none focus:border-[#775fab] focus:bg-white dark:focus:bg-gray-800 transition-all resize-none"
                   rows="5"
                 ></textarea>
