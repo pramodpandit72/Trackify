@@ -1,14 +1,11 @@
 import {z} from "zod";
 
-
 export const personalInfoSchema = z.object({
     firstName: z.string().min(1, "First Name is required"),
     lastName: z.string().min(1, "Last Name is required"),
     email: z.string().email("Email is required"),
     phone: z.string().min(10, "Phone number is too short"),
 });
-
-
 
 export const goalsInfoSchema = z.object({
     goals: z.array(z.string("Should be string")).min(1,"Minimum one goal is required"),

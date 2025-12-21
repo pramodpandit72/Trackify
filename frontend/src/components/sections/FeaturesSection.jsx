@@ -1,5 +1,3 @@
-import React from 'react';
-
 function FeaturesSection({ title, features, subtitle }) {
   return (
     <section className="py-24 px-4 bg-white dark:bg-black">

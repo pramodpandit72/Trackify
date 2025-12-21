@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import heroVideo from '../../assets/Hero_section_video.mp4';
 

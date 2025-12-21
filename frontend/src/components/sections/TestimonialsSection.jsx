@@ -1,4 +1,3 @@
-import React from 'react';
 import TestimonialCard from '../ui/TestimonialCard';
 
 function TestimonialsSection({ testimonials, title = "What Our Clients Say", subtitle = "Thousands of real clients have accomplished real change on the Trackify platform" }) {
