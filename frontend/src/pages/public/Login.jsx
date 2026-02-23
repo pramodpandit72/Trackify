@@ -92,7 +92,13 @@ function Login() {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="w-full pl-12 pr-4 py-3 bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-600 rounded-xl text-gray-800 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:border-[#775fab] focus:ring-2 focus:ring-[#775fab]/20 transition-all duration-300"
+                className="w-full pl-12 pr-4 py-3 bg-white
+                 dark:bg-gray-800 border-2 border-gray-200
+                  dark:border-gray-600 rounded-xl text-gray-800
+                   dark:text-white placeholder-gray-400
+                    dark:placeholder-gray-500 focus:outline-none 
+                    focus:border-[#775fab] focus:ring-2 focus:ring-[#775fab]/20
+                     transition-all duration-300"
               />
             </div>
           </div>
@@ -113,7 +119,10 @@ function Login() {
                 value={formData.password}
                 onChange={handleChange}
                 required
-                className="w-full pl-12 pr-12 py-3 bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-600 rounded-xl text-gray-800 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:border-[#775fab] focus:ring-2 focus:ring-[#775fab]/20 transition-all duration-300"
+                className="w-full pl-12 pr-12 py-3 bg-white dark:bg-gray-800 border-2 border-gray-200
+                 dark:border-gray-600 rounded-xl text-gray-800 dark:text-white placeholder-gray-
+                  dark:placeholder-gray-500 focus:outline-none focus:border-[#775fab] focus:ring-2
+                   focus:ring-[#775fab]/20 transition-all duration-300"
               />
               <button
                 type="button"
@@ -145,7 +154,9 @@ function Login() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3.5 bg-gradient-to-r from-[#775fab] to-[#32284a] text-white font-semibold rounded-xl shadow-lg shadow-[#775fab]/30 hover:shadow-xl hover:shadow-[#775fab]/40 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+            className="w-full py-3.5 bg-gradient-to-r from-[#775fab] to-[#32284a] text-white font-semibold rounded-xl 
+            shadow-lg shadow-[#775fab]/30 hover:shadow-xl hover:shadow-[#775fab]/40 hover:scale-[1.02] active:scale-[0.98] 
+            transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
           >
             {loading ? (
               <span className="flex items-center justify-center gap-2">

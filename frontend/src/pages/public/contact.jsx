@@ -77,7 +77,7 @@ function Contact() {
                 </p>
                 <button
                   onClick={() => setSuccess(false)}
-                  className="bg-[#775fab] text-white py-3 px-8 rounded-lg font-semibold hover:bg-[#5d3d89] transition-colors"
+                  className="bg-[#775fab] text-white py-3 px-8 rounded-lg font-semibold hover:bg-[#5d3d89] transition-colors cursor-pointer"
                 >
                   Send Another Message
                 </button>
@@ -101,7 +101,7 @@ function Contact() {
                     onChange={handleChange}
                     required
                     className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#775fab]"
-                    placeholder="Your name"
+                    placeholder="Full Name"
                   />
                 </div>
 
@@ -116,7 +116,7 @@ function Contact() {
                     onChange={handleChange}
                     required
                     className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#775fab]"
-                    placeholder="your.email@example.com"
+                    placeholder="Email"
                   />
                 </div>
 
@@ -146,14 +146,14 @@ function Contact() {
                     required
                     rows="6"
                     className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#775fab]"
-                    placeholder="Your message..."
+                    placeholder="Enter message..."
                   ></textarea>
                 </div>
 
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full bg-[#775fab] text-white py-3 px-6 rounded-lg font-semibold hover:bg-[#5d3d89] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full bg-[#775fab] text-white py-3 px-6 rounded-lg font-semibold hover:bg-[#5d3d89] transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                 >
                   {loading ? 'Sending...' : 'Send Message'}
                 </button>

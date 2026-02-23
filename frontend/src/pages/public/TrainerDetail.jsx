@@ -135,7 +135,7 @@ function TrainerDetail() {
 
               {/* CTA Button */}
               <a
-                href="/signup"
+                href="/contact"
                 className="inline-block bg-[#775fab] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#5d3d89] transition-colors"
               >
                 Book a Session
