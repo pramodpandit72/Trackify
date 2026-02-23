@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 
-import TrainerCard from '../../components/ui/TrainerCard';
+import TrainerCard from '../../components/ui/TrainerCard.jsx';
 import CustomDropdown from '../../components/ui/CustomDropdown';
 import axios from 'axios';
 import AmitKumar from '../../assets/AmitKumar.webp';
