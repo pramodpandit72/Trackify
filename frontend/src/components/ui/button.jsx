@@ -1,4 +1,4 @@
-import { cn } from "../../lib/utils/twMerge";
+import { cn } from "../../lib/utils/twMerge.js";
 
 export default function Button({
 	children,
