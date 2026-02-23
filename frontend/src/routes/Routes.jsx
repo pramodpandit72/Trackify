@@ -1,17 +1,19 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 
-import Trainers from "../pages/public/trainers";
-import TrainerDetail from "../pages/public/TrainerDetail";
+// import Home from "../pages/public/Home";
+import Trainers from "../pages/public/Trainers.jsx";
+import TrainerDetail from "../pages/public/TrainerDetail.jsx";
+// import Exercise from "../pages/public/Exercise";
 
 import Jobs from "../pages/jobs/Jobs";
 import JobDetails from "../pages/jobs/JobDetails";
 import ApplyJobs from "../pages/jobs/ApplyJobs";
 
-import Reviews from "../pages/public/reviews";
-import About from "../pages/public/about";
-import Contact from "../pages/public/contact";
-import FAQ from "../pages/public/faq";
+import Reviews from "../pages/public/Reviews";
+import About from "../pages/public/About";
+import Contact from "../pages/public/Contact";
+import FAQ from "../pages/public/Faq";
 import Login from "../pages/public/Login";
 import SignUp from "../pages/public/Signup";
 import ForgotPassword from "../pages/public/ForgotPassword";
