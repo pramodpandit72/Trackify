@@ -2,7 +2,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 
 // import Home from "../pages/public/Home";
-import Trainers from "../pages/public/Trainers";
+import Trainers from "../pages/public/Trainers.jsx";
 import TrainerDetail from "../pages/public/TrainerDetail";
 // import Exercise from "../pages/public/Exercise";
 
