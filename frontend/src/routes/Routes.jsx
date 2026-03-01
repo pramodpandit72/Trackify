@@ -28,8 +28,8 @@ import AdminDashboard from "../pages/auth/AdminDashboard";
 import AdminApplications from "../pages/auth/AdminApplications";
 import AdminLogin from "../pages/auth/AdminLogin";
 import UpdateProfile from "../pages/auth/UpdateProfile";
-import Home from "../pages/public/home";
-import Exercise from "../pages/public/exercise";
+import Home from "../pages/public/Home.jsx";
+import Exercise from "../pages/public/Exercise.jsx";
 
 function RoutesClient() {
   return (

@@ -7,7 +7,6 @@ import CTASection from '../../components/sections/CTASection';
 
 import axios from 'axios';
 
-
 function Home() {
   const [testimonials, setTestimonials] = useState([]);
   const [loading, setLoading] = useState(true);
